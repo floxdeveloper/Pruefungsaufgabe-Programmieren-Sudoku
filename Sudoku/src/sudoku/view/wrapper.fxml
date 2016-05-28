@@ -11,13 +11,13 @@
         <menus>
           <Menu mnemonicParsing="false" text="Sudoku">
             <items>
-              <MenuItem mnemonicParsing="false" text="Load" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleTest" text="Save" />
+              <MenuItem mnemonicParsing="false" onAction="#handleLoad" text="Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
             </items>
           </Menu>
         </menus>

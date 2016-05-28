@@ -6,12 +6,14 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sudoku.view.sudokuController">
    <children>
-      <GridPane alignment="CENTER" focusTraversable="true" gridLinesVisible="true" layoutX="106.0" layoutY="172.0" prefHeight="600.0" prefWidth="570.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <GridPane alignment="CENTER" focusTraversable="true" gridLinesVisible="true" layoutX="5.0" layoutY="14.0" prefHeight="600.0" prefWidth="570.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="14.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,338 +36,434 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
-         <children>
-            <Text fx:id="t01" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <children>              
+            
+			 <Text fx:id="t01"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t37" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text fx:id="t37"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t36" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text fx:id="t36"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t35" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text fx:id="t35"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t34" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text fx:id="t34"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t33" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text fx:id="t33"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t32" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text fx:id="t32"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t31" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text fx:id="t31"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t28" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text fx:id="t28"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t27" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text fx:id="t27"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t26" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text fx:id="t26"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t25" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text fx:id="t25"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t24" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text fx:id="t24"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t23" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text fx:id="t23"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t22" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text fx:id="t22"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t21" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text fx:id="t21"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t20" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text fx:id="t20"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t18" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="t18"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t17" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="t17"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t16" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="t16"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t15" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="t15"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t14" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="t14"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t13" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="t13"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t12" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="t12"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t11" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="t11"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t10" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="t10"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t08" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="t08"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t07" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="t07"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t06" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="t06"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t05" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="t05"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t04" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="t04"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t03" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="t03"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t02" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="t02"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t30" layoutX="53.0" layoutY="125.0" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text fx:id="t30" layoutX="53.0" layoutY="125.0"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t00" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="t00"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t40" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="t40"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t38" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text fx:id="t38"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t41" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="t41"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t42" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="t42"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t43" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="t43"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t44" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="t44"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t45" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="t45"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t46" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="t46"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t47" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="t47"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t48" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="t48"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t50" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text fx:id="t50"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t51" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text fx:id="t51"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t52" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text fx:id="t52"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t53" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text fx:id="t53"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t54" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text fx:id="t54"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t55" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text fx:id="t55"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t56" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text fx:id="t56"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t57" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text fx:id="t57"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t58" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text fx:id="t58"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t60" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Text fx:id="t60"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t61" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Text fx:id="t61"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t62" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Text fx:id="t62"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t63" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Text fx:id="t63"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t64" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Text fx:id="t64"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t65" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Text fx:id="t65"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t66" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Text fx:id="t66"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t67" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Text fx:id="t67"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t68" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Text fx:id="t68"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t70" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Text fx:id="t70"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t88" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Text fx:id="t88"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t87" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Text fx:id="t87"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t86" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Text fx:id="t86"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t85" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Text fx:id="t85"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t84" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Text fx:id="t84"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t83" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Text fx:id="t83"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t82" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Text fx:id="t82"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t81" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Text fx:id="t81"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t80" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Text fx:id="t80"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t78" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Text fx:id="t78"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t77" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Text fx:id="t77"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t76" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Text fx:id="t76"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t75" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Text fx:id="t75"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t74" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Text fx:id="t74"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t73" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Text fx:id="t73"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t72" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Text fx:id="t72"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font></Text>
-            <Text fx:id="t71" onMouseClicked="#handleTextClick" strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Text fx:id="t71"   strokeType="OUTSIDE" strokeWidth="0.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font size="32.0" />
-               </font></Text>
+               </font></Text>  
+
+			<Rectangle fx:id="r00" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.halignment="CENTER" />
+         	<Rectangle fx:id="r01" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+         	<Rectangle fx:id="r02" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+         	<Rectangle fx:id="r03" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+         	<Rectangle fx:id="r04" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+         	<Rectangle fx:id="r05" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
+         	<Rectangle fx:id="r06" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" />
+         	<Rectangle fx:id="r07" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" />
+         	<Rectangle fx:id="r08" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" />
+         	
+         	<Rectangle fx:id="r10" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         	<Rectangle fx:id="r11" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         	<Rectangle fx:id="r12" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         	<Rectangle fx:id="r13" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         	<Rectangle fx:id="r14" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         	<Rectangle fx:id="r15" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         	<Rectangle fx:id="r16" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         	<Rectangle fx:id="r17" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         	<Rectangle fx:id="r18" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         	
+         	<Rectangle fx:id="r20" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         	<Rectangle fx:id="r21" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         	<Rectangle fx:id="r22" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         	<Rectangle fx:id="r23" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         	<Rectangle fx:id="r24" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         	<Rectangle fx:id="r25" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         	<Rectangle fx:id="r26" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         	<Rectangle fx:id="r27" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         	<Rectangle fx:id="r28" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         	
+         	<Rectangle fx:id="r30" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+         	<Rectangle fx:id="r31" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+         	<Rectangle fx:id="r32" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+         	<Rectangle fx:id="r33" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+         	<Rectangle fx:id="r34" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+         	<Rectangle fx:id="r35" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+         	<Rectangle fx:id="r36" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+         	<Rectangle fx:id="r37" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+         	<Rectangle fx:id="r38" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+         	
+         	<Rectangle fx:id="r40" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+         	<Rectangle fx:id="r41" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+         	<Rectangle fx:id="r42" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+         	<Rectangle fx:id="r43" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+         	<Rectangle fx:id="r44" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+         	<Rectangle fx:id="r45" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+         	<Rectangle fx:id="r46" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+         	<Rectangle fx:id="r47" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+         	<Rectangle fx:id="r48" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+         	
+         	<Rectangle fx:id="r50" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+         	<Rectangle fx:id="r51" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+         	<Rectangle fx:id="r52" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+         	<Rectangle fx:id="r53" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+         	<Rectangle fx:id="r54" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+         	<Rectangle fx:id="r55" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+         	<Rectangle fx:id="r56" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+         	<Rectangle fx:id="r57" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+         	<Rectangle fx:id="r58" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+         	
+         	<Rectangle fx:id="r60" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         	<Rectangle fx:id="r61" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         	<Rectangle fx:id="r62" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         	<Rectangle fx:id="r63" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         	<Rectangle fx:id="r64" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         	<Rectangle fx:id="r65" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         	<Rectangle fx:id="r66" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         	<Rectangle fx:id="r67" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         	<Rectangle fx:id="r68" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         	
+         	<Rectangle fx:id="r70" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         	<Rectangle fx:id="r71" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         	<Rectangle fx:id="r72" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         	<Rectangle fx:id="r73" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         	<Rectangle fx:id="r74" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         	<Rectangle fx:id="r75" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         	<Rectangle fx:id="r76" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         	<Rectangle fx:id="r77" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         	<Rectangle fx:id="r78" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         	
+         	<Rectangle fx:id="r80" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         	<Rectangle fx:id="r81" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         	<Rectangle fx:id="r82" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         	<Rectangle fx:id="r83" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         	<Rectangle fx:id="r84" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         	<Rectangle fx:id="r85" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         	<Rectangle fx:id="r86" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         	<Rectangle fx:id="r87" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         	<Rectangle fx:id="r88" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="43.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="5.0" width="43.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         	     
+        	
          </children>
+         
+         
       </GridPane>
-      <ButtonBar layoutX="338.0" layoutY="595.0" prefHeight="40.0" prefWidth="248.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0">
+      <ButtonBar layoutX="338.0" layoutY="595.0" prefHeight="30.0" prefWidth="248.0" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="5.0">
         <buttons>
-          <Button mnemonicParsing="false" onAction="#handleSolve" text="Solve" />
+          <Button mnemonicParsing="false" onAction="#handleSolve"  text="Solve" defaultButton="true"  />
             <Button mnemonicParsing="false" onAction="#handleReset" text="Reset" />
         </buttons>
       </ButtonBar>
+      
    </children>
 </AnchorPane>

@@ -1,7 +1,14 @@
 package sudoku.model;
 
-public class Sudoku {
+import java.io.Serializable;
 
+public class Sudoku implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int[][] sudoku = new int[9][9];
 	private boolean fertig;
 
@@ -11,11 +18,7 @@ public class Sudoku {
 
 	public void starten() {
 
-		for (int i = 0; i < sudoku.length; i++) {
-			for (int j = 0; j < sudoku.length; j++) {
-				sudoku[i][j] = 0;
-			}
-		}
+	
 		fertig = false;
 		sudokuBT();
 	}
@@ -108,7 +111,7 @@ public class Sudoku {
 
 	public void sudokuBT() {
 
-		int[] koord = naechsteKoordinaten();
+		int[] koord = getNextCoordinate();
 		int xkoord = koord[0];
 		int ykoord = koord[1];
 		
@@ -167,19 +170,45 @@ public class Sudoku {
 		}
 		return true;
 	}
+	
+	
+	public void sudokuReset(){
+		
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				sudoku[i][j]=0;
+			}
+		}
+		
+	}
 
-	public int[] naechsteKoordinaten() {
+	public int[] getNextCoordinate() {
 		for (int j = 0; j < sudoku.length; j++) {
 			for (int i = 0; i < sudoku.length; i++) {
-				if (sudoku[i][j] == 0)
-					return new int[] { i, j }; // nächste koordinate, die
+				if (sudoku[j][i] == 0)
+					return new int[] { j, i }; // nächste koordinate, die
 												// probiert werden muss
 			}
 		}
 		return new int[] { -1, -1 }; // nichts mehr auszufüllen -> fertig
 	}
+	
+	public boolean empty(){
+		for (int i = 0; i < sudoku.length; i++) {
+			for (int j = 0; j < sudoku.length; j++) {
+				if (sudoku[i][j] != 0)
+					return false;
+			}
+		}
+		return true;
+		
+		
+		
+		
+		
+	}
 
-	public boolean ausgefuellt() {
+	public boolean filled() {
 		for (int i = 0; i < sudoku.length; i++) {
 			for (int j = 0; j < sudoku.length; j++) {
 				if (sudoku[i][j] == 0)
