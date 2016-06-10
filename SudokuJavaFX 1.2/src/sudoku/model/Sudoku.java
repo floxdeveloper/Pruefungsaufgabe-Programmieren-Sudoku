@@ -293,5 +293,8 @@ public class Sudoku implements Serializable {
 		}
 		return true;
 	}
+	public static void generateSudoku(int numberOfClues){
 
+		
+	}
 }

@@ -193,6 +193,10 @@ public class MainApp extends Application {
 	public Sudoku getSudoku() {
 		return sudoku;
 	}
+	
+	public static void showRandomSudoku(Sudoku sudoku){
+		
+	}
 
 	public static void main(String[] args) {
 		launch(args);

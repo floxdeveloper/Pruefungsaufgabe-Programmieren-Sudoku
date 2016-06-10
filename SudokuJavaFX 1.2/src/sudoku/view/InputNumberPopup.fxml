@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="0.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sudoku.view.InputNumberPopupController">
+   <children>
+      <Label text="vorgegebene Zahlen">
+         <tooltip>
+            <Tooltip text="Bitte geben Sie die Anzahl der vorgegebenen Zahlen im Sudokufeld ein." />
+         </tooltip>
+      </Label>
+      <TextField fx:id="eingabe" layoutX="-25.0" layoutY="21.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="21.0" />
+      <ButtonBar layoutX="372.0" layoutY="537.0" prefHeight="31.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <buttons>
+            <Button mnemonicParsing="false" onAction="#handleAbsenden" text="Absenden" />
+            <Button mnemonicParsing="false" onAction="#handleAbbrechen" text="Abbrechen" />
+         </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>

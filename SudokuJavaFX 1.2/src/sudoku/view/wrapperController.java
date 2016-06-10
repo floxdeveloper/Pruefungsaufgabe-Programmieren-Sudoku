@@ -1,5 +1,7 @@
 package sudoku.view;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -9,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +27,7 @@ import sudoku.MainApp;
 import sudoku.model.Sudoku;
 import sudoku.model.SudokuGenerator;
 
-public class wrapperController {
+public class wrapperController implements PropertyChangeListener {
 
 	private MainApp mainApp;
 
@@ -38,19 +42,27 @@ public class wrapperController {
 	private void handleGenerate(){
 //TODO Abfrage nach generate Zahl / Thread	(William)	
 		
-		
-		//Um alle Textfelder auf schwarz zu setzen
-		mainApp.getSudokuController().colorAllBlack();
-		
-		
-		Sudoku genSudoku = SudokuGenerator.generate(25);
-		mainApp.setSudoku(genSudoku);
-		
-		
-		
-		
-		
-		
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			//loader.setLocation(new URL("view/InputNumberPopup.fxml"));
+			loader.setLocation(new File("src/sudoku/view/InputNumberPopup.fxml").toURI().toURL());
+			AnchorPane pane = loader.load();
+			
+			Scene scene = new Scene(pane);
+			Stage stage = new Stage();
+			//stage.initModality(Modality.WINDOW_MODAL);
+			stage.setScene(scene);
+			
+			InputNumberPopupController iController = loader.getController();
+			iController.addListener(this);
+			iController.setStage(stage);
+			stage.showAndWait();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	// Beim Klick auf Sudoku -> Save
@@ -169,6 +181,26 @@ public class wrapperController {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 
+	}
+
+
+
+	public void propertyChange(PropertyChangeEvent evt) {
+		if(evt.getPropertyName().equals("InputNumber")){
+			int numberOfClues=(int) evt.getNewValue();
+			//Um alle Textfelder auf schwarz zu setzen
+			mainApp.getSudokuController().colorAllBlack();
+			Thread t = new Thread(){
+				public void run(){
+					System.out.println("Generating Sudoku...");
+					Sudoku genSudoku = SudokuGenerator.generate(numberOfClues);
+					System.out.println("Finished generating Sudoku.");
+					mainApp.setSudoku(genSudoku);
+				}
+			};
+			t.start();	
+		}
+		
 	}
 
 }
