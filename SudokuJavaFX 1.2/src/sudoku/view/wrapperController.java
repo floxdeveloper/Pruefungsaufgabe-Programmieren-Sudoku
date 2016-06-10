@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sudoku.MainApp;
 import sudoku.model.Sudoku;
+import sudoku.model.SudokuGenerator;
 
 public class wrapperController {
 
@@ -30,8 +31,29 @@ public class wrapperController {
 	private void initialize() {
 
 	}
+	
+	
+	//Beim Klick auf Sudoku -> Generate solvable Sudoku
+	@FXML
+	private void handleGenerate(){
+//TODO Abfrage nach generate Zahl / Thread	(William)	
+		
+		
+		//Um alle Textfelder auf schwarz zu setzen
+		mainApp.getSudokuController().colorAllBlack();
+		
+		
+		Sudoku genSudoku = SudokuGenerator.generate(25);
+		mainApp.setSudoku(genSudoku);
+		
+		
+		
+		
+		
+		
+	}
 
-	// Beim Klick auf File -> Save
+	// Beim Klick auf Sudoku -> Save
 	@FXML
 	private void handleSave() {
 
@@ -64,7 +86,7 @@ public class wrapperController {
 
 	}
 
-	// Beim Klick auf File -> Load
+	// Beim Klick auf Sudoku -> Load
 	@FXML
 	private void handleLoad() {
 
