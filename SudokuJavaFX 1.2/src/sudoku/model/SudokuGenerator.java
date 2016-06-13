@@ -20,7 +20,7 @@ public class SudokuGenerator {
 		Sudoku objectSudoku = new Sudoku(arraySudoku);
 		int enteredFields = 0;
 
-		while (enteredFields < numberOfClues) {
+		while (enteredFields < numberOfClues - 1) {
 
 			int xKoord = (int) (Math.random() * 8);
 			int yKoord = (int) (Math.random() * 8);
@@ -55,8 +55,8 @@ public class SudokuGenerator {
 
 					}
 				}
+				
 				enteredFields++;
-
 			}
 
 		}
@@ -67,7 +67,7 @@ public class SudokuGenerator {
 
 	public static int moduloHochzaehlen(int zahl) {
 		zahl--;
-		zahl = (zahl) % 9;
+		zahl = (zahl+1) % 9;
 		return zahl++;
 	}
 

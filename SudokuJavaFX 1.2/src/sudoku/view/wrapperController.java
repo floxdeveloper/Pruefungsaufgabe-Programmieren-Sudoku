@@ -35,24 +35,23 @@ public class wrapperController implements PropertyChangeListener {
 	private void initialize() {
 
 	}
-	
-	
-	//Beim Klick auf Sudoku -> Generate solvable Sudoku
+
+	// Beim Klick auf Sudoku -> Generate solvable Sudoku
 	@FXML
-	private void handleGenerate(){
-//TODO Abfrage nach generate Zahl / Thread	(William)	
-		
+	private void handleGenerate() {
+		// TODO Abfrage nach generate Zahl / Thread (William)
+
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			//loader.setLocation(new URL("view/InputNumberPopup.fxml"));
+			// loader.setLocation(new URL("view/InputNumberPopup.fxml"));
 			loader.setLocation(new File("src/sudoku/view/InputNumberPopup.fxml").toURI().toURL());
 			AnchorPane pane = loader.load();
-			
+
 			Scene scene = new Scene(pane);
 			Stage stage = new Stage();
-			//stage.initModality(Modality.WINDOW_MODAL);
+			// stage.initModality(Modality.WINDOW_MODAL);
 			stage.setScene(scene);
-			
+
 			InputNumberPopupController iController = loader.getController();
 			iController.addListener(this);
 			iController.setStage(stage);
@@ -68,13 +67,21 @@ public class wrapperController implements PropertyChangeListener {
 	// Beim Klick auf Sudoku -> Save
 	@FXML
 	private void handleSave() {
-
+		
+		//Man darf keine leeren sudokus speichern
+		if (mainApp.getSudoku().empty()) {
+			mainApp.warning("Unable to save", "You can not save an empty sudoku.");
+			return;
+		}
+		
+		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Sudoku");
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Sudokus", "*.sdk"));
 
 		File selectedFile = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 
+		
 		if (selectedFile != null) {
 
 			try {
@@ -116,11 +123,12 @@ public class wrapperController implements PropertyChangeListener {
 				Sudoku sudoku = (Sudoku) is.readObject();
 				mainApp.setSudoku(sudoku);
 				is.close();
-				
-				//Alle Textfelder auf schwarz setzen (falls vorher etwas blau gefärbt war)
+
+				// Alle Textfelder auf schwarz setzen (falls vorher etwas blau
+				// gefärbt war)
 				mainApp.getSudokuController().colorAllBlack();
-				
-				if(mainApp.getSudoku().filled())
+
+				if (mainApp.getSudoku().filled())
 					mainApp.getSudokuController().setEditable(false);
 				else
 					mainApp.getSudokuController().setEditable(true);
@@ -139,39 +147,31 @@ public class wrapperController implements PropertyChangeListener {
 		}
 
 	}
-	
+
 	@FXML
-	public void handleAbout(){
-		
+	public void handleAbout() {
+
 		try {
-	        // Load the fxml file and create a new stage for the popup dialog.
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("view/about.fxml"));
-	        AnchorPane page = (AnchorPane) loader.load();
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/about.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
 
-	        // Create the dialog Stage.
-	        Stage dialogStage = new Stage();	     
-	        dialogStage.initStyle(StageStyle.UTILITY);
-	        dialogStage.initOwner(mainApp.getPrimaryStage());
-	        dialogStage.setResizable(false);
-	        Scene scene = new Scene(page);
-	        dialogStage.setScene(scene);
-	        
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.initStyle(StageStyle.UTILITY);
+			dialogStage.initOwner(mainApp.getPrimaryStage());
+			dialogStage.setResizable(false);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
 
-	        // Show the dialog and wait until the user closes it
-	        dialogStage.showAndWait();
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
 
-	       
-	    } catch (IOException e) {
-	        e.printStackTrace();	      
-	    }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-		
-		
-		
-		
-		
-	
 
 	/**
 	 * Is called by the main application to give a reference back to itself.
@@ -183,24 +183,22 @@ public class wrapperController implements PropertyChangeListener {
 
 	}
 
-
-
 	public void propertyChange(PropertyChangeEvent evt) {
-		if(evt.getPropertyName().equals("InputNumber")){
-			int numberOfClues=(int) evt.getNewValue();
-			//Um alle Textfelder auf schwarz zu setzen
+		if (evt.getPropertyName().equals("InputNumber")) {
+			int numberOfClues = (int) evt.getNewValue();
+			// Um alle Textfelder auf schwarz zu setzen
 			mainApp.getSudokuController().colorAllBlack();
-			Thread t = new Thread(){
-				public void run(){
+			Thread t = new Thread() {
+				public void run() {
 					System.out.println("Generating Sudoku...");
 					Sudoku genSudoku = SudokuGenerator.generate(numberOfClues);
 					System.out.println("Finished generating Sudoku.");
 					mainApp.setSudoku(genSudoku);
 				}
 			};
-			t.start();	
+			t.start();
 		}
-		
+
 	}
 
 }
