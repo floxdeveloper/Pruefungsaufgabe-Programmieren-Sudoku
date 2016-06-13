@@ -14,6 +14,10 @@ public class InputNumberPopupController {
 	@FXML
 	private TextField eingabe;
 	
+	
+	//TODO auf Englisch ändern 
+	
+	
 	public void addListener(PropertyChangeListener p){
 		support.addPropertyChangeListener(p);
 	}
