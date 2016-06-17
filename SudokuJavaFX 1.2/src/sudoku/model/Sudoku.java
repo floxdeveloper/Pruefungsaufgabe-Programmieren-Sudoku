@@ -10,6 +10,7 @@ public class Sudoku implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int[][] sudoku = new int[9][9];
+	private int[][] sudokuSaved = new int[9][9];
 	private boolean fertig;
 
 	public Sudoku(int[][] array) {
@@ -186,6 +187,10 @@ public class Sudoku implements Serializable {
 
 	}
 
+	private void copySolvedSudoku(){
+		//getSudoku
+	}
+	
 	private void sudokuBT() {
 
 		int[] koord = getNextCoordinate();
@@ -197,7 +202,13 @@ public class Sudoku implements Serializable {
 			return;
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
 		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
-			fertig = true;
+			if(fertig == false)
+			{
+				fertig = true;
+				
+				
+			}
+			
 		else { // backtracking
 
 			for (int i = 1; i <= 9; i++) {
