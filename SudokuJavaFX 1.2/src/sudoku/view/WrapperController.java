@@ -15,12 +15,15 @@ import java.net.MalformedURLException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sudoku.MainApp;
+import sudoku.MainAppTest;
 import sudoku.model.Sudoku;
 import sudoku.model.SudokuGenerator;
 
@@ -46,7 +49,16 @@ public class WrapperController implements PropertyChangeListener {
 
 			Scene scene = new Scene(pane);
 			Stage stage = new Stage();
-			// stage.initModality(Modality.WINDOW_MODAL);
+			
+			// Set the application icon.
+			stage.getIcons().add(new Image("file:resources/images/sudoku.png"));
+			
+			
+			//Eingabe auf Main Fenster nicht mehr zulassen
+			stage.initOwner(mainApp.getPrimaryStage());
+			stage.initModality(Modality.WINDOW_MODAL);
+		 
+		 
 			stage.setScene(scene);
 
 			InputNumberPopupController iController = loader.getController();
@@ -151,7 +163,7 @@ public class WrapperController implements PropertyChangeListener {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/about.fxml"));
+			loader.setLocation(MainAppTest.class.getResource("view/about.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// Create the dialog Stage.
@@ -183,13 +195,10 @@ public class WrapperController implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("InputNumber")) {
 			int numberOfClues = (int) evt.getNewValue();
-			// Falls davor editable = false, ksnns wieder editiert werden
-			mainApp.getSudokuController().setEditable(true);
 			// Um alle Textfelder auf schwarz zu setzen
 			mainApp.getSudokuController().colorAllBlack();
 			Thread t = new Thread() {
 				public void run() {
-				
 					System.out.println("Generating Sudoku...");
 					Sudoku genSudoku = SudokuGenerator.generate(numberOfClues);
 					System.out.println("Finished generating Sudoku.");

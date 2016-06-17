@@ -31,6 +31,7 @@ public class InputNumberPopupController {
 		eingabecb.setVisibleRowCount(10);
 		eingabecb.setItems(a1);
 	
+	
 	}
 	
 	
