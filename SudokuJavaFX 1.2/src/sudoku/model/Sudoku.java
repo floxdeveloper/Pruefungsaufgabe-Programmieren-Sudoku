@@ -293,8 +293,11 @@ public class Sudoku implements Serializable {
 		}
 		return true;
 	}
-	public static void generateSudoku(int numberOfClues){
 
+	
+	// checkt, ob es zum gegebenen Sudoku eine einzigartige Loesung gibt
+	public boolean checkUniqueSolvable(){
 		
+		return false;
 	}
 }

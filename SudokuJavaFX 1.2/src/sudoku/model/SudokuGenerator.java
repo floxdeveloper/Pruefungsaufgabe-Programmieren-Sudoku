@@ -42,10 +42,6 @@ public class SudokuGenerator {
 
 					filledPos = true;
 					arraySudoku[xKoord][yKoord] = digit;
-
-					//Um Referenz zu lösen
-					objectSudoku.setSudoku(new int[9][9]);
-					objectSudoku.sudokuReset();
 					
 					copy = copySudokuArray(arraySudoku);
 			
