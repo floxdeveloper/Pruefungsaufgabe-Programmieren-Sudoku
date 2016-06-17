@@ -183,10 +183,13 @@ public class WrapperController implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("InputNumber")) {
 			int numberOfClues = (int) evt.getNewValue();
+			// Falls davor editable = false, ksnns wieder editiert werden
+			mainApp.getSudokuController().setEditable(true);
 			// Um alle Textfelder auf schwarz zu setzen
 			mainApp.getSudokuController().colorAllBlack();
 			Thread t = new Thread() {
 				public void run() {
+				
 					System.out.println("Generating Sudoku...");
 					Sudoku genSudoku = SudokuGenerator.generate(numberOfClues);
 					System.out.println("Finished generating Sudoku.");

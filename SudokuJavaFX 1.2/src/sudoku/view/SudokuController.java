@@ -154,11 +154,11 @@ public class SudokuController {
 			// geklappt hat
 			mainApp.getSudoku().solve();
 
-			if (!mainApp.getSudoku().filled()) {
+			if (mainApp.getSudoku().getSolveCounter()==0) {
 				// Farbe wieder auf schwarz ändern
 				colorAllBlack();
 
-				mainApp.error("Unsolvable Sudoku", "The Sodoku you have entered is not solvable.");
+				mainApp.error("Unsolvable Sudoku", "The Sudoku you have entered is not solvable.");
 
 			} else
 				editable = false;

@@ -11,6 +11,7 @@ public class Sudoku implements Serializable {
 
 	private int[][] sudoku = new int[9][9];
 	private int[][] sudokuSaved = new int[9][9];
+	private int solveCounter;
 	private boolean fertig;
 
 	public Sudoku(int[][] array) {
@@ -28,10 +29,15 @@ public class Sudoku implements Serializable {
 	// ein teilweise gefülltes sudoku korrekt gelöst wird oder im
 	// Ausgangszustand bleibt
 	public void solve() {
+		solveCounter=0;
 		fertig = false;
 		sudokuBT();
+		if(solveCounter>0)
+			sudoku=copySudoku(sudokuSaved);
 	}
-
+	public int getSolveCounter(){
+		return solveCounter;
+	}
 	public int[][] getSudoku() {
 		return sudoku;
 
@@ -187,8 +193,15 @@ public class Sudoku implements Serializable {
 
 	}
 
-	private void copySolvedSudoku(){
-		//getSudoku
+	private int[][] copySudoku(int[][] toCopy){
+		int[][] copied = new int[9][9];
+		for(int k=0;k<9;k++){
+			for(int j=0;j<9;j++){
+				copied[k][j]=toCopy[k][j];
+			}
+		}
+		return copied;
+		
 	}
 	
 	private void sudokuBT() {
@@ -198,15 +211,18 @@ public class Sudoku implements Serializable {
 		int ykoord = koord[1];
 
 		// beende BT
-		if (fertig == true)
+		if (fertig == true && solveCounter>1)
 			return;
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
 		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
 			if(fertig == false)
 			{
 				fertig = true;
-				
-				
+				sudokuSaved = copySudoku(sudoku);
+				solveCounter++;
+			}
+			else{
+				solveCounter++;
 			}
 			
 		else { // backtracking
@@ -219,7 +235,7 @@ public class Sudoku implements Serializable {
 					 */
 					sudokuBT();
 
-					if (!fertig)
+					
 						sudoku[xkoord][ykoord] = 0;
 				}
 			}
@@ -308,7 +324,12 @@ public class Sudoku implements Serializable {
 	
 	// checkt, ob es zum gegebenen Sudoku eine einzigartige Loesung gibt
 	public boolean checkUniqueSolvable(){
-		
-		return false;
+		int[][] temp = copySudoku(sudoku);
+		Sudoku tempSudoku = new Sudoku(temp);
+		tempSudoku.solve();
+		if(tempSudoku.getSolveCounter()!=1)
+			return false;
+		else 
+			return true;
 	}
 }
