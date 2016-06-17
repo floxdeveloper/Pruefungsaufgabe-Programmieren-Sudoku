@@ -3,19 +3,35 @@ package sudoku.view;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 public class InputNumberPopupController {
 	private PropertyChangeSupport support = new PropertyChangeSupport(this);
+//	@FXML
+//	private TextField eingabe;
+	
 	@FXML
-	private TextField eingabe;
+	private ComboBox<Integer> eingabecb;
 	
 	
 	//TODO auf Englisch ändern 
+	
+	@FXML
+	private void initialize(){
+		
+		//Setzt Items von ComboBox
+		ObservableList<Integer> a1 = FXCollections.observableArrayList();	
+		for(int i = 20;i<81;i++){
+		a1.add(i);
+		}
+		eingabecb.setVisibleRowCount(10);
+		eingabecb.setItems(a1);
+	
+	}
 	
 	
 	public void addListener(PropertyChangeListener p){
@@ -28,21 +44,12 @@ public class InputNumberPopupController {
 	
 	@FXML
 	private void handleAbsenden(){
-		try{
-			if(Integer.parseInt(eingabe.getText())<18 || Integer.parseInt(eingabe.getText())>80){
-				throw new NumberFormatException();
-			}
-			support.firePropertyChange("InputNumber", 0, Integer.parseInt(eingabe.getText()));	
-			stage.close();
+			support.firePropertyChange("InputNumber", 0, (int) eingabecb.getValue());	
+			stage.close();	
 		}
-		catch(NumberFormatException e)
-		{
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Fehler");
-			alert.setContentText("Keinen Integer eingegeben. Bitte geben Sie einen Integer zwischen 18 und 80 ein.");
-			alert.showAndWait();
-		}
-		}
+	
+	
+	
 	@FXML
 	private void handleAbbrechen(){
 		stage.close();
