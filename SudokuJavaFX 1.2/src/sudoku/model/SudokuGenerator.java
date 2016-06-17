@@ -25,13 +25,13 @@ public class SudokuGenerator {
 		
 		int[][] copy = copySudokuArray(arraySudoku);
 		Sudoku objectSudoku = new Sudoku(copy);
-		int enteredFields = 1;
+		int enteredFields = 0;
 
 		while (enteredFields < numberOfClues ) {
 
-			int xKoord = (int) (Math.random() * 8.99);
-			int yKoord = (int) (Math.random() * 8.99);
-			int digit = (int) ((Math.random() * 8.99) + 1);
+			int xKoord = (int) Math.floor((Math.random() * 9));
+			int yKoord = (int) Math.floor((Math.random() * 9));
+			int digit = (int) (Math.floor((Math.random() * 9)) + 1);
 
 			// Wenn Feld frei ist -> muss eine Lösung haben, da es im Schritt davor lösbar war -> alle Zahlen durchprobieren (für Performance)
 			if (arraySudoku[xKoord][yKoord] == 0) {
@@ -81,8 +81,9 @@ public class SudokuGenerator {
 	}
 
 	public static int moduloHochzaehlen(int zahl) {
-		zahl = (zahl+1) % 9;
-		return zahl++;
+		zahl = (zahl+1) % 10;
+		if(zahl==0) zahl++;
+		return zahl;
 	}
 
 	private static int[][] copySudokuArray(int[][] array) {
