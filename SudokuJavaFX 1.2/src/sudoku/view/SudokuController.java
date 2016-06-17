@@ -17,8 +17,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sudoku.MainApp;
+import sudoku.MainAppTest;
 
-public class sudokuController {
+public class SudokuController {
 
 	private MainApp mainApp;
 	private HashMap<Integer, Text> mapText = new HashMap<Integer, Text>();

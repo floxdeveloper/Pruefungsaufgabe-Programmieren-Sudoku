@@ -16,15 +16,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import sudoku.model.Sudoku;
-import sudoku.view.sudokuController;
-import sudoku.view.wrapperController;
+import sudoku.view.SudokuController;
+import sudoku.view.WrapperController;
 
 public class MainApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private Sudoku sudoku;
-	private sudokuController scontroller;
+	private SudokuController scontroller;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -72,11 +72,11 @@ public class MainApp extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/wrapper.fxml"));
+			loader.setLocation(MainAppTest.class.getResource("view/wrapper.fxml"));
 			rootLayout = (BorderPane) loader.load();
 
 			// Set controller to Main Stage
-			wrapperController controller = loader.getController();
+			WrapperController controller = loader.getController();
 			controller.setMainApp(this);
 
 			// Show the scene containing the root layout.
@@ -95,14 +95,14 @@ public class MainApp extends Application {
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/sudoku.fxml"));
+			loader.setLocation(MainAppTest.class.getResource("view/sudoku.fxml"));
 			AnchorPane sudoku = (AnchorPane) loader.load();
 
 			// Set sudoku solver into the center of root layout.
 			rootLayout.setCenter(sudoku);
 
 			// Set controller to Main Stage
-			sudokuController controller = loader.getController();
+			SudokuController controller = loader.getController();
 			controller.setMainApp(this);
 
 			// Verweis auf Controller um beim set Sudoku die GUI neu zu laden
@@ -146,7 +146,7 @@ public class MainApp extends Application {
 
 	}
 
-	public sudokuController getSudokuController() {
+	public SudokuController getSudokuController() {
 		return scontroller;
 	}
 

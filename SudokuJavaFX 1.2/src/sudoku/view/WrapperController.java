@@ -24,10 +24,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sudoku.MainApp;
+import sudoku.MainAppTest;
+import sudoku.model.SudokuTest;
 import sudoku.model.Sudoku;
 import sudoku.model.SudokuGenerator;
+import sudoku.model.SudokuGeneratorTest;
 
-public class wrapperController implements PropertyChangeListener {
+public class WrapperController implements PropertyChangeListener {
 
 	private MainApp mainApp;
 
@@ -154,7 +157,7 @@ public class wrapperController implements PropertyChangeListener {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/about.fxml"));
+			loader.setLocation(MainAppTest.class.getResource("view/about.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// Create the dialog Stage.
