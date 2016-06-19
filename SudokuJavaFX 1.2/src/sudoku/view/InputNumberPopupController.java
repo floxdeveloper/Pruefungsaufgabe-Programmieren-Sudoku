@@ -45,6 +45,7 @@ public class InputNumberPopupController {
 	
 	@FXML
 	private void handleAbsenden(){
+			//TODO Bei nicht ausgewählter Zahl -> Exception (fixen)
 			support.firePropertyChange("InputNumber", 0, (int) eingabecb.getValue());	
 			stage.close();	
 		}

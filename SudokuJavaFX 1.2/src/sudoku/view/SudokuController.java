@@ -73,6 +73,9 @@ public class SudokuController {
 			//Wenn Sudoku gelöst ist -> Congrationlations ausgeben
 			if(mainApp.getSudoku().filled()){
 				
+				setEditable(false);
+				mainApp.warning("Congrationlations", "You have solved the Sudoku by yourself");
+				
 				
 				
 				
