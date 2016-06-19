@@ -58,7 +58,7 @@ public class WrapperController implements PropertyChangeListener {
 			stage.initOwner(mainApp.getPrimaryStage());
 			stage.initModality(Modality.WINDOW_MODAL);
 		 
-		 
+			stage.setResizable(false);
 			stage.setScene(scene);
 
 			InputNumberPopupController iController = loader.getController();
@@ -197,6 +197,9 @@ public class WrapperController implements PropertyChangeListener {
 			int numberOfClues = (int) evt.getNewValue();
 			// Um alle Textfelder auf schwarz zu setzen
 			mainApp.getSudokuController().colorAllBlack();
+			
+			mainApp.getSudokuController().setEditable(true);
+			
 			Thread t = new Thread() {
 				public void run() {
 					System.out.println("Generating Sudoku...");
