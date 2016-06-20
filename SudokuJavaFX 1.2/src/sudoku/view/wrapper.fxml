@@ -11,9 +11,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="Sudoku">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleLoad" text="Load" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save" />
-                 	 <MenuItem mnemonicParsing="false" onAction="#handleGenerate" text="Generate solvable Sudoku" />
+              <MenuItem mnemonicParsing="false" onAction="#handleLoad" text="Load"/> 
+                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save"/> 
+                 	 <MenuItem mnemonicParsing="false" onAction="#handleGenerate" text="Generate solvable Sudoku" /> 
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

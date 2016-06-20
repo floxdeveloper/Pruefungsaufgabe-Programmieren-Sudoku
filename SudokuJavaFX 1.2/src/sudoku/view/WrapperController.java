@@ -64,7 +64,10 @@ public class WrapperController implements PropertyChangeListener {
 			InputNumberPopupController iController = loader.getController();
 			iController.addListener(this);
 			iController.setStage(stage);
-			stage.showAndWait();
+			iController.setMainApp(mainApp);
+			
+			//Wird manuell geschlossen
+			stage.show();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

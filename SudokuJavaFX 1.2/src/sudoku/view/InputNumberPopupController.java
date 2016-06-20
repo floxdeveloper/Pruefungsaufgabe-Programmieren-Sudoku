@@ -8,11 +8,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import sudoku.MainApp;
 
 public class InputNumberPopupController {
+	
+	private MainApp mainApp;
 	private PropertyChangeSupport support = new PropertyChangeSupport(this);
-//	@FXML
-//	private TextField eingabe;
 	
 	@FXML
 	private ComboBox<Integer> eingabecb;
@@ -46,11 +47,22 @@ public class InputNumberPopupController {
 	@FXML
 	private void handleAbsenden(){
 			//TODO Bei nicht ausgewählter Zahl -> Exception (fixen)
+			try{
 			support.firePropertyChange("InputNumber", 0, (int) eingabecb.getValue());	
-			stage.close();	
+			stage.close();
+			}catch (Exception e){
+				
+				mainApp.warning("Please select a number", "You have not selected a number of hints");
+				
+			}
+			
 		}
 	
 	
+	
+	public void setMainApp(MainApp m){	
+		mainApp=m;
+	}
 	
 	@FXML
 	private void handleAbbrechen(){

@@ -57,6 +57,11 @@ public class SudokuController {
 		return mapText.get(vert * 9 + hor);
 
 	}
+	@FXML
+	private void handleCheck(){
+		
+		
+	}
 
 	public void handleEingabe(int eingabe) {
 		if (eingabe < 10 && eingabe >= 0 && auswahlX != -1 && auswahlY != -1) {
