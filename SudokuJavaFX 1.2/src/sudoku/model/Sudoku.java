@@ -275,7 +275,7 @@ public class Sudoku implements Serializable {
 					/*
 					 * if (ausgefuellt()) ausgabe(); else
 					 */
-					sudokuBT();
+					sudokuBTCount();
 	
 					
 						sudoku[xkoord][ykoord] = 0;

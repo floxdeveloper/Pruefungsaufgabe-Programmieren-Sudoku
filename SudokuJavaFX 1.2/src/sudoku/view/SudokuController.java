@@ -1,20 +1,27 @@
 package sudoku.view;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sudoku.MainApp;
+import sudoku.MainAppTest;
 
 public class SudokuController {
 
@@ -57,14 +64,6 @@ public class SudokuController {
 		return mapText.get(vert * 9 + hor);
 
 	}
-	@FXML
-	private void handleCheck(){
-		if (mainApp.getSudoku().checkUniqueSolvable())
-			System.out.println("Uniquely solvable");
-			else 
-				System.out.println("Not uniquely solvable");
-		
-	}
 
 	public void handleEingabe(int eingabe) {
 		if (eingabe < 10 && eingabe >= 0 && auswahlX != -1 && auswahlY != -1) {
@@ -81,10 +80,28 @@ public class SudokuController {
 			//Wenn Sudoku gelöst ist -> Congrationlations ausgeben
 			if(mainApp.getSudoku().filled()){
 				
-				//TODO extra Bildschirm erstellen
-				setEditable(false);
-				mainApp.warning("Congrationlations", "You have solved the Sudoku by yourself");
+				try {
+					// Load the fxml file and create a new stage for the popup dialog.
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(MainAppTest.class.getResource("view/Congratiolations.fxml"));
+					AnchorPane page = (AnchorPane) loader.load();
+
+					// Create the dialog Stage.
+					Stage dialogStage = new Stage();
+					dialogStage.initStyle(StageStyle.UTILITY);
+					dialogStage.initOwner(mainApp.getPrimaryStage());
+					dialogStage.setResizable(false);
+					Scene scene = new Scene(page);
+					dialogStage.setScene(scene);
+
+					// Show the dialog and wait until the user closes it
+					dialogStage.showAndWait();
 				
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 				
 				
 				
@@ -97,7 +114,7 @@ public class SudokuController {
 				select(auswahlX, auswahlY);
 
 		}
-	}
+	
 
 	// Beim Klick auf Reset
 	@FXML
