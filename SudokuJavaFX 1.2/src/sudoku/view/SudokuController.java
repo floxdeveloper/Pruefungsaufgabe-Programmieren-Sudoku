@@ -59,7 +59,10 @@ public class SudokuController {
 	}
 	@FXML
 	private void handleCheck(){
-		
+		if (mainApp.getSudoku().checkUniqueSolvable())
+			System.out.println("Uniquely solvable");
+			else 
+				System.out.println("Not uniquely solvable");
 		
 	}
 
@@ -74,10 +77,11 @@ public class SudokuController {
 			//Liesst GUI aus und schreibt in Sudoku (bei falscher Eingabe wird alter Stand geladen)
 			sudokuAuslesen();
 			
-			//TODO abc
+	
 			//Wenn Sudoku gelöst ist -> Congrationlations ausgeben
 			if(mainApp.getSudoku().filled()){
 				
+				//TODO extra Bildschirm erstellen
 				setEditable(false);
 				mainApp.warning("Congrationlations", "You have solved the Sudoku by yourself");
 				
@@ -162,7 +166,7 @@ public class SudokuController {
 			// geklappt hat
 			mainApp.getSudoku().solve();
 
-			if (mainApp.getSudoku().getSolveCounter()==0) {
+			if (!mainApp.getSudoku().filled()) {
 				// Farbe wieder auf schwarz ändern
 				colorAllBlack();
 

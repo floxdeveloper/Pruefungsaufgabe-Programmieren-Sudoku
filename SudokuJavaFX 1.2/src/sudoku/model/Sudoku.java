@@ -11,6 +11,8 @@ public class Sudoku implements Serializable {
 
 	private int[][] sudoku = new int[9][9];
 	private int[][] sudokuSaved = new int[9][9];
+	
+	//Gefüllt nach solveCount (0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht eindeutig lösbar)
 	private int solveCounter;
 	private boolean fertig;
 
@@ -27,13 +29,24 @@ public class Sudoku implements Serializable {
 
 	// Hauptmethode in Sudoku die zum Lösen ausgeführt wird -> sorgt dafür, dass
 	// ein teilweise gefülltes sudoku korrekt gelöst wird oder im
-	// Ausgangszustand bleibt
+	// Ausgangszustand bleibt (wenn nicht lösbar)
 	public void solve() {
-		solveCounter=0;
+		
 		fertig = false;
 		sudokuBT();
-		if(solveCounter>0)
-			sudoku=copySudoku(sudokuSaved);
+	
+		
+	}
+	
+	
+	//Löst das Sudoku und befüllt die Count Variable mit: 0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht eindeutig lösbar
+	public void solveCount() {
+		solveCounter=0;
+		fertig = false;
+		sudokuBTCount();
+		if (solveCounter > 0)
+			sudoku = copySudoku(sudokuSaved);
+		
 	}
 	public int getSolveCounter(){
 		return solveCounter;
@@ -211,6 +224,35 @@ public class Sudoku implements Serializable {
 		int ykoord = koord[1];
 
 		// beende BT
+		if (fertig == true )
+			return;
+		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
+		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
+			fertig = true;		
+		else { // backtracking
+
+			for (int i = 1; i <= 9; i++) {
+				if (isSafe(xkoord, ykoord, i)) {
+					sudoku[xkoord][ykoord] = i;
+					/*
+					 * if (ausgefuellt()) ausgabe(); else
+					 */
+					sudokuBT();
+
+						if(!fertig)
+						sudoku[xkoord][ykoord] = 0;
+				}
+			}
+		}
+	}
+
+	private void sudokuBTCount() {
+	
+		int[] koord = getNextCoordinate();
+		int xkoord = koord[0];
+		int ykoord = koord[1];
+	
+		// beende BT
 		if (fertig == true && solveCounter>1)
 			return;
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
@@ -226,7 +268,7 @@ public class Sudoku implements Serializable {
 			}
 			
 		else { // backtracking
-
+	
 			for (int i = 1; i <= 9; i++) {
 				if (isSafe(xkoord, ykoord, i)) {
 					sudoku[xkoord][ykoord] = i;
@@ -234,7 +276,7 @@ public class Sudoku implements Serializable {
 					 * if (ausgefuellt()) ausgabe(); else
 					 */
 					sudokuBT();
-
+	
 					
 						sudoku[xkoord][ykoord] = 0;
 				}
@@ -326,7 +368,7 @@ public class Sudoku implements Serializable {
 	public boolean checkUniqueSolvable(){
 		int[][] temp = copySudoku(sudoku);
 		Sudoku tempSudoku = new Sudoku(temp);
-		tempSudoku.solve();
+		tempSudoku.solveCount();
 		if(tempSudoku.getSolveCounter()!=1)
 			return false;
 		else 
