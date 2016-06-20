@@ -184,6 +184,15 @@ public class WrapperController implements PropertyChangeListener {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	private void handleCheck(){
+		if (mainApp.getSudoku().checkUniqueSolvable())
+			System.out.println("Uniquely solvable");
+		else 
+			System.out.println("Not uniquely solvable");
+		
+	}
 
 	/**
 	 * Is called by the main application to give a reference back to itself.

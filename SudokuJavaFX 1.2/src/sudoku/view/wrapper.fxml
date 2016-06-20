@@ -9,11 +9,16 @@
    <top>
       <MenuBar prefHeight="10.0" prefWidth="400.0" BorderPane.alignment="CENTER">
         <menus>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleLoad" text="Load" /> 
+                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Sudoku">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleLoad" text="Load"/> 
-                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save"/> 
-                 	 <MenuItem mnemonicParsing="false" onAction="#handleGenerate" text="Generate solvable Sudoku" /> 
+            <items> 
+                 	 <MenuItem mnemonicParsing="false" onAction="#handleGenerate" text="Generate solvable Sudoku" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCheck" text="Check for unique solveability" /> 
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
