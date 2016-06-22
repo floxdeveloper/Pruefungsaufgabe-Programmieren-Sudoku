@@ -166,7 +166,7 @@ public class WrapperController implements PropertyChangeListener {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainAppTest.class.getResource("view/about.fxml"));
+			loader.setLocation(MainAppTest.class.getResource("view/About.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// Create the dialog Stage.

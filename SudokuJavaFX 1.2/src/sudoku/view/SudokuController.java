@@ -34,8 +34,6 @@ public class SudokuController {
 
 	boolean editable = true;
 
-	
-
 	@FXML
 	private Text t00, t01, t02, t03, t04, t05, t06, t07, t08, t10, t11, t12, t13, t14, t15, t16, t17, t18, t20, t21,
 			t22, t23, t24, t25, t26, t27, t28, t30, t31, t32, t33, t34, t35, t36, t37, t38, t40, t41, t42, t43, t44,
@@ -73,17 +71,22 @@ public class SudokuController {
 				getKoordinate(auswahlX, auswahlY).setText(Integer.toString(eingabe));
 			}
 
-			//Liesst GUI aus und schreibt in Sudoku (bei falscher Eingabe wird alter Stand geladen)
+			// Liesst GUI aus und schreibt in Sudoku (bei falscher Eingabe wird
+			// alter Stand geladen)
 			sudokuAuslesen();
-			
-	
-			//Wenn Sudoku gelöst ist -> Congrationlations ausgeben
-			if(mainApp.getSudoku().filled()){
-				
+
+			// zum zurücksetzen
+			if (auswahlX != -1 && auswahlY != -1)
+				select(auswahlX, auswahlY);
+
+			// Wenn Sudoku gelöst ist -> Congrationlations ausgeben
+			if (mainApp.getSudoku().filled()) {
+
 				try {
-					// Load the fxml file and create a new stage for the popup dialog.
+					// Load the fxml file and create a new stage for the popup
+					// dialog.
 					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(MainAppTest.class.getResource("view/Congratiolations.fxml"));
+					loader.setLocation(MainAppTest.class.getResource("view/Congratulation.fxml"));
 					AnchorPane page = (AnchorPane) loader.load();
 
 					// Create the dialog Stage.
@@ -94,27 +97,23 @@ public class SudokuController {
 					Scene scene = new Scene(page);
 					dialogStage.setScene(scene);
 
+					// Set controller to Main Stage
+					CongratulationController controller = loader.getController();
+					controller.setStage(dialogStage);
+
 					// Show the dialog and wait until the user closes it
 					dialogStage.showAndWait();
-				
+
+					mainApp.getSudokuController().setEditable(false);
 
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-				
-				
-				
-			}
-				
-			
-
-			// zum zurücksetzen
-			if (auswahlX != -1 && auswahlY != -1)
-				select(auswahlX, auswahlY);
 
 		}
-	
+
+	}
 
 	// Beim Klick auf Reset
 	@FXML
@@ -473,11 +472,9 @@ public class SudokuController {
 			aktRect.setPosX(i / 9);
 			aktRect.setPosY(i % 9);
 
-			
-			//Initialisierung des Klich Event Handlers auf Rechtecke
+			// Initialisierung des Klich Event Handlers auf Rechtecke
 			aktRect.setOnMousePressed(new EventHandler<MouseEvent>() {
 
-			
 				int sourceX, sourceY = -1;
 
 				public void handle(MouseEvent me) {

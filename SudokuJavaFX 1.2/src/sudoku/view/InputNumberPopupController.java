@@ -39,6 +39,8 @@ public class InputNumberPopupController {
 	public void addListener(PropertyChangeListener p){
 		support.addPropertyChangeListener(p);
 	}
+	
+	
 	private Stage stage;
 	public void setStage(Stage stage){
 		this.stage=stage;

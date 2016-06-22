@@ -72,7 +72,7 @@ public class MainApp extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/wrapper.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/Wrapper.fxml"));
 			rootLayout = (BorderPane) loader.load();
 
 			// Set controller to Main Stage
@@ -95,7 +95,7 @@ public class MainApp extends Application {
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/sudoku.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/Sudoku.fxml"));
 			AnchorPane sudoku = (AnchorPane) loader.load();
 
 			// Set sudoku solver into the center of root layout.
