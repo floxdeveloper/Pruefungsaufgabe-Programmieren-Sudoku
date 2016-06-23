@@ -21,10 +21,14 @@ public class InputNumberPopupController {
 	
 	//TODO auf Englisch ändern 
 	
+	
+	/**
+	 * 
+	 */
 	@FXML
 	private void initialize(){
 		
-		//Setzt Items von ComboBox
+		//Sets Item of ComboBox
 		ObservableList<Integer> a1 = FXCollections.observableArrayList();	
 		for(int i = 20;i<81;i++){
 		a1.add(i);
@@ -35,7 +39,10 @@ public class InputNumberPopupController {
 	
 	}
 	
-	
+	/**
+	 * Adds a PropertyChangeListener to the PropertyChangeSupport
+	 * @param p
+	 */
 	public void addListener(PropertyChangeListener p){
 		support.addPropertyChangeListener(p);
 	}
@@ -52,7 +59,7 @@ public class InputNumberPopupController {
 			try{
 			support.firePropertyChange("InputNumber", 0, (int) eingabecb.getValue());	
 			stage.close();
-			}catch (Exception e){
+			}catch (Exception noNumberOfHintsSelectedException){
 				
 				mainApp.warning("Please select a number", "You have not selected a number of hints");
 				
@@ -61,11 +68,17 @@ public class InputNumberPopupController {
 		}
 	
 	
-	
+	/**
+	 * Sets the MainApp Reference
+	 * @param m
+	 */
 	public void setMainApp(MainApp m){	
 		mainApp=m;
 	}
 	
+	/**
+	 * Handles the user's choice to break
+	 */
 	@FXML
 	private void handleAbbrechen(){
 		stage.close();
