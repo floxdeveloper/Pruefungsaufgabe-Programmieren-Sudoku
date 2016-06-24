@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sudoku.MainApp;
 import sudoku.MainAppTest;
+import sudoku.model.Sudoku;
 
 public class SudokuController {
 
@@ -63,6 +64,8 @@ public class SudokuController {
 		return mapText.get(vert * 9 + hor);
 
 	}
+	
+	
 
 	public void handleEingabe(int eingabe) {
 		if (eingabe < 10 && eingabe >= 0 && auswahlX != -1 && auswahlY != -1) {
@@ -203,11 +206,65 @@ public class SudokuController {
 		sudokuAnzeigen();
 
 	}
+	
+	@FXML
+	private void handleHint(){
+		
+		//Wenn nicht editiertbar -> nichts machen
+		if (!editable)
+			return;
+		
+		int[][] sudokuArray = mainApp.getSudoku().copySudokuArray();
+		int[][] sudokuArraySolve =  mainApp.getSudoku().copySudokuArray();
+		
+		Sudoku sudoku = new Sudoku(sudokuArraySolve);
+		sudoku.solve();
+		
+		//Sudoku nicht lösbar -> Error
+		if (!sudoku.filled()){
+			
+			mainApp.error("Unable to give a hint.", "The Sudoku you have entered is not solvable.");
+			return;
+			
+			
+		}
+		
+		boolean hintGiven = false;
+		
+		while (!hintGiven){
+			
+			int xKoord = (int) (Math.random()*9);
+			int yKoord = (int) (Math.random()*9);
+			
+			if (sudokuArray[xKoord][yKoord]==0){
+				
+				sudokuArray[xKoord][yKoord] = sudokuArraySolve[xKoord][yKoord];
+				mainApp.setSudoku(sudokuArray);
+				hintGiven = true;
+				
+				if (mainApp.getSudoku().filled()){
+					setEditable(false);
+					select(auswahlX,auswahlY);
+					
+					
+				}
+				
+			}
+			
+			
+			
+			
+			
+		}
+		
+		
+	}
+	
 
 	@FXML
 	private void sudokuAnzeigen() {
 		Text text;
-		int[][] sudokuArray = mainApp.getSudoku().getSudoku();
+		int[][] sudokuArray = mainApp.getSudoku().getSudokuArray();
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				text = getKoordinate(i, j);
@@ -250,30 +307,32 @@ public class SudokuController {
 	}
 
 	public void select(int sourceX, int sourceY) {
-
+	
 		if (sourceX == auswahlX && sourceY == auswahlY) {
 			auswahlX = -1;
 			auswahlY = -1;
 			mapRect.get(9 * sourceX + sourceY).setStroke(Color.TRANSPARENT);
-
+	
 		} else {
 			if (auswahlX != -1 && auswahlY != -1)
 				mapRect.get(9 * auswahlX + auswahlY).setStroke(Color.TRANSPARENT);
 			auswahlX = sourceX;
 			auswahlY = sourceY;
-
+	
 			mapRect.get(9 * auswahlX + auswahlY).setStroke(Color.RED);
-
+	
 		}
-
+	
 	}
+
+	
 
 	public void colorInputBlue() {
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 
-				if (mainApp.getSudoku().getSudoku()[i][j] != 0) {
+				if (mainApp.getSudoku().getSudokuArray()[i][j] != 0) {
 					Text t = getKoordinate(i, j);
 					t.setFill(Color.BLUE);
 
