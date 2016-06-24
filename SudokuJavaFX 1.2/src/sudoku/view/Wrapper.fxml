@@ -5,25 +5,25 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane id="rootLayout" maxHeight="460.0" maxWidth="400.0" minHeight="460.0" minWidth="400.0" prefHeight="460.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sudoku.view.WrapperController">
+<BorderPane fx:id="rootLayout" maxHeight="460.0" maxWidth="400.0" minHeight="460.0" minWidth="400.0" prefHeight="460.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sudoku.view.WrapperController">
    <top>
       <MenuBar prefHeight="10.0" prefWidth="400.0" BorderPane.alignment="CENTER">
         <menus>
-            <Menu id="file" mnemonicParsing="false" text="File">
+            <Menu fx:id="file" mnemonicParsing="false" text="File">
               <items>
               <MenuItem mnemonicParsing="false" onAction="#handleLoad" text="Load" /> 
-                  <MenuItem id="save" mnemonicParsing="false" onAction="#handleSave" text="Save" />
+                  <MenuItem fx:id="save" mnemonicParsing="false" onAction="#handleSave" text="Save" />
               </items>
             </Menu>
-          <Menu id="sudoku" mnemonicParsing="false" text="Sudoku">
+          <Menu fx:id="sudoku" mnemonicParsing="false" text="Sudoku">
             <items> 
-                 	 <MenuItem id="generate" mnemonicParsing="false" onAction="#handleGenerate" text="Generate solvable Sudoku" />
-                  <MenuItem id="checkUniquely" mnemonicParsing="false" onAction="#handleCheck" text="Check for unique solveability" /> 
+                 	 <MenuItem fx:id="generate" mnemonicParsing="false" onAction="#handleGenerate" text="Generate solvable Sudoku" />
+                  <MenuItem fx:id="checkUniquely" mnemonicParsing="false" onAction="#handleCheck" text="Check for unique solveability" /> 
             </items>
           </Menu>
-          <Menu id="help" mnemonicParsing="false" text="Help">
+          <Menu fx:id="help" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem id="about" mnemonicParsing="false" onAction="#handleAbout" text="About" />
+              <MenuItem fx:id="about" mnemonicParsing="false" onAction="#handleAbout" text="About" />
             </items>
           </Menu>
         </menus>

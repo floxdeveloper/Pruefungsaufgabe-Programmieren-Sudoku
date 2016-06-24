@@ -131,13 +131,6 @@ public class Sudoku implements Serializable {
 
 	}
 
-
-
-<<<<<<< HEAD
-
-=======
-
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 	
 	private int[][] copyArray(int[][] toCopy){
 		int[][] copied = new int[9][9];

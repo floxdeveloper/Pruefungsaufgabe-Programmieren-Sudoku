@@ -94,44 +94,7 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-	private Stage currentStage;
-	public Stage getCurrentStage(){
-		return this.currentStage;
-	}
-	public void lockScreen(){
-		try {
-			// Load the fxml file and create a new stage for the popup dialog.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainAppTest.class.getResource("view/WrapperLock.fxml"));
-			AnchorPane pane = (AnchorPane) loader.load();
-
-			// Create the dialog Stage.
-			Stage dialogStage = new Stage();
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initStyle(StageStyle.TRANSPARENT);
-			dialogStage.initOwner(this.primaryStage);
-			dialogStage.setResizable(false);
-			dialogStage.setAlwaysOnTop(true);
-			dialogStage.setOpacity(0.9);
-			Scene scene = new Scene(pane);
-			dialogStage.setScene(scene);
-			 
-			//set Stage boundaries to the lower right corner of the visible bounds of the main screen
-			dialogStage.setHeight(this.primaryStage.getHeight());
-			dialogStage.setWidth(this.primaryStage.getWidth());
-			dialogStage.setX(this.primaryStage.getX());
-			dialogStage.setY(this.primaryStage.getY());
-			this.currentStage = dialogStage;
-			// Show the dialog and wait until the user closes it
-			dialogStage.show();
-			System.out.println("bla");
-			
-			
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	private Stage currentStage;
 	public Stage getCurrentStage(){
 		return this.currentStage;
