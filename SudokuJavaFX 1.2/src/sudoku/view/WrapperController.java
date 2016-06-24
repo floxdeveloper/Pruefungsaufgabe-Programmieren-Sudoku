@@ -109,11 +109,7 @@ public class WrapperController implements PropertyChangeListener {
 
 			}
 
-		} else {
-
-			mainApp.warning("Unable to save", "Please select a file");
-
-		}
+		} 
 
 	}
 
@@ -152,11 +148,7 @@ public class WrapperController implements PropertyChangeListener {
 
 			}
 
-		} else {
-
-			mainApp.warning("Unable to load", "Please select a file");
-
-		}
+		} 
 
 	}
 
