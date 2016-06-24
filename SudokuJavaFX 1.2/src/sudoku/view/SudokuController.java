@@ -206,7 +206,7 @@ public class SudokuController {
 	@FXML
 	private void sudokuAnzeigen() {
 		Text text;
-		int[][] sudokuArray = mainApp.getSudoku().getSudoku();
+		int[][] sudokuArray = mainApp.getSudoku().getSudokuArray();
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				text = getKoordinate(i, j);
@@ -272,7 +272,7 @@ public class SudokuController {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 
-				if (mainApp.getSudoku().getSudoku()[i][j] != 0) {
+				if (mainApp.getSudoku().getSudokuArray()[i][j] != 0) {
 					Text t = getKoordinate(i, j);
 					t.setFill(Color.BLUE);
 
