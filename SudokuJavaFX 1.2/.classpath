@@ -6,6 +6,6 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="libraries/guava-19.0.jar"/>
-	<classpathentry kind="lib" path="libraries/testFx-3.1.2.jar"/>
+	<classpathentry kind="lib" path="libraries/testFx-3.1.2.jar" sourcepath="resources/source/testFx-3.1.2-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
