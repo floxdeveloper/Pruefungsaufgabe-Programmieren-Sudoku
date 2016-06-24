@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -13,7 +14,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import sudoku.model.Sudoku;
 import sudoku.view.SudokuController;
@@ -67,7 +70,11 @@ public class MainApp extends Application {
 
 	
 
-	// Lädt das Root Layout
+	// Load RootLayout
+	/**
+	 * Connects the rootLayout with the MainStage and the WrapperController
+	 * Shows the new Scene
+	 */
 	public void initRootLayout() {
 		try {
 			// Load root layout from fxml file.
@@ -83,6 +90,44 @@ public class MainApp extends Application {
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private Stage currentStage;
+	public Stage getCurrentStage(){
+		return this.currentStage;
+	}
+	public void lockScreen(){
+		try {
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainAppTest.class.getResource("view/WrapperLock.fxml"));
+			AnchorPane pane = (AnchorPane) loader.load();
+
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initStyle(StageStyle.TRANSPARENT);
+			dialogStage.initOwner(this.primaryStage);
+			dialogStage.setResizable(false);
+			dialogStage.setAlwaysOnTop(true);
+			dialogStage.setOpacity(0.9);
+			Scene scene = new Scene(pane);
+			dialogStage.setScene(scene);
+			 
+			//set Stage boundaries to the lower right corner of the visible bounds of the main screen
+			dialogStage.setHeight(this.primaryStage.getHeight());
+			dialogStage.setWidth(this.primaryStage.getWidth());
+			dialogStage.setX(this.primaryStage.getX());
+			dialogStage.setY(this.primaryStage.getY());
+			this.currentStage = dialogStage;
+			// Show the dialog and wait until the user closes it
+			dialogStage.show();
+			System.out.println("bla");
+			
+			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -128,6 +173,22 @@ public class MainApp extends Application {
 		alert.showAndWait();
 
 	}
+	
+	// Used to send warnings with custom header and content
+		public void information(String header, String content) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.initOwner(primaryStage);
+			alert.setTitle("Information");
+
+			if (header.equals(""))
+				return;
+
+			alert.setHeaderText(header);
+			alert.setContentText(content);
+
+			alert.showAndWait();
+
+		}
 
 	// Used to send error messanges with custom header and content
 	public void error(String header, String content) {

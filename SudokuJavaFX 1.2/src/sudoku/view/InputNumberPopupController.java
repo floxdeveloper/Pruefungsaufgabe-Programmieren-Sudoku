@@ -2,13 +2,23 @@ package sudoku.view;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sudoku.MainApp;
+import sudoku.MainAppTest;
 
 public class InputNumberPopupController {
 	
@@ -19,9 +29,9 @@ public class InputNumberPopupController {
 	private ComboBox<Integer> eingabecb;
 	
 	
-	//TODO auf Englisch ändern 
-	
-	
+
+
+		//TODO auf Englisch ändern 
 	/**
 	 * 
 	 */
@@ -59,6 +69,7 @@ public class InputNumberPopupController {
 			try{
 			support.firePropertyChange("InputNumber", 0, (int) eingabecb.getValue());	
 			stage.close();
+
 			}catch (Exception noNumberOfHintsSelectedException){
 				
 				mainApp.warning("Please select a number", "You have not selected a number of hints");

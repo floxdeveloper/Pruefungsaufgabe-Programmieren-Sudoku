@@ -463,6 +463,8 @@
       <ButtonBar layoutX="338.0" layoutY="595.0" prefHeight="30.0" prefWidth="248.0" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="5.0">
         <buttons>
           <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSolve" text="Solve" ><tooltip> <Tooltip text="Solves the Sudoku"  /> </tooltip> </Button>
+                    <Button mnemonicParsing="false" onAction="#handleHint" text="Hint" ><tooltip> <Tooltip text="Fills in on element"  /> </tooltip> </Button>
+          
             <Button mnemonicParsing="false" onAction="#handleReset" text="Reset" ><tooltip> <Tooltip text="Resets the Sudoku (show empty Suodku)"  /> </tooltip> </Button>
         </buttons>
       </ButtonBar>
