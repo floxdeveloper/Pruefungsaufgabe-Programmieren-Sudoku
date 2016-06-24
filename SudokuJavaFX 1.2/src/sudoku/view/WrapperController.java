@@ -30,16 +30,17 @@ import sudoku.model.SudokuGenerator;
 public class WrapperController implements PropertyChangeListener {
 
 	private MainApp mainApp;
+	
 
 	@FXML
 	private void initialize() {
 
 	}
 
+	
 	// Beim Klick auf Sudoku -> Generate solvable Sudoku
 	@FXML
 	private void handleGenerate() {
-		// TODO Abfrage nach generate Zahl / Thread (William)
 
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -221,6 +222,9 @@ public class WrapperController implements PropertyChangeListener {
 				}
 			};
 			t.start();
+		}
+		if (evt.getPropertyName().equals("KillThread")) {
+			
 		}
 
 	}

@@ -28,6 +28,7 @@ public class SudokuController {
 	private MainApp mainApp;
 	private HashMap<Integer, Text> mapText = new HashMap<Integer, Text>();
 	private HashMap<Integer, RectPos> mapRect = new HashMap<Integer, RectPos>();
+	
 
 	int auswahlX = -1;
 	int auswahlY = -1;
