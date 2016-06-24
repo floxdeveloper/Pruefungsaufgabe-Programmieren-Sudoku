@@ -45,7 +45,7 @@ public class Sudoku implements Serializable {
 		fertig = false;
 		sudokuBTCount();
 		if (solveCounter > 0)
-			sudoku = copySudoku(sudokuSaved);
+			sudoku = copyArray(sudokuSaved);
 		
 	}
 	public int getSolveCounter(){
@@ -206,7 +206,8 @@ public class Sudoku implements Serializable {
 
 	}
 
-	private int[][] copySudoku(int[][] toCopy){
+	
+	private int[][] copyArray(int[][] toCopy){
 		int[][] copied = new int[9][9];
 		for(int k=0;k<9;k++){
 			for(int j=0;j<9;j++){
@@ -214,6 +215,14 @@ public class Sudoku implements Serializable {
 			}
 		}
 		return copied;
+		
+	}
+	
+	//Gibt kopiertes SudokuArray zurück
+	public int[][] copySudokuArray(){
+		
+		return copyArray(sudoku);
+		
 		
 	}
 	
@@ -260,7 +269,7 @@ public class Sudoku implements Serializable {
 			if(fertig == false)
 			{
 				fertig = true;
-				sudokuSaved = copySudoku(sudoku);
+				sudokuSaved = copyArray(sudoku);
 				solveCounter++;
 			}
 			else{
@@ -366,7 +375,7 @@ public class Sudoku implements Serializable {
 	
 	// checkt, ob es zum gegebenen Sudoku eine einzigartige Loesung gibt
 	public boolean checkUniqueSolvable(){
-		int[][] temp = copySudoku(sudoku);
+		int[][] temp = copyArray(sudoku);
 		Sudoku tempSudoku = new Sudoku(temp);
 		tempSudoku.solveCount();
 		if(tempSudoku.getSolveCounter()!=1)
