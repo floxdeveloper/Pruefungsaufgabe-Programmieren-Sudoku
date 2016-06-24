@@ -47,7 +47,6 @@ public class Sudoku implements Serializable {
 		if (solveCounter > 0)
 			sudoku = copyArray(sudokuSaved);
 		
-		
 	}
 	public int getSolveCounter(){
 		return solveCounter;
