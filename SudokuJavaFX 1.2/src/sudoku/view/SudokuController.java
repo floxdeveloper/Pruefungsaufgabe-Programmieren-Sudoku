@@ -29,6 +29,7 @@ public class SudokuController {
 	private MainApp mainApp;
 	private HashMap<Integer, Text> mapText = new HashMap<Integer, Text>();
 	private HashMap<Integer, RectPos> mapRect = new HashMap<Integer, RectPos>();
+	
 
 	int auswahlX = -1;
 	int auswahlY = -1;
@@ -63,8 +64,6 @@ public class SudokuController {
 		return mapText.get(vert * 9 + hor);
 
 	}
-	
-	
 
 	public void handleEingabe(int eingabe) {
 		if (eingabe < 10 && eingabe >= 0 && auswahlX != -1 && auswahlY != -1) {
@@ -113,18 +112,13 @@ public class SudokuController {
 					e.printStackTrace();
 				}
 			}
-
 		}
-
 	}
-
 	// Beim Klick auf Reset
 	@FXML
 	private void handleReset() {
-
 		if (mainApp.getSudoku().empty())
 			return;
-
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Reset Confirmation");
 		alert.setHeaderText("Reset Sudoku?");
@@ -144,11 +138,9 @@ public class SudokuController {
 
 			// Alle Textfelder wieder einschwärzen
 			colorAllBlack();
-
 		}
-
 	}
-
+	
 	// Beim Klick auf Solve
 	@FXML
 	private void handleSolve() {
@@ -205,60 +197,51 @@ public class SudokuController {
 		sudokuAnzeigen();
 
 	}
-	
+
 	@FXML
-	private void handleHint(){
-		
-		//Wenn nicht editiertbar -> nichts machen
+	private void handleHint() {
+
+		// Wenn nicht editiertbar -> nichts machen
 		if (!editable)
 			return;
-		
+
 		int[][] sudokuArray = mainApp.getSudoku().copySudokuArray();
-		int[][] sudokuArraySolve =  mainApp.getSudoku().copySudokuArray();
-		
+		int[][] sudokuArraySolve = mainApp.getSudoku().copySudokuArray();
+
 		Sudoku sudoku = new Sudoku(sudokuArraySolve);
 		sudoku.solve();
-		
-		//Sudoku nicht lösbar -> Error
-		if (!sudoku.filled()){
-			
+
+		// Sudoku nicht lösbar -> Error
+		if (!sudoku.filled()) {
+
 			mainApp.error("Unable to give a hint.", "The Sudoku you have entered is not solvable.");
 			return;
-			
-			
+
 		}
-		
+
 		boolean hintGiven = false;
-		
-		while (!hintGiven){
-			
-			int xKoord = (int) (Math.random()*9);
-			int yKoord = (int) (Math.random()*9);
-			
-			if (sudokuArray[xKoord][yKoord]==0){
-				
+
+		while (!hintGiven) {
+
+			int xKoord = (int) (Math.random() * 9);
+			int yKoord = (int) (Math.random() * 9);
+
+			if (sudokuArray[xKoord][yKoord] == 0) {
+
 				sudokuArray[xKoord][yKoord] = sudokuArraySolve[xKoord][yKoord];
 				mainApp.setSudoku(sudokuArray);
 				hintGiven = true;
-				
-				if (mainApp.getSudoku().filled()){
+
+				if (mainApp.getSudoku().filled()) {
 					setEditable(false);
-					select(auswahlX,auswahlY);
-					
-					
+
+					// abwählen, wenn etwas ausgefwählt ist
+					if (auswahlX != -1 && auswahlY != -1)
+						select(auswahlX, auswahlY);
 				}
-				
 			}
-			
-			
-			
-			
-			
 		}
-		
-		
 	}
-	
 
 	@FXML
 	private void sudokuAnzeigen() {
@@ -306,25 +289,24 @@ public class SudokuController {
 	}
 
 	public void select(int sourceX, int sourceY) {
-	
+
 		if (sourceX == auswahlX && sourceY == auswahlY) {
 			auswahlX = -1;
 			auswahlY = -1;
+
 			mapRect.get(9 * sourceX + sourceY).setStroke(Color.TRANSPARENT);
-	
+
 		} else {
 			if (auswahlX != -1 && auswahlY != -1)
 				mapRect.get(9 * auswahlX + auswahlY).setStroke(Color.TRANSPARENT);
 			auswahlX = sourceX;
 			auswahlY = sourceY;
-	
-			mapRect.get(9 * auswahlX + auswahlY).setStroke(Color.RED);
-	
-		}
-	
-	}
 
-	
+			mapRect.get(9 * auswahlX + auswahlY).setStroke(Color.RED);
+
+		}
+
+	}
 
 	public void colorInputBlue() {
 
