@@ -132,6 +132,10 @@ public class Sudoku implements Serializable {
 	}
 
 	
+	
+	
+
+	
 	private int[][] copyArray(int[][] toCopy){
 		int[][] copied = new int[9][9];
 		for(int k=0;k<9;k++){
