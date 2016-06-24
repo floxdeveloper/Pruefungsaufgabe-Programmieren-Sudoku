@@ -128,6 +128,22 @@ public class MainApp extends Application {
 		alert.showAndWait();
 
 	}
+	
+	// Used to send warnings with custom header and content
+		public void information(String header, String content) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.initOwner(primaryStage);
+			alert.setTitle("Information");
+
+			if (header.equals(""))
+				return;
+
+			alert.setHeaderText(header);
+			alert.setContentText(content);
+
+			alert.showAndWait();
+
+		}
 
 	// Used to send error messanges with custom header and content
 	public void error(String header, String content) {

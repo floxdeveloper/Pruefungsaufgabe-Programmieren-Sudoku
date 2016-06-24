@@ -3,11 +3,6 @@ package sudoku.model;
 
 public class SudokuGenerator {
 
-	public static void main(String[] args) {
-		generate(40);
-	}
-	
-	
 	
 	public static Sudoku generate(int numberOfClues) {
 
