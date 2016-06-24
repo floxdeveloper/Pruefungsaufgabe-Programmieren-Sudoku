@@ -12,6 +12,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -200,28 +204,93 @@ public class WrapperController implements PropertyChangeListener {
 
 	}
 
+//	@FXML
+//	private Stage lockScreen(){
+//		try {
+//			// Load the fxml file and create a new stage for the popup dialog.
+//			FXMLLoader loader = new FXMLLoader();
+//			loader.setLocation(MainAppTest.class.getResource("view/WrapperLock.fxml"));
+//			AnchorPane pane = (AnchorPane) loader.load();
+//
+//			// Create the dialog Stage.
+//			Stage dialogStage = new Stage();
+//			dialogStage.initModality(Modality.WINDOW_MODAL);
+//			dialogStage.initStyle(StageStyle.TRANSPARENT);
+//			dialogStage.initOwner(mainApp.getPrimaryStage());
+//			dialogStage.setResizable(false);
+//			dialogStage.setAlwaysOnTop(true);
+//			dialogStage.setOpacity(0.9);
+//			Scene scene = new Scene(pane);
+//			dialogStage.setScene(scene);
+//			 
+//			//set Stage boundaries to the lower right corner of the visible bounds of the main screen
+//			dialogStage.setHeight(mainApp.getPrimaryStage().getHeight());
+//			dialogStage.setWidth(mainApp.getPrimaryStage().getWidth());
+//			dialogStage.setX(mainApp.getPrimaryStage().getX());
+//			dialogStage.setY(mainApp.getPrimaryStage().getY());
+//
+//			// Show the dialog and wait until the user closes it
+//			dialogStage.showAndWait();
+//			
+//			return dialogStage;
+//			
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
+	
 	public void propertyChange(PropertyChangeEvent evt) {
+		
 		if (evt.getPropertyName().equals("InputNumber")) {
+
 			int numberOfClues = (int) evt.getNewValue();
 			// Um alle Textfelder auf schwarz zu setzen
 			mainApp.getSudokuController().colorAllBlack();
 			
 			
-			
-			Thread t = new Thread() {
-				public void run() {
+
+			Task<Void> task = new Task<Void>(){
+
+				@Override
+				protected Void call() throws Exception {
+					
 					System.out.println("Generating Sudoku...");
 					Sudoku genSudoku = SudokuGenerator.generate(numberOfClues);
 					System.out.println("Finished generating Sudoku.");
 					mainApp.setSudoku(genSudoku);
 					mainApp.getSudokuController().setEditable(true);
+					return null;
 				}
+				
 			};
-			t.start();
-		}
-		if (evt.getPropertyName().equals("KillThread")) {
+			task.setOnScheduled(e -> {
+				System.out.println("Scheduled");
+
+			});			
+			task.setOnRunning(e -> {
+				System.out.println("Running");
+				mainApp.lockScreen();
+			});
+			task.setOnSucceeded(e -> {
+				System.out.println("Succeded");
+				mainApp.getCurrentStage().close();
+			});
+//			task.setOnRunning(event);
+
+			new Thread(task).start();
 			
-		}
+
+//			System.out.println(t.isAlive());
+//			while (t.isAlive()){
+//			//	System.out.println("blubber");
+//			}
+//			System.out.println("blubber");
+			//System.out.println(mainApp.getCurrentStage().getTitle());
+			//mainApp.getCurrentStage().close();			
+			
+			}
 
 	}
 
