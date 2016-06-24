@@ -30,39 +30,7 @@ public class InputNumberPopupController {
 	
 	
 
-	@FXML
-	private void lockScreen(){
-		try {
-			// Load the fxml file and create a new stage for the popup dialog.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainAppTest.class.getResource("view/WrapperLock.fxml"));
-			AnchorPane pane = (AnchorPane) loader.load();
 
-			// Create the dialog Stage.
-			Stage dialogStage = new Stage();
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initStyle(StageStyle.TRANSPARENT);
-			dialogStage.initOwner(mainApp.getPrimaryStage());
-			dialogStage.setResizable(false);
-			dialogStage.setAlwaysOnTop(true);
-			dialogStage.setOpacity(0.9);
-			Scene scene = new Scene(pane);
-			dialogStage.setScene(scene);
-			 
-			//set Stage boundaries to the lower right corner of the visible bounds of the main screen
-			dialogStage.setHeight(mainApp.getPrimaryStage().getHeight());
-			dialogStage.setWidth(mainApp.getPrimaryStage().getWidth());
-			dialogStage.setX(mainApp.getPrimaryStage().getX());
-			dialogStage.setY(mainApp.getPrimaryStage().getY());
-
-			// Show the dialog and wait until the user closes it
-			dialogStage.show();
-			
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 		//TODO auf Englisch ändern 
 	/**
 	 * 
@@ -101,7 +69,7 @@ public class InputNumberPopupController {
 			try{
 			support.firePropertyChange("InputNumber", 0, (int) eingabecb.getValue());	
 			stage.close();
-			lockScreen();
+
 			}catch (Exception noNumberOfHintsSelectedException){
 				
 				mainApp.warning("Please select a number", "You have not selected a number of hints");
