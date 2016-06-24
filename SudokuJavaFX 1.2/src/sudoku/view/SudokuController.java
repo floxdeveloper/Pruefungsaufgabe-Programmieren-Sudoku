@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sudoku.MainApp;
 import sudoku.MainAppTest;
+import sudoku.model.Sudoku;
 
 public class SudokuController {
 
@@ -62,6 +63,8 @@ public class SudokuController {
 		return mapText.get(vert * 9 + hor);
 
 	}
+	
+	
 
 	public void handleEingabe(int eingabe) {
 		if (eingabe < 10 && eingabe >= 0 && auswahlX != -1 && auswahlY != -1) {
@@ -202,6 +205,59 @@ public class SudokuController {
 		sudokuAnzeigen();
 
 	}
+	
+	@FXML
+	private void handleHint(){
+		
+		//Wenn nicht editiertbar -> nichts machen
+		if (!editable)
+			return;
+		
+		int[][] sudokuArray = mainApp.getSudoku().copySudokuArray();
+		int[][] sudokuArraySolve =  mainApp.getSudoku().copySudokuArray();
+		
+		Sudoku sudoku = new Sudoku(sudokuArraySolve);
+		sudoku.solve();
+		
+		//Sudoku nicht lösbar -> Error
+		if (!sudoku.filled()){
+			
+			mainApp.error("Unable to give a hint.", "The Sudoku you have entered is not solvable.");
+			return;
+			
+			
+		}
+		
+		boolean hintGiven = false;
+		
+		while (!hintGiven){
+			
+			int xKoord = (int) (Math.random()*9);
+			int yKoord = (int) (Math.random()*9);
+			
+			if (sudokuArray[xKoord][yKoord]==0){
+				
+				sudokuArray[xKoord][yKoord] = sudokuArraySolve[xKoord][yKoord];
+				mainApp.setSudoku(sudokuArray);
+				hintGiven = true;
+				
+				if (mainApp.getSudoku().filled()){
+					setEditable(false);
+					
+					
+				}
+				
+			}
+			
+			
+			
+			
+			
+		}
+		
+		
+	}
+	
 
 	@FXML
 	private void sudokuAnzeigen() {
