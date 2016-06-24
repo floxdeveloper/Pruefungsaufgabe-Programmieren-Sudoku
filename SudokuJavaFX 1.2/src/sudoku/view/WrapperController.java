@@ -89,8 +89,11 @@ public class WrapperController implements PropertyChangeListener {
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Sudoku");
+		
+		
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Sudokus", "*.sdk"));
 
+		
 		File selectedFile = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 
 		
@@ -180,9 +183,9 @@ public class WrapperController implements PropertyChangeListener {
 	@FXML
 	private void handleCheck(){
 		if (mainApp.getSudoku().checkUniqueSolvable())
-			System.out.println("Uniquely solvable");
+			mainApp.information("Uniquely solvable", "The Sudoku you have entered is uniquely solvable.");
 		else 
-			System.out.println("Not uniquely solvable");
+			mainApp.information("Not uniquely solvable", "The Sudoku you have entered is NOT uniquely solvable.");
 		
 	}
 
@@ -202,7 +205,7 @@ public class WrapperController implements PropertyChangeListener {
 			// Um alle Textfelder auf schwarz zu setzen
 			mainApp.getSudokuController().colorAllBlack();
 			
-			mainApp.getSudokuController().setEditable(true);
+			
 			
 			Thread t = new Thread() {
 				public void run() {
@@ -210,6 +213,7 @@ public class WrapperController implements PropertyChangeListener {
 					Sudoku genSudoku = SudokuGenerator.generate(numberOfClues);
 					System.out.println("Finished generating Sudoku.");
 					mainApp.setSudoku(genSudoku);
+					mainApp.getSudokuController().setEditable(true);
 				}
 			};
 			t.start();
