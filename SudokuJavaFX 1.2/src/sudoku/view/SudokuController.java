@@ -243,6 +243,7 @@ public class SudokuController {
 				
 				if (mainApp.getSudoku().filled()){
 					setEditable(false);
+					select(auswahlX,auswahlY);
 					
 					
 				}
@@ -262,7 +263,7 @@ public class SudokuController {
 	@FXML
 	private void sudokuAnzeigen() {
 		Text text;
-		int[][] sudokuArray = mainApp.getSudoku().getSudoku();
+		int[][] sudokuArray = mainApp.getSudoku().getSudokuArray();
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				text = getKoordinate(i, j);
@@ -305,30 +306,32 @@ public class SudokuController {
 	}
 
 	public void select(int sourceX, int sourceY) {
-
+	
 		if (sourceX == auswahlX && sourceY == auswahlY) {
 			auswahlX = -1;
 			auswahlY = -1;
 			mapRect.get(9 * sourceX + sourceY).setStroke(Color.TRANSPARENT);
-
+	
 		} else {
 			if (auswahlX != -1 && auswahlY != -1)
 				mapRect.get(9 * auswahlX + auswahlY).setStroke(Color.TRANSPARENT);
 			auswahlX = sourceX;
 			auswahlY = sourceY;
-
+	
 			mapRect.get(9 * auswahlX + auswahlY).setStroke(Color.RED);
-
+	
 		}
-
+	
 	}
+
+	
 
 	public void colorInputBlue() {
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 
-				if (mainApp.getSudoku().getSudoku()[i][j] != 0) {
+				if (mainApp.getSudoku().getSudokuArray()[i][j] != 0) {
 					Text t = getKoordinate(i, j);
 					t.setFill(Color.BLUE);
 

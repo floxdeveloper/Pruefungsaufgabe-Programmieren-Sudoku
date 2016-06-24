@@ -51,7 +51,9 @@ public class Sudoku implements Serializable {
 	public int getSolveCounter(){
 		return solveCounter;
 	}
-	public int[][] getSudoku() {
+	
+	
+	public int[][] getSudokuArray() {
 		return sudoku;
 
 	}
@@ -120,7 +122,7 @@ public class Sudoku implements Serializable {
 		return true;
 	}
 
-	public boolean[] setBoolarrayAll(boolean[] boolArray, boolean wert) {
+	private boolean[] setBoolarrayAll(boolean[] boolArray, boolean wert) {
 		for (int i = 0; i < boolArray.length; i++) {
 			boolArray[i] = wert;
 
