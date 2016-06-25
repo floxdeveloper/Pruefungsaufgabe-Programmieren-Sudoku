@@ -58,6 +58,7 @@ public class WrapperGuiTest extends GuiTest{
 		//All Menus are selected and checked, if their MenuItems can be found by id
 		
 		click(file);
+		
 		click(sudoku);
 		click(help);
 		about = find("#about");
