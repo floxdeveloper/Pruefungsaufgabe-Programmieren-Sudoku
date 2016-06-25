@@ -1,7 +1,56 @@
 package sudoku.model;
 
-public class SudokuGeneratorTest {
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
+
+public class SudokuGeneratorTest {
+	Sudoku testSudoku;
+	int[][] testArrayFilled = new int[][] 
+			 {{5,3,4,6,7,8,9,1,2},
+			  {6,7,2,1,9,5,3,4,8},
+			  {1,9,8,3,4,2,5,6,7},
+			  {8,5,9,7,6,1,4,2,3},
+			  {4,2,6,8,5,3,7,9,1},
+			  {7,1,3,9,2,4,8,5,6},
+			  {9,6,1,5,3,7,2,8,4},
+			  {2,8,7,4,1,9,6,3,5},
+			  {3,4,5,2,8,6,1,7,9}}; 
+	
+	@Before
+	public void setUp(){
+		testSudoku = new Sudoku(testArrayFilled);
+	}
+	
+	@Test
+	public void copyArrayShouldCopy(){
+		assertArrayEquals("Arrays should be the same", testArrayFilled, testSudoku.copySudokuArray());
+	}
+	
+	@Test
+	public void moduluHochzaehlenShouldReturnFrom1to9(){
+		assertEquals("0 % 10 should return 1", 1, sudoku.model.SudokuGenerator.moduloHochzaehlen(0));
+		assertEquals("1 % 10 should return 2", 2, sudoku.model.SudokuGenerator.moduloHochzaehlen(1));
+		assertEquals("2 % 10 should return 3", 3, sudoku.model.SudokuGenerator.moduloHochzaehlen(2));
+		assertEquals("3 % 10 should return 4", 4, sudoku.model.SudokuGenerator.moduloHochzaehlen(3));
+		assertEquals("4 % 10 should return 5", 5, sudoku.model.SudokuGenerator.moduloHochzaehlen(4));
+		assertEquals("5 % 10 should return 6", 6, sudoku.model.SudokuGenerator.moduloHochzaehlen(5));
+		assertEquals("6 % 10 should return 7", 7, sudoku.model.SudokuGenerator.moduloHochzaehlen(6));
+		assertEquals("7 % 10 should return 8", 8, sudoku.model.SudokuGenerator.moduloHochzaehlen(7));
+		assertEquals("8 % 10 should return 9", 9, sudoku.model.SudokuGenerator.moduloHochzaehlen(8));
+		assertEquals("9 % 10 should return 1", 1, sudoku.model.SudokuGenerator.moduloHochzaehlen(9));
+		assertEquals("10 % 10 should return 1", 1, sudoku.model.SudokuGenerator.moduloHochzaehlen(10));
+		assertEquals("1348973 % 10 should return 4", 4, sudoku.model.SudokuGenerator.moduloHochzaehlen(1348973));
+		assertEquals("9584 % 10 should return 5", 5, sudoku.model.SudokuGenerator.moduloHochzaehlen(9584));
+	}
+	
+	
+	
+	
+	
+	
+	
 }
 /*public void sudokuBefuellen() {
 
