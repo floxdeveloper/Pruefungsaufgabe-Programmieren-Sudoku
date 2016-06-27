@@ -137,12 +137,12 @@ public class WrapperController implements PropertyChangeListener {
 
 				// Alle Textfelder auf schwarz setzen (falls vorher etwas blau
 				// gefärbt war)
-				mainApp.getSudokuController().colorAllBlack();
+				mainApp.getSudokuController().resetEditability();
 
 				if (mainApp.getSudoku().filled())
 					mainApp.getSudokuController().setEditable(false);
-				else
-					mainApp.getSudokuController().setEditable(true);
+			
+				
 
 			} catch (Exception e) {
 
@@ -206,8 +206,7 @@ public class WrapperController implements PropertyChangeListener {
 
 			int numberOfClues = (int) evt.getNewValue();
 			// Um alle Textfelder auf schwarz zu setzen
-			mainApp.getSudokuController().colorAllBlack();
-			
+			mainApp.getSudokuController().resetEditability();			
 			
 
 			Task<Void> task = new Task<Void>(){

@@ -33,7 +33,7 @@ public class SudokuController {
 	int auswahlX = -1;
 	int auswahlY = -1;
 
-	boolean[][] editableField;
+	boolean[][] editableField = new boolean[9][9];
 
 	boolean editable = true;
 
@@ -60,6 +60,13 @@ public class SudokuController {
 		allEditable();
 
 	}
+	
+	//Wird aufgerufen um alles editierbar zu machen
+	public void resetEditability(){
+		colorAllBlack();
+		setEditable(true);
+		allEditable();	
+	}
 
 	// Setzt jedes Feld auf editierbar
 	public void allEditable() {
@@ -69,20 +76,18 @@ public class SudokuController {
 				editableField[i][j] = true;
 			}
 		}
-
 	}
 
-	// Setzt alle aktuellen Felder auf nicht editierbar und färbt alle anderen
-	// blau
+	// Setzt alle aktuellen Felder auf nicht editierbar und färbt diese blau (wie bei solve sonst)
 	public void lockEnteredFields() {
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 
-				if (getKoordinate(i, j).getText().equals(""))
+				if (!getKoordinate(i, j).getText().equals("")){
 					getKoordinate(i, j).setFill(Color.BLUE);
-				else
 					editableField[i][j] = false;
+				}
 
 			}
 		}
@@ -169,7 +174,7 @@ public class SudokuController {
 			editable = true;
 
 			// Alle Textfelder wieder einschwärzen
-			colorAllBlack();
+			resetEditability();
 		}
 	}
 
