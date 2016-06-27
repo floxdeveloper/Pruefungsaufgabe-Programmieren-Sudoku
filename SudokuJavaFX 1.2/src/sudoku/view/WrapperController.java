@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
-
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,8 +44,7 @@ public class WrapperController implements PropertyChangeListener {
 
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			// loader.setLocation(new URL("view/InputNumberPopup.fxml"));
-			loader.setLocation(new File("src/sudoku/view/InputNumberPopup.fxml").toURI().toURL());
+			loader.setLocation(MainAppTest.class.getResource("view/InputNumberPopup.fxml"));
 			AnchorPane pane = loader.load();
 
 			Scene scene = new Scene(pane);
@@ -201,42 +199,6 @@ public class WrapperController implements PropertyChangeListener {
 
 	}
 
-//	@FXML
-//	private Stage lockScreen(){
-//		try {
-//			// Load the fxml file and create a new stage for the popup dialog.
-//			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(MainAppTest.class.getResource("view/WrapperLock.fxml"));
-//			AnchorPane pane = (AnchorPane) loader.load();
-//
-//			// Create the dialog Stage.
-//			Stage dialogStage = new Stage();
-//			dialogStage.initModality(Modality.WINDOW_MODAL);
-//			dialogStage.initStyle(StageStyle.TRANSPARENT);
-//			dialogStage.initOwner(mainApp.getPrimaryStage());
-//			dialogStage.setResizable(false);
-//			dialogStage.setAlwaysOnTop(true);
-//			dialogStage.setOpacity(0.9);
-//			Scene scene = new Scene(pane);
-//			dialogStage.setScene(scene);
-//			 
-//			//set Stage boundaries to the lower right corner of the visible bounds of the main screen
-//			dialogStage.setHeight(mainApp.getPrimaryStage().getHeight());
-//			dialogStage.setWidth(mainApp.getPrimaryStage().getWidth());
-//			dialogStage.setX(mainApp.getPrimaryStage().getX());
-//			dialogStage.setY(mainApp.getPrimaryStage().getY());
-//
-//			// Show the dialog and wait until the user closes it
-//			dialogStage.showAndWait();
-//			
-//			return dialogStage;
-//			
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
 	
 	public void propertyChange(PropertyChangeEvent evt) {
 		
@@ -269,23 +231,19 @@ public class WrapperController implements PropertyChangeListener {
 			task.setOnRunning(e -> {
 				System.out.println("Running");
 				mainApp.lockScreen();
+				System.out.println("Running2");
+				//TODO: Interrupt falls cancel erwünscht, Interrupthandling erforderlich!
 			});
 			task.setOnSucceeded(e -> {
 				System.out.println("Succeded");
 				mainApp.getCurrentStage().close();
 			});
+			task.setOnCancelled(e -> {
+				System.out.println("Cancelled");
+			});
 //			task.setOnRunning(event);
 
-			new Thread(task).start();
-			
-
-//			System.out.println(t.isAlive());
-//			while (t.isAlive()){
-//			//	System.out.println("blubber");
-//			}
-//			System.out.println("blubber");
-			//System.out.println(mainApp.getCurrentStage().getTitle());
-			//mainApp.getCurrentStage().close();			
+			new Thread(task).start();	
 			
 			}
 
