@@ -4,21 +4,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sudoku.view.CongratulationController">
    <children>
-      <ImageView fitHeight="250.0" fitWidth="250.0">
+      <ImageView fitHeight="211.0" fitWidth="453.0">
          <image>
-            <Image url="@../../../resources/images/congratulation.png" />
+            <Image url="@../../../resources/images/Congtratiolation.png" />
          </image>
       </ImageView>
-      <Button fx:id="ok" layoutX="109.0" layoutY="211.0" mnemonicParsing="false" onAction="#handleOk" text="OK" AnchorPane.topAnchor="211.0" />
-      <Text layoutX="110.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
-         <font>
-            <Font size="56.0" />
-         </font>
-      </Text>
+      <Button fx:id="ok" layoutX="210.0" layoutY="172.0" mnemonicParsing="false" onAction="#handleOk" text="OK" AnchorPane.topAnchor="172.0" />
    </children>
 </AnchorPane>
