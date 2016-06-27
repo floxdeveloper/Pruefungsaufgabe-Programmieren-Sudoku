@@ -29,10 +29,11 @@ public class SudokuController {
 	private MainApp mainApp;
 	private HashMap<Integer, Text> mapText = new HashMap<Integer, Text>();
 	private HashMap<Integer, RectPos> mapRect = new HashMap<Integer, RectPos>();
-	
 
 	int auswahlX = -1;
 	int auswahlY = -1;
+
+	boolean[][] editableField;
 
 	boolean editable = true;
 
@@ -56,9 +57,39 @@ public class SudokuController {
 
 		initMaps();
 		initEventHandler();
+		allEditable();
+
 	}
 
-	//
+	// Setzt jedes Feld auf editierbar
+	public void allEditable() {
+
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				editableField[i][j] = true;
+			}
+		}
+
+	}
+
+	// Setzt alle aktuellen Felder auf nicht editierbar und färbt alle anderen
+	// blau
+	public void lockEnteredFields() {
+
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+
+				if (getKoordinate(i, j).getText().equals(""))
+					getKoordinate(i, j).setFill(Color.BLUE);
+				else
+					editableField[i][j] = false;
+
+			}
+		}
+
+	}
+
+	// gibt Text an der Koordinate
 	private Text getKoordinate(int vert, int hor) {
 
 		return mapText.get(vert * 9 + hor);
@@ -114,6 +145,7 @@ public class SudokuController {
 			}
 		}
 	}
+
 	// Beim Klick auf Reset
 	@FXML
 	private void handleReset() {
@@ -140,7 +172,7 @@ public class SudokuController {
 			colorAllBlack();
 		}
 	}
-	
+
 	// Beim Klick auf Solve
 	@FXML
 	private void handleSolve() {

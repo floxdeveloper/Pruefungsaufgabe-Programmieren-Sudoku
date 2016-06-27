@@ -12,6 +12,6 @@
             <Image url="@../../../resources/images/Congtratiolation.png" />
          </image>
       </ImageView>
-      <Button fx:id="ok" layoutX="210.0" layoutY="172.0" mnemonicParsing="false" onAction="#handleOk" text="OK" AnchorPane.topAnchor="172.0" />
+      <Button fx:id="ok" layoutX="210.0" layoutY="213.0" mnemonicParsing="false" onAction="#handleOk" text="OK" AnchorPane.topAnchor="213.0" />
    </children>
 </AnchorPane>
