@@ -352,8 +352,6 @@ public class SudokuController {
 	public void select(int sourceX, int sourceY) {
 
 		if (!editableField[sourceX][sourceY]) {
-
-			unselect();
 			return;
 		}
 
