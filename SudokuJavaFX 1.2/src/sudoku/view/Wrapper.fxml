@@ -21,18 +21,19 @@
                   <MenuItem id="checkUniquely" mnemonicParsing="false" onAction="#handleCheck" text="Check for unique solveability" /> 
             </items>
           </Menu>
-          <Menu id="help" mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem id="about" mnemonicParsing="false" onAction="#handleAbout" text="About" />
-            </items>
-          </Menu>
-          <Menu id="Input" mnemonicParsing="false" text="Input">
+           <Menu id="Input" mnemonicParsing="false" text="Input">
               <items>
               <MenuItem mnemonicParsing="false" onAction="#handleResetEditability" text="Reset editability" /> 
                   <MenuItem id="save" mnemonicParsing="false" onAction="#handleLockEntered" text="Lock and color entered numbers" />
                   	<MenuItem  mnemonicParsing="false" onAction="#handleResetNotLocked" text="Reset all not locked fields" />
               </items>
             </Menu>
+          <Menu id="help" mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem id="about" mnemonicParsing="false" onAction="#handleAbout" text="About" />
+            </items>
+          </Menu>
+         
         </menus>
       </MenuBar>
    </top>
