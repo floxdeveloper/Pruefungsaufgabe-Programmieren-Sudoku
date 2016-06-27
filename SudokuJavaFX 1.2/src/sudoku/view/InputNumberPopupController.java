@@ -21,79 +21,75 @@ import sudoku.MainApp;
 import sudoku.MainAppTest;
 
 public class InputNumberPopupController {
-	
+
 	private MainApp mainApp;
 	private PropertyChangeSupport support = new PropertyChangeSupport(this);
-	
+
 	@FXML
 	private ComboBox<Integer> eingabecb;
-	
-	
 
-
-		//TODO auf Englisch ändern 
+	// TODO auf Englisch ändern
 	/**
 	 * 
 	 */
 	@FXML
-	private void initialize(){
-		
-		//Sets Item of ComboBox
-		ObservableList<Integer> a1 = FXCollections.observableArrayList();	
-		for(int i = 20;i<81;i++){
-		a1.add(i);
+	private void initialize() {
+
+		// Sets Item of ComboBox
+		ObservableList<Integer> a1 = FXCollections.observableArrayList();
+		for (int i = 20; i < 81; i++) {
+			a1.add(i);
 		}
 		eingabecb.setVisibleRowCount(10);
 		eingabecb.setItems(a1);
-	
-	
+
 	}
-	
+
 	/**
 	 * Adds a PropertyChangeListener to the PropertyChangeSupport
+	 * 
 	 * @param p
 	 */
-	public void addListener(PropertyChangeListener p){
+	public void addListener(PropertyChangeListener p) {
 		support.addPropertyChangeListener(p);
 	}
-	
-	
+
 	private Stage stage;
-	public void setStage(Stage stage){
-		this.stage=stage;
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
-	
+
 	@FXML
-	private void handleAbsenden(){
-			//TODO Bei nicht ausgewählter Zahl -> Exception (fixen)
-			try{
-			support.firePropertyChange("InputNumber", 0, (int) eingabecb.getValue());	
+	private void handleAbsenden() {
+		// TODO Bei nicht ausgewählter Zahl -> Exception (fixen)
+		try {
+			support.firePropertyChange("InputNumber", 0, (int) eingabecb.getValue());
 			stage.close();
 
-			}catch (Exception noNumberOfHintsSelectedException){
-				
-				mainApp.warning("Please select a number", "You have not selected a number of hints");
-				
-			}
-			
+		} catch	(NullPointerException noNumberOfHintsSelectedException) {
+
+			mainApp.warning("Please select a number", "You have not selected a number of hints");
+
 		}
-	
-	
+
+	}
+
 	/**
 	 * Sets the MainApp Reference
+	 * 
 	 * @param m
 	 */
-	public void setMainApp(MainApp m){	
-		mainApp=m;
+	public void setMainApp(MainApp m) {
+		mainApp = m;
 	}
-	
+
 	/**
 	 * Handles the user's choice to break
 	 */
 	@FXML
-	private void handleAbbrechen(){
+	private void handleAbbrechen() {
 		stage.close();
 	}
-	
-	
+
 }

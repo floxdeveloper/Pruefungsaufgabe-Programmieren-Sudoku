@@ -69,6 +69,7 @@ public class SudokuController {
 					Text t = getKoordinate(i,j);
 					t.setText(" ");
 					t.setFill(Color.BLACK);
+					mainApp.getSudokuController().setEditable(true);
 				}
 
 			}
@@ -110,6 +111,7 @@ public class SudokuController {
 				} else {
 					// Wenn ein Feld nicht gelockt wird -> prinzipiell
 					// editierbar
+					editableField[i][j] = true;
 					setEditable(true);
 				}
 			}
