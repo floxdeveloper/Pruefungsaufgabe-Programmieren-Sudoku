@@ -75,6 +75,21 @@ public class WrapperController implements PropertyChangeListener {
 		}
 
 	}
+	
+	@FXML
+	private void handleResetEditability(){
+		
+		mainApp.getSudokuController().resetEditability();
+		
+	}
+	
+	
+	@FXML
+	private void handleLockEntered(){
+		
+		mainApp.getSudokuController().lockEnteredFields();
+		
+	}
 
 	// Beim Klick auf Sudoku -> Save
 	@FXML

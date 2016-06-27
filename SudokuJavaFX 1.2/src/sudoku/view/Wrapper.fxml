@@ -26,6 +26,12 @@
               <MenuItem id="about" mnemonicParsing="false" onAction="#handleAbout" text="About" />
             </items>
           </Menu>
+          <Menu id="Input" mnemonicParsing="false" text="Input">
+              <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleResetEditability" text="Reset editability" /> 
+                  <MenuItem id="save" mnemonicParsing="false" onAction="#handleLockEntered" text="Lock and color entered numbers" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

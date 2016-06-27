@@ -14,7 +14,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -30,12 +29,12 @@ public class SudokuController {
 	private HashMap<Integer, Text> mapText = new HashMap<Integer, Text>();
 	private HashMap<Integer, RectPos> mapRect = new HashMap<Integer, RectPos>();
 
-	int auswahlX = -1;
-	int auswahlY = -1;
+	private int auswahlX = -1;
+	private int auswahlY = -1;
 
-	boolean[][] editableField = new boolean[9][9];
+	private boolean[][] editableField = new boolean[9][9];
 
-	boolean editable = true;
+	private boolean editable = true;
 
 	@FXML
 	private Text t00, t01, t02, t03, t04, t05, t06, t07, t08, t10, t11, t12, t13, t14, t15, t16, t17, t18, t20, t21,
@@ -63,13 +62,15 @@ public class SudokuController {
 
 	// Wird aufgerufen um alles editierbar zu machen
 	public void resetEditability() {
+		
 		colorAllBlack();
 		setEditable(true);
 		allEditable();
+		unselect();
 	}
 
 	// Setzt jedes Feld auf editierbar
-	public void allEditable() {
+	private void allEditable() {
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -81,7 +82,7 @@ public class SudokuController {
 	// Setzt alle aktuellen Felder auf nicht editierbar und färbt diese blau
 	// (wie bei solve sonst)
 	public void lockEnteredFields() {
-
+		unselect();
 		setEditable(false);
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
