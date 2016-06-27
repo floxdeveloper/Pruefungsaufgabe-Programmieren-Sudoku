@@ -30,6 +30,7 @@
               <items>
               <MenuItem mnemonicParsing="false" onAction="#handleResetEditability" text="Reset editability" /> 
                   <MenuItem id="save" mnemonicParsing="false" onAction="#handleLockEntered" text="Lock and color entered numbers" />
+                  	<MenuItem  mnemonicParsing="false" onAction="#handleResetNotLocked" text="Reset all not locked fields" />
               </items>
             </Menu>
         </menus>

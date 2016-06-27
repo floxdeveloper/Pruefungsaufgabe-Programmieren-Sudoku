@@ -59,10 +59,27 @@ public class SudokuController {
 		allEditable();
 
 	}
+	
+
+	// Resetet alle Felder die nicht
+	public void resetNotLocked() {
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (editableField[i][j]) {
+					Text t = getKoordinate(i,j);
+					t.setText(" ");
+					t.setFill(Color.BLACK);
+				}
+
+			}
+		}
+		sudokuAuslesen();
+
+	}
 
 	// Wird aufgerufen um alles editierbar zu machen
 	public void resetEditability() {
-		
+
 		colorAllBlack();
 		setEditable(true);
 		allEditable();
@@ -205,7 +222,7 @@ public class SudokuController {
 			unselect();
 
 			// User Input blau einfärben
-			colorInputBlue();
+			lockEnteredFields();
 
 			// Wenn nicht nach Sudoku Regeln -> würde hier altes anzeigen (kommt
 			// nie vor da nach jeder Eingabe gecheckt wird)
@@ -218,7 +235,7 @@ public class SudokuController {
 
 			if (!mainApp.getSudoku().filled()) {
 				// Farbe wieder auf schwarz ändern
-				colorAllBlack();
+				resetNotLocked();
 
 				mainApp.error("Unsolvable Sudoku", "The Sudoku you have entered is not solvable.");
 
@@ -241,7 +258,7 @@ public class SudokuController {
 	private void handleHint() {
 
 		// Wenn nicht editiertbar -> nichts machen
-		if (!editable)
+		if (mainApp.getSudoku().filled())
 			return;
 
 		int[][] sudokuArray = mainApp.getSudoku().copySudokuArray();
@@ -357,22 +374,6 @@ public class SudokuController {
 
 	}
 
-	public void colorInputBlue() {
-
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-
-				// if (mainApp.getSudoku().getSudokuArray()[i][j] != 0) {
-				if (!getKoordinate(i, j).getText().equals(" ")) {
-					Text t = getKoordinate(i, j);
-					t.setFill(Color.BLUE);
-
-				}
-
-			}
-		}
-
-	}
 
 	public void colorAllBlack() {
 

@@ -36,6 +36,13 @@ public class WrapperController implements PropertyChangeListener {
 	private void initialize() {
 
 	}
+	
+	@FXML
+	private void handleResetNotLocked() {
+		
+		mainApp.getSudokuController().resetNotLocked();
+		
+	}
 
 	
 	// Beim Klick auf Sudoku -> Generate solvable Sudoku
