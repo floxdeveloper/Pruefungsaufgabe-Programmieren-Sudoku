@@ -60,12 +60,12 @@ public class SudokuController {
 		allEditable();
 
 	}
-	
-	//Wird aufgerufen um alles editierbar zu machen
-	public void resetEditability(){
+
+	// Wird aufgerufen um alles editierbar zu machen
+	public void resetEditability() {
 		colorAllBlack();
 		setEditable(true);
-		allEditable();	
+		allEditable();
 	}
 
 	// Setzt jedes Feld auf editierbar
@@ -78,17 +78,22 @@ public class SudokuController {
 		}
 	}
 
-	// Setzt alle aktuellen Felder auf nicht editierbar und färbt diese blau (wie bei solve sonst)
+	// Setzt alle aktuellen Felder auf nicht editierbar und färbt diese blau
+	// (wie bei solve sonst)
 	public void lockEnteredFields() {
 
+		setEditable(false);
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 
-				if (!getKoordinate(i, j).getText().equals("")){
+				if (!getKoordinate(i, j).getText().equals(" ")) {
 					getKoordinate(i, j).setFill(Color.BLUE);
 					editableField[i][j] = false;
+				} else {
+					// Wenn ein Feld nicht gelockt wird -> prinzipiell
+					// editierbar
+					setEditable(true);
 				}
-
 			}
 		}
 
@@ -113,9 +118,7 @@ public class SudokuController {
 			// alter Stand geladen)
 			sudokuAuslesen();
 
-			// zum zurücksetzen
-			if (auswahlX != -1 && auswahlY != -1)
-				select(auswahlX, auswahlY);
+			unselect();
 
 			// Wenn Sudoku gelöst ist -> Congrationlations ausgeben
 			if (mainApp.getSudoku().filled()) {
@@ -198,9 +201,7 @@ public class SudokuController {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
 
-			// reset der Auwahl
-			if (auswahlX != -1 && auswahlY != -1)
-				select(auswahlX, auswahlY);
+			unselect();
 
 			// User Input blau einfärben
 			colorInputBlue();
@@ -272,9 +273,7 @@ public class SudokuController {
 				if (mainApp.getSudoku().filled()) {
 					setEditable(false);
 
-					// abwählen, wenn etwas ausgefwählt ist
-					if (auswahlX != -1 && auswahlY != -1)
-						select(auswahlX, auswahlY);
+					unselect();
 				}
 			}
 		}
@@ -325,7 +324,20 @@ public class SudokuController {
 		return true;
 	}
 
+	// Wählt ab egal was davor war
+	public void unselect() {
+		if (auswahlX != -1 && auswahlY != -1)
+			select(auswahlX, auswahlY);
+
+	}
+
 	public void select(int sourceX, int sourceY) {
+
+		if (!editableField[sourceX][sourceY]) {
+
+			unselect();
+			return;
+		}
 
 		if (sourceX == auswahlX && sourceY == auswahlY) {
 			auswahlX = -1;
@@ -338,7 +350,6 @@ public class SudokuController {
 				mapRect.get(9 * auswahlX + auswahlY).setStroke(Color.TRANSPARENT);
 			auswahlX = sourceX;
 			auswahlY = sourceY;
-
 			mapRect.get(9 * auswahlX + auswahlY).setStroke(Color.RED);
 
 		}
@@ -350,7 +361,8 @@ public class SudokuController {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 
-				if (mainApp.getSudoku().getSudokuArray()[i][j] != 0) {
+				// if (mainApp.getSudoku().getSudokuArray()[i][j] != 0) {
+				if (!getKoordinate(i, j).getText().equals(" ")) {
 					Text t = getKoordinate(i, j);
 					t.setFill(Color.BLUE);
 

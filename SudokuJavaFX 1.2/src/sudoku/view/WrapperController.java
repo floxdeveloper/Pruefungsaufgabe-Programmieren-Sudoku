@@ -206,9 +206,9 @@ public class WrapperController implements PropertyChangeListener {
 
 			int numberOfClues = (int) evt.getNewValue();
 			// Um alle Textfelder auf schwarz zu setzen
-			mainApp.getSudokuController().resetEditability();			
+			mainApp.getSudokuController().colorAllBlack();			
+			mainApp.getSudokuController().unselect();
 			
-
 			Task<Void> task = new Task<Void>(){
 
 				@Override
@@ -218,7 +218,7 @@ public class WrapperController implements PropertyChangeListener {
 					Sudoku genSudoku = SudokuGenerator.generate(numberOfClues);
 					System.out.println("Finished generating Sudoku.");
 					mainApp.setSudoku(genSudoku);
-					mainApp.getSudokuController().setEditable(true);
+					mainApp.getSudokuController().lockEnteredFields();
 					return null;
 				}
 				
