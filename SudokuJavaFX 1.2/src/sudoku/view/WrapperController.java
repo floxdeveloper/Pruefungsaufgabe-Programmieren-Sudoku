@@ -22,14 +22,14 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sudoku.MainApp;
+import sudoku.MainAppInterface;
 import sudoku.MainAppTest;
 import sudoku.model.Sudoku;
 import sudoku.model.SudokuGenerator;
 
 public class WrapperController implements PropertyChangeListener {
 
-	private MainApp mainApp;
+	private MainAppInterface mainApp;
 	
 
 	@FXML
@@ -216,7 +216,7 @@ public class WrapperController implements PropertyChangeListener {
 	 * 
 	 * @param mainApp
 	 */
-	public void setMainApp(MainApp mainApp) {
+	public void setMainApp(MainAppInterface mainApp) {
 		this.mainApp = mainApp;
 
 	}
