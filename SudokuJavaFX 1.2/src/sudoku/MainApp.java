@@ -100,7 +100,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage. 
+	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
 	 */
 	public void lockScreen() {
 		try {
@@ -237,33 +237,18 @@ public class MainApp extends Application {
 	}
 
 	/**
+	 * 
+	 * Sudoku wird gesetzt wenn es den Regeln entspricht. Updated GUI.
+	 * 
 	 * @param array
-	 *            Es wird gecheckt ob das Feld 9x9 groß ist, ob unerlaubte
-	 *            Zahlen eingefügt sind und ob das Sudoku bis jetzt den Regeln
-	 *            entspricht. Wenn es ihnen entspricht wird es gesetzt, sonst
-	 *            nicht. Updatet GUI.
 	 * @return true wenn gesetzt; false sonst
 	 */
 	public boolean setSudoku(int[][] array) {
 
-		// Prüft prinzipielle Groesse
-		if (array.length != 9)
-			return false;
-		for (int i = 0; i < 9; i++) {
-			if (array[i].length != 9)
-				return false;
-		}
-
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				if (array[i][j] > 9 || array[i][j] < 0)
-					return false;
-			}
-		}
-
+	
 		// Setzt Sudoku Array und überprüft ob es den Regeln entspricht -> wenn
 		// nicht bleibt alter Stand bestehen
-		if (!sudoku.setSudoku(array))
+		if (!sudoku.setSudokuIfCorrect(array))
 			return false;
 
 		scontroller.sudokuChanged();
@@ -272,8 +257,9 @@ public class MainApp extends Application {
 	}
 
 	/**
+	 * Man setzt s als neues sudoku und updatet GUI.
+	 * 
 	 * @param s
-	 * 		Man setzt s als neues sudoku und updatet GUI.
 	 * @return true, da Sudoku immer Regeln entspricht
 	 */
 	public boolean setSudoku(Sudoku s) {
