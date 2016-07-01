@@ -97,31 +97,22 @@ public class MainApp extends Application implements MainAppInterface {
 	}
 
 	private Stage currentStage;
-<<<<<<< HEAD
 	
 	@Override
-	public Stage getCurrentStage(){
-=======
 
 	public Stage getCurrentStage() {
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 		return this.currentStage;
 	}
-<<<<<<< HEAD
+
 	
 	
-	/**
-	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
-	 */
-	@Override
-	public void lockScreen(){
-=======
+
 
 	/**
 	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
 	 */
+	@Override
 	public void lockScreen() {
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
@@ -149,12 +140,8 @@ public class MainApp extends Application implements MainAppInterface {
 			// Show the dialog and wait until the user closes it
 			dialogStage.show();
 			System.out.println("bla");
-<<<<<<< HEAD
-			} catch (IOException e) {
-=======
-
+			
 		} catch (IOException e) {
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 			e.printStackTrace();
 		}
 	}
@@ -196,10 +183,8 @@ public class MainApp extends Application implements MainAppInterface {
 	 * @param content
 	 *            gibt den Haupttext der Warnung an
 	 */
-<<<<<<< HEAD
+
 	@Override
-=======
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 	public void warning(String header, String content) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(primaryStage);
@@ -214,24 +199,7 @@ public class MainApp extends Application implements MainAppInterface {
 		alert.showAndWait();
 
 	}
-<<<<<<< HEAD
-	
-	/**
-	 * Gibt eine Informationsmeldung mit mainApp als owner aus
-	 * 
-	 * @param header
-	 *            gibt den header der Information an
-	 * @param content
-	 *            gibt den Haupttext der Information an
-	 */
-		@Override
-		public void information(String header, String content) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.initOwner(primaryStage);
-			alert.setTitle("Information");
-=======
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
-
+		
 	/**
 	 * Gibt eine Informationsmeldung mit mainApp als owner aus
 	 * 
@@ -253,17 +221,6 @@ public class MainApp extends Application implements MainAppInterface {
 
 		alert.showAndWait();
 
-<<<<<<< HEAD
-	/**
-	 * Gibt einen Fehler mit mainApp als owner aus
-	 * 
-	 * @param header
-	 *            gibt den header der Fehlermeldung an
-	 * @param content
-	 *            gibt den Haupttext der Fehlermeldung an
-	 */
-	@Override
-=======
 	}
 
 	/**
@@ -274,7 +231,7 @@ public class MainApp extends Application implements MainAppInterface {
 	 * @param content
 	 *            gibt den Haupttext der Fehlermeldung an
 	 */
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
+	@Override
 	public void error(String header, String content) {
 
 		Alert alert = new Alert(AlertType.ERROR);
@@ -304,10 +261,7 @@ public class MainApp extends Application implements MainAppInterface {
 	 * @param array
 	 * @return true wenn gesetzt; false sonst
 	 */
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 	public boolean setSudoku(int[][] array) {
 
 	
@@ -320,8 +274,6 @@ public class MainApp extends Application implements MainAppInterface {
 		return true;
 
 	}
-
-<<<<<<< HEAD
 	
 	/**
 	 * Man setzt s als neues sudoku und updatet GUI.
@@ -330,14 +282,6 @@ public class MainApp extends Application implements MainAppInterface {
 	 * @return true, da Sudoku immer Regeln entspricht
 	 */
 	@Override
-=======
-	/**
-	 * Man setzt s als neues sudoku und updatet GUI.
-	 * 
-	 * @param s
-	 * @return true, da Sudoku immer Regeln entspricht
-	 */
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 	public boolean setSudoku(Sudoku s) {
 		sudoku = s;
 		scontroller.sudokuChanged();
@@ -345,20 +289,12 @@ public class MainApp extends Application implements MainAppInterface {
 
 	}
 
-<<<<<<< HEAD
-
 
 	@Override
-=======
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 	public Sudoku getSudoku() {
 		return sudoku;
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 	public static void main(String[] args) {
 		launch(args);
 	}
