@@ -20,11 +20,9 @@ public class Sudoku implements Serializable {
 
 		// Versucht Sudoku nach regeln zu laden, wenn nicht -> leeres Sudoku
 		// laden
-		if (!setSudoku(array)) {
-
+		if (!setSudoku(array)) 
 			sudokuReset();
-
-		}
+		
 	}
 
 	// Hauptmethode in Sudoku die zum Lösen ausgeführt wird -> sorgt dafür, dass
