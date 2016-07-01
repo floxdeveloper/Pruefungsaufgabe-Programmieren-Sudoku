@@ -2,6 +2,7 @@ package sudoku.gui;
 
 import java.io.IOException;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import sudoku.MainApp;
+import sudoku.MainAppInterface;
 import sudoku.view.RectPos;
 
 public class SudokuGuiTest extends GuiTest{
@@ -16,6 +18,7 @@ public class SudokuGuiTest extends GuiTest{
 	
 	/*The widgets of the gui used for the tests */
 	RectPos rect10;
+	MainAppInterface mainApp;
 	
 	protected Parent getRootNode() {
         Parent parent = null;
@@ -31,8 +34,14 @@ public class SudokuGuiTest extends GuiTest{
         return parent;
     }
 	
+	@Before
+	public void setUp(){
+		mainApp = new MainApp();
+	}
+	
 	@Test
 	public void markCell() {
+		
 		rect10 = find("#r10");
 		click(rect10);
 	}

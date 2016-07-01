@@ -62,6 +62,7 @@ public class WrapperGuiTest extends GuiTest{
 		click(sudoku);
 		click(help);
 		about = find("#about");
+		click(about);
 		
 	}
 	
