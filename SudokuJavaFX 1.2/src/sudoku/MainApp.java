@@ -38,14 +38,14 @@ public class MainApp extends Application {
 		// Set the application icon.
 		this.primaryStage.getIcons().add(new Image("file:resources/images/sudoku.png"));
 
-		//Leeres Sudoku in MainApp laden
+		// Leeres Sudoku in MainApp laden
 		sudoku = new Sudoku(new int[9][9]);
 		sudoku.sudokuReset();
 
 		initRootLayout();
 		initSudokuLayout();
 
-		//Verarbeitet Tastatureingaben -> um Zahlen eingeben zu können
+		// Verarbeitet Tastatureingaben -> um Zahlen eingeben zu können
 		primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 			public void handle(final KeyEvent keyEvent) {
 
@@ -68,12 +68,10 @@ public class MainApp extends Application {
 		});
 	}
 
-	
-
 	// Load RootLayout
 	/**
-	 * Connects the rootLayout with the MainStage and the WrapperController
-	 * Shows the new Scene
+	 * Verbindet das Root Layout mit der Main Stage und dem WrapperController
+	 * Zeigt die neue Szene an
 	 */
 	public void initRootLayout() {
 		try {
@@ -94,12 +92,17 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private Stage currentStage;
-	public Stage getCurrentStage(){
+
+	public Stage getCurrentStage() {
 		return this.currentStage;
 	}
-	public void lockScreen(){
+
+	/**
+	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
+	 */
+	public void lockScreen() {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
@@ -116,8 +119,9 @@ public class MainApp extends Application {
 			dialogStage.setOpacity(0.9);
 			Scene scene = new Scene(pane);
 			dialogStage.setScene(scene);
-			 
-			//set Stage boundaries to the lower right corner of the visible bounds of the main screen
+
+			// set Stage boundaries to the lower right corner of the visible
+			// bounds of the main screen
 			dialogStage.setHeight(this.primaryStage.getHeight());
 			dialogStage.setWidth(this.primaryStage.getWidth());
 			dialogStage.setX(this.primaryStage.getX());
@@ -126,8 +130,6 @@ public class MainApp extends Application {
 			// Show the dialog and wait until the user closes it
 			dialogStage.show();
 			System.out.println("bla");
-			
-			
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -135,7 +137,8 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Shows the sudoku solver inside the root layout.
+	 * Zeigt den Sudoku Solver im rootLayout und setzt den SudokuController in
+	 * die Mainapp.
 	 */
 	public void initSudokuLayout() {
 		try {
@@ -159,7 +162,14 @@ public class MainApp extends Application {
 		}
 	}
 
-	// Used to send warnings with custom header and content
+	/**
+	 * Gibt eine Warnung mit mainApp als owner aus
+	 * 
+	 * @param header
+	 *            gibt den header der Warnung an
+	 * @param content
+	 *            gibt den Haupttext der Warnung an
+	 */
 	public void warning(String header, String content) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(primaryStage);
@@ -174,24 +184,38 @@ public class MainApp extends Application {
 		alert.showAndWait();
 
 	}
-	
-	// Used to send warnings with custom header and content
-		public void information(String header, String content) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.initOwner(primaryStage);
-			alert.setTitle("Information");
 
-			if (header.equals(""))
-				return;
+	/**
+	 * Gibt eine Informationsmeldung mit mainApp als owner aus
+	 * 
+	 * @param header
+	 *            gibt den header der Information an
+	 * @param content
+	 *            gibt den Haupttext der Information an
+	 */
+	public void information(String header, String content) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.initOwner(primaryStage);
+		alert.setTitle("Information");
 
-			alert.setHeaderText(header);
-			alert.setContentText(content);
+		if (header.equals(""))
+			return;
 
-			alert.showAndWait();
+		alert.setHeaderText(header);
+		alert.setContentText(content);
 
-		}
+		alert.showAndWait();
 
-	// Used to send error messanges with custom header and content
+	}
+
+	/**
+	 * Gibt einen Fehler mit mainApp als owner aus
+	 * 
+	 * @param header
+	 *            gibt den header der Fehlermeldung an
+	 * @param content
+	 *            gibt den Haupttext der Fehlermeldung an
+	 */
 	public void error(String header, String content) {
 
 		Alert alert = new Alert(AlertType.ERROR);
@@ -212,37 +236,32 @@ public class MainApp extends Application {
 		return scontroller;
 	}
 
+	/**
+	 * 
+	 * Sudoku wird gesetzt wenn es den Regeln entspricht. Updated GUI.
+	 * 
+	 * @param array
+	 * @return true wenn gesetzt; false sonst
+	 */
 	public boolean setSudoku(int[][] array) {
 
-		int horizontal = array.length;
-
-		// Prüft prinzipielle Groesse
-		if (horizontal != 9)
+	
+		// Setzt Sudoku Array und überprüft ob es den Regeln entspricht -> wenn
+		// nicht bleibt alter Stand bestehen
+		if (!sudoku.setSudokuIfCorrect(array))
 			return false;
-		for (int i = 0; i < 9; i++) {
-			if (array[i].length != 9)
-				return false;
-		}
 
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				if (array[i][j] > 9 || array[i][j] < 0)
-					return false;
-			}
-		}
-
-
-		//Setzt Sudoku Array und überprüft ob es den Regeln entspricht -> wenn nicht bleibt alter Stand bestehen
-		if (!sudoku.setSudoku(array))
-			return false;
-		
-		
 		scontroller.sudokuChanged();
 		return true;
 
 	}
-	
 
+	/**
+	 * Man setzt s als neues sudoku und updatet GUI.
+	 * 
+	 * @param s
+	 * @return true, da Sudoku immer Regeln entspricht
+	 */
 	public boolean setSudoku(Sudoku s) {
 		sudoku = s;
 		scontroller.sudokuChanged();
@@ -250,14 +269,8 @@ public class MainApp extends Application {
 
 	}
 
-
-
 	public Sudoku getSudoku() {
 		return sudoku;
-	}
-	
-	public static void showRandomSudoku(Sudoku sudoku){
-		
 	}
 
 	public static void main(String[] args) {
