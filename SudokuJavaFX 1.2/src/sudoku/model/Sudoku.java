@@ -9,56 +9,95 @@ public class Sudoku implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int[][] sudoku = new int[9][9];
+	private int[][] sudokuArray = new int[9][9];
 	private int[][] sudokuSaved = new int[9][9];
-	
-	//Gefüllt nach solveCount (0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht eindeutig lösbar)
-	private int solveCounter;
-	private boolean fertig;
 
+	// Gefüllt nach solveCount (0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht
+	// eindeutig lösbar)
+	protected int solveCounter;
+	protected boolean fertig;
+
+	/**
+	 * Erzeugt ein neues Sudoku Objekt. Wenn array nicht Regeln entspricht wird
+	 * leeres sudokuArray geladen.
+	 * 
+	 * @param array
+	 */
 	public Sudoku(int[][] array) {
-
-		// Versucht Sudoku nach regeln zu laden, wenn nicht -> leeres Sudoku
-		// laden
-		if (!setSudoku(array)) {
-
+		if (!setSudokuIfCorrect(array))
 			sudokuReset();
 
-		}
 	}
 
-	// Hauptmethode in Sudoku die zum Lösen ausgeführt wird -> sorgt dafür, dass
-	// ein teilweise gefülltes sudoku korrekt gelöst wird oder im
-	// Ausgangszustand bleibt (wenn nicht lösbar)
+	/**
+	 * Methode löst das Sudoku ohne Aussage über Anzahl der Lösungen zu treffen.
+	 * Bei unlösbarem Sudoku ist sudoku danach in Zustand, wie vor
+	 * Methodenaufruf
+	 */
 	public void solve() {
-		
+
 		fertig = false;
 		sudokuBT();
-	
-		
+
 	}
-	
-	
-	//Löst das Sudoku und befüllt die Count Variable mit: 0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht eindeutig lösbar
+
+	/**
+	 * Löst das sudokuArray mittels sudokuBTCount. Wenn Sudoku nicht lösbar
+	 */
 	public void solveCount() {
-		solveCounter=0;
+		solveCounter = 0;
 		fertig = false;
 		sudokuBTCount();
 		if (solveCounter > 0)
-			sudoku = copyArray(sudokuSaved);
-		
+			sudokuArray = copyArray(sudokuSaved);
+
 	}
-	public int getSolveCounter(){
+
+	public int getSolveCounter() {
 		return solveCounter;
 	}
-	
-	
+
 	public int[][] getSudokuArray() {
-		return sudoku;
+		return sudokuArray;
 
 	}
 
-	public boolean setSudoku(int[][] array) {
+	/**
+	 * Wenn sudokuArray den Regeln entspricht wird es gesetzt.
+	 * 
+	 * 
+	 * @param array
+	 * @return true wenn gesetzt; false sonst
+	 */
+	public boolean setSudokuIfCorrect(int[][] array) {
+		if (checkIfCorrectSudoku(array)) {
+			sudokuArray = array;
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Überprüft array auf Sudoku Regeln(richtige Größe; nur erlaubte Werte)
+	 * 
+	 * @param array
+	 * @return true wenn es Regeln entspricht; false sonst
+	 */
+	public boolean checkIfCorrectSudoku(int[][] array) {
+		// Prüft prinzipielle Groesse
+		if (array.length != 9)
+			return false;
+		for (int i = 0; i < 9; i++) {
+			if (array[i].length != 9)
+				return false;
+		}
+
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (array[i][j] > 9 || array[i][j] < 0)
+					return false;
+			}
+		}
 
 		boolean[] zahlVerfügbar = new boolean[9];
 
@@ -108,49 +147,58 @@ public class Sudoku implements Serializable {
 								return false;
 							else
 								zahlVerfügbar[zahl - 1] = false;
-
 						}
-
 					}
-
 				}
-
 			}
 		}
-
-		sudoku = array;
 		return true;
+
 	}
 
-	private boolean[] setBoolarrayAll(boolean[] boolArray, boolean wert) {
+	/**
+	 * 
+	 * Setzt alle Werte in boolArray auf value.
+	 * 
+	 * @param boolArray
+	 * @param value
+	 */
+	private void setBoolarrayAll(boolean[] boolArray, boolean value) {
 		for (int i = 0; i < boolArray.length; i++) {
-			boolArray[i] = wert;
+			boolArray[i] = value;
 
 		}
-		return boolArray;
 
 	}
 
-	
-	private int[][] copyArray(int[][] toCopy){
+	/**
+	 * @param toCopy
+	 * @return Neu erstelltes Array mit Werten aus toCopy.
+	 */
+	private int[][] copyArray(int[][] toCopy) {
 		int[][] copied = new int[9][9];
-		for(int k=0;k<9;k++){
-			for(int j=0;j<9;j++){
-				copied[k][j]=toCopy[k][j];
+		for (int k = 0; k < 9; k++) {
+			for (int j = 0; j < 9; j++) {
+				copied[k][j] = toCopy[k][j];
 			}
 		}
 		return copied;
-		
+
 	}
-	
-	//Gibt kopiertes SudokuArray zurück
-	public int[][] copySudokuArray(){
-		
-		return copyArray(sudoku);
-		
-		
+
+	/**
+	 * @return Kopie von sudokuArray
+	 */
+	public int[][] copySudokuArray() {
+
+		return copyArray(sudokuArray);
+
 	}
-	
+
+	/**
+	 * Löst sudokuArray mithilfe von Backtracking. Stoppt bei erster Lösung. Bei
+	 * keiner Lösung ist sudokuArray in Anfangszustand.
+	 */
 	private void sudokuBT() {
 
 		int[] koord = getNextCoordinate();
@@ -158,61 +206,63 @@ public class Sudoku implements Serializable {
 		int ykoord = koord[1];
 
 		// beende BT
-		if (fertig == true )
+		if (fertig == true)
 			return;
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
 		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
-			fertig = true;		
+			fertig = true;
 		else { // backtracking
 
 			for (int i = 1; i <= 9; i++) {
 				if (isSafe(xkoord, ykoord, i)) {
-					sudoku[xkoord][ykoord] = i;
+					sudokuArray[xkoord][ykoord] = i;
 					/*
 					 * if (ausgefuellt()) ausgabe(); else
 					 */
 					sudokuBT();
 
-						if(!fertig)
-						sudoku[xkoord][ykoord] = 0;
+					if (!fertig)
+						sudokuArray[xkoord][ykoord] = 0;
 				}
 			}
 		}
 	}
 
+	/**
+	 * Löst sudokuArray mit Backtracking. Speichert die erste Lösung in
+	 * sudokuSaved zwischen. Schaut ob es mindestens eine zweite Lösung gibt.
+	 * Bricht dann ab. Füllt Count Variable.
+	 */
 	private void sudokuBTCount() {
-	
+
 		int[] koord = getNextCoordinate();
 		int xkoord = koord[0];
 		int ykoord = koord[1];
-	
+
 		// beende BT
-		if (fertig == true && solveCounter>1)
+		if (fertig == true && solveCounter > 1)
 			return;
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
 		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
-			if(fertig == false)
-			{
+			if (fertig == false) {
 				fertig = true;
-				sudokuSaved = copyArray(sudoku);
+				sudokuSaved = copyArray(sudokuArray);
+				solveCounter++;
+			} else {
 				solveCounter++;
 			}
-			else{
-				solveCounter++;
-			}
-			
+
 		else { // backtracking
-	
+
 			for (int i = 1; i <= 9; i++) {
 				if (isSafe(xkoord, ykoord, i)) {
-					sudoku[xkoord][ykoord] = i;
+					sudokuArray[xkoord][ykoord] = i;
 					/*
 					 * if (ausgefuellt()) ausgabe(); else
 					 */
 					sudokuBTCount();
-	
-					
-						sudoku[xkoord][ykoord] = 0;
+
+					sudokuArray[xkoord][ykoord] = 0;
 				}
 			}
 		}
@@ -225,8 +275,8 @@ public class Sudoku implements Serializable {
 															// eingesetzt werden
 															// darf
 
-		for (int i = 0; i < sudoku.length; i++) {
-			if (sudoku[hor][i] == zahl || sudoku[i][ver] == zahl)
+		for (int i = 0; i < sudokuArray.length; i++) {
+			if (sudokuArray[hor][i] == zahl || sudokuArray[i][ver] == zahl)
 				return false;
 		}
 		int horizontal;
@@ -248,7 +298,7 @@ public class Sudoku implements Serializable {
 
 		for (int j = vertikal; j < vertikal + 3; j++) {
 			for (int i = horizontal; i < horizontal + 3; i++) {
-				if (sudoku[i][j] == zahl)
+				if (sudokuArray[i][j] == zahl)
 					return false;
 			}
 		}
@@ -259,16 +309,16 @@ public class Sudoku implements Serializable {
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				sudoku[i][j] = 0;
+				sudokuArray[i][j] = 0;
 			}
 		}
 
 	}
 
 	private int[] getNextCoordinate() {
-		for (int j = 0; j < sudoku.length; j++) {
-			for (int i = 0; i < sudoku.length; i++) {
-				if (sudoku[j][i] == 0)
+		for (int j = 0; j < sudokuArray.length; j++) {
+			for (int i = 0; i < sudokuArray.length; i++) {
+				if (sudokuArray[j][i] == 0)
 					return new int[] { j, i }; // nächste koordinate, die
 												// probiert werden muss
 			}
@@ -277,9 +327,9 @@ public class Sudoku implements Serializable {
 	}
 
 	public boolean empty() {
-		for (int i = 0; i < sudoku.length; i++) {
-			for (int j = 0; j < sudoku.length; j++) {
-				if (sudoku[i][j] != 0)
+		for (int i = 0; i < sudokuArray.length; i++) {
+			for (int j = 0; j < sudokuArray.length; j++) {
+				if (sudokuArray[i][j] != 0)
 					return false;
 			}
 		}
@@ -288,24 +338,23 @@ public class Sudoku implements Serializable {
 	}
 
 	public boolean filled() {
-		for (int i = 0; i < sudoku.length; i++) {
-			for (int j = 0; j < sudoku.length; j++) {
-				if (sudoku[i][j] == 0)
+		for (int i = 0; i < sudokuArray.length; i++) {
+			for (int j = 0; j < sudokuArray.length; j++) {
+				if (sudokuArray[i][j] == 0)
 					return false;
 			}
 		}
 		return true;
 	}
 
-	
 	// checkt, ob es zum gegebenen Sudoku eine einzigartige Loesung gibt
-	public boolean checkUniqueSolvable(){
-		int[][] temp = copyArray(sudoku);
+	public boolean checkUniqueSolvable() {
+		int[][] temp = copyArray(sudokuArray);
 		Sudoku tempSudoku = new Sudoku(temp);
 		tempSudoku.solveCount();
-		if(tempSudoku.getSolveCounter()!=1)
+		if (tempSudoku.getSolveCounter() != 1)
 			return false;
-		else 
+		else
 			return true;
 	}
 }
