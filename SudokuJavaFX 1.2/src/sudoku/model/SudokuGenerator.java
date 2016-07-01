@@ -42,7 +42,7 @@ public class SudokuGenerator {
 			
 
 					// entspricht nicht den Sudoku Regeln -> nächste Zahl probieren
-					if (!objectSudoku.setSudoku(copy)) {
+					if (!objectSudoku.setSudokuIfCorrect(copy)) {
 						digit = moduloHochzaehlen(digit);
 						filledPos = false;
 					} else {

@@ -12,6 +12,7 @@ public class Sudoku implements Serializable {
 	private int[][] sudokuArray = new int[9][9];
 	private int[][] sudokuSaved = new int[9][9];
 
+
 	// Gefüllt nach solveCount (0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht
 	// eindeutig lösbar)
 	protected int solveCounter;

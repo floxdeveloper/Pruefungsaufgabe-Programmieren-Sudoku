@@ -10,6 +10,8 @@ public class HelpElements {
 	public static Sudoku testSudokuCountUniqueSolvable;
 	public static Sudoku testSudokuCountUnSolvable;
 	public static Sudoku testSudokuFalse;
+	public static Sudoku testSudokuHalfFilled;
+	
 	public static int[][] testArrayEmpty = new int[9][9];
 	public static int[][] testArrayFilled = new int[][] 
 		 {{5,3,4,6,7,8,9,1,2},
@@ -61,4 +63,15 @@ public class HelpElements {
 		  {9,6,1,5,3,7,2,8,4},
 		  {2,8,7,4,1,9,6,3,5},
 		  {3,4,5,2,8,6,1,7,9}};	  
+	public static int[][] testArrayHalfFilled = new int[][]
+		 {{0,3,4,6,7,0,0,0,2},
+		  {0,0,2,1,0,5,3,0,8},
+		  {0,0,8,3,4,0,0,0,7},
+		  {8,5,9,7,6,1,0,0,3},
+		  {4,0,0,0,0,0,7,9,1},
+		  {7,1,0,9,2,4,8,5,6},
+		  {9,0,1,0,0,0,0,8,4},
+		  {2,0,0,4,1,0,0,0,0},
+		  {3,0,5,2,0,0,0,0,0}}; 
+		  
 }

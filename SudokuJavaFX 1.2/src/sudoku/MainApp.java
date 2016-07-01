@@ -38,7 +38,7 @@ public class MainApp extends Application {
 		// Set the application icon.
 		this.primaryStage.getIcons().add(new Image("file:resources/images/sudoku.png"));
 
-		//Leeres Sudoku in MainApp laden
+		// Leeres Sudoku in MainApp laden
 		sudoku = new Sudoku(new int[9][9]);
 		sudoku.sudokuReset();
 
@@ -233,7 +233,7 @@ public class MainApp extends Application {
 
 
 		//Setzt Sudoku Array und überprüft ob es den Regeln entspricht -> wenn nicht bleibt alter Stand bestehen
-		if (!sudoku.setSudoku(array))
+		if (!sudoku.setSudokuIfCorrect(array))
 			return false;
 		
 		
