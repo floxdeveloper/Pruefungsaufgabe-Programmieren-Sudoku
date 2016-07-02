@@ -4,8 +4,9 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -302,5 +303,9 @@ public class MainApp extends Application implements MainAppInterface {
 	@Override
 	public Window getPrimaryStage() {
 		return primaryStage;
+	}
+	
+	public Parent getRoot(){
+		return rootLayout;
 	}
 }

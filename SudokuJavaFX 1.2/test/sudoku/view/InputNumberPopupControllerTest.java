@@ -1,15 +1,19 @@
 package sudoku.view;
 
-import org.loadui.testfx.GuiTest;
+import org.junit.Before;
+import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
 
-import javafx.scene.Parent;
+import sudoku.MainApp;
 
-public class InputNumberPopupControllerTest extends GuiTest {
+public class InputNumberPopupControllerTest{
+	private FxRobot robot;
 
-	@Override
-	protected Parent getRootNode() {
-		// TODO Auto-generated method stub
-		return null;
+	@Before
+	public void setUp() throws Exception {
+		FxToolkit.registerPrimaryStage();
+		FxToolkit.setupApplication(MainApp.class);
+		robot = new FxRobot();
 	}
 
 	

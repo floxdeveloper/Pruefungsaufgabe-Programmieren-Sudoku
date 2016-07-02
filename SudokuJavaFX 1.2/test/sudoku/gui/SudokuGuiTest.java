@@ -4,7 +4,8 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.loadui.testfx.GuiTest;
+import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,36 +14,20 @@ import sudoku.MainApp;
 import sudoku.MainAppInterface;
 import sudoku.view.RectPos;
 
-public class SudokuGuiTest extends GuiTest{
+public class SudokuGuiTest{
 	AnchorPane rootLayout;
 	
 	/*The widgets of the gui used for the tests */
 	RectPos rect10;
 	MainAppInterface mainApp;
 	
-	protected Parent getRootNode() {
-        Parent parent = null;
-        try {
-        	FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/Sudoku.fxml"));
-			rootLayout = (AnchorPane) loader.load();
-			parent = rootLayout;
-			return parent;
-        } catch (IOException ex) {
-           System.err.println("Es konnte kein Parent aus der Sudoku.fxml gezogen werden");
-        }
-        return parent;
-    }
-	
+	private FxRobot robot;
+
 	@Before
-	public void setUp(){
-		mainApp = new MainApp();
+	public void setUp() throws Exception {
+		FxToolkit.registerPrimaryStage();
+		FxToolkit.setupApplication(MainApp.class);
+		robot = new FxRobot();
 	}
 	
-	@Test
-	public void markCell() {
-		
-		rect10 = find("#r10");
-		click(rect10);
-	}
 }

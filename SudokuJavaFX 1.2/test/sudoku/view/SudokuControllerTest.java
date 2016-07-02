@@ -22,9 +22,9 @@ public class SudokuControllerTest extends Application{
 	public static void initJFX() {
 	    Thread t = new Thread("JavaFX Init Thread") {
 	        public void run() {
-//	            Application.launch(MainApp.class, new String[0]);
-	        	mainApp = new MainApp();
-	        	mainApp.main(null);
+	            Application.launch(MainApp.class, new String[0]);
+//	        	mainApp = new MainApp();
+//	        	mainApp.main(null);
 	        }
 	    };
 	    t.setDaemon(true);
@@ -33,7 +33,7 @@ public class SudokuControllerTest extends Application{
 	
 	@Before
 	public void setUp(){
-
+		mainApp = new MainApp();
 	}
 	
 	@Test
