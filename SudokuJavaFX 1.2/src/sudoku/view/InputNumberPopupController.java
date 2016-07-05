@@ -17,12 +17,12 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sudoku.MainApp;
+import sudoku.MainAppInterface;
 import sudoku.MainAppTest;
 
 public class InputNumberPopupController {
 
-	private MainApp mainApp;
+	private MainAppInterface mainApp;
 	private PropertyChangeSupport support = new PropertyChangeSupport(this);
 
 	@FXML
@@ -80,7 +80,7 @@ public class InputNumberPopupController {
 	 * 
 	 * @param m
 	 */
-	public void setMainApp(MainApp m) {
+	public void setMainApp(MainAppInterface m) {
 		mainApp = m;
 	}
 

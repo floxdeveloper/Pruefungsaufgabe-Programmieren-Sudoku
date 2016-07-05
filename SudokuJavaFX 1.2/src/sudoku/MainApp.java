@@ -4,8 +4,9 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -22,13 +23,14 @@ import sudoku.model.Sudoku;
 import sudoku.view.SudokuController;
 import sudoku.view.WrapperController;
 
-public class MainApp extends Application {
+public class MainApp extends Application implements MainAppInterface {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private Sudoku sudoku;
 	private SudokuController scontroller;
 
+	
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -69,10 +71,12 @@ public class MainApp extends Application {
 	}
 
 	// Load RootLayout
+	
 	/**
 	 * Verbindet das Root Layout mit der Main Stage und dem WrapperController
 	 * Zeigt die neue Szene an
 	 */
+	@Override
 	public void initRootLayout() {
 		try {
 			// Load root layout from fxml file.
@@ -94,14 +98,21 @@ public class MainApp extends Application {
 	}
 
 	private Stage currentStage;
+	
+	@Override
 
 	public Stage getCurrentStage() {
 		return this.currentStage;
 	}
 
+	
+	
+
+
 	/**
 	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
 	 */
+	@Override
 	public void lockScreen() {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
@@ -130,16 +141,19 @@ public class MainApp extends Application {
 			// Show the dialog and wait until the user closes it
 			dialogStage.show();
 			System.out.println("bla");
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	
+	
 	/**
 	 * Zeigt den Sudoku Solver im rootLayout und setzt den SudokuController in
 	 * die Mainapp.
 	 */
+	@Override
 	public void initSudokuLayout() {
 		try {
 			// Load person overview.
@@ -170,6 +184,8 @@ public class MainApp extends Application {
 	 * @param content
 	 *            gibt den Haupttext der Warnung an
 	 */
+
+	@Override
 	public void warning(String header, String content) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(primaryStage);
@@ -184,7 +200,7 @@ public class MainApp extends Application {
 		alert.showAndWait();
 
 	}
-
+		
 	/**
 	 * Gibt eine Informationsmeldung mit mainApp als owner aus
 	 * 
@@ -216,6 +232,7 @@ public class MainApp extends Application {
 	 * @param content
 	 *            gibt den Haupttext der Fehlermeldung an
 	 */
+	@Override
 	public void error(String header, String content) {
 
 		Alert alert = new Alert(AlertType.ERROR);
@@ -232,6 +249,8 @@ public class MainApp extends Application {
 
 	}
 
+	
+	@Override
 	public SudokuController getSudokuController() {
 		return scontroller;
 	}
@@ -243,6 +262,7 @@ public class MainApp extends Application {
 	 * @param array
 	 * @return true wenn gesetzt; false sonst
 	 */
+	@Override
 	public boolean setSudoku(int[][] array) {
 
 	
@@ -255,13 +275,14 @@ public class MainApp extends Application {
 		return true;
 
 	}
-
+	
 	/**
 	 * Man setzt s als neues sudoku und updatet GUI.
 	 * 
 	 * @param s
 	 * @return true, da Sudoku immer Regeln entspricht
 	 */
+	@Override
 	public boolean setSudoku(Sudoku s) {
 		sudoku = s;
 		scontroller.sudokuChanged();
@@ -269,6 +290,8 @@ public class MainApp extends Application {
 
 	}
 
+
+	@Override
 	public Sudoku getSudoku() {
 		return sudoku;
 	}
@@ -277,7 +300,12 @@ public class MainApp extends Application {
 		launch(args);
 	}
 
+	@Override
 	public Window getPrimaryStage() {
 		return primaryStage;
+	}
+	
+	public Parent getRoot(){
+		return rootLayout;
 	}
 }

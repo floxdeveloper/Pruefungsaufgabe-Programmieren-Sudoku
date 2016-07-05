@@ -19,18 +19,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sudoku.MainApp;
+import sudoku.MainAppInterface;
 import sudoku.MainAppTest;
 import sudoku.model.Sudoku;
 
 public class SudokuController {
 
-	private MainApp mainApp;
-	private HashMap<Integer, Text> mapText = new HashMap<Integer, Text>();
+	private MainAppInterface mainApp;
+	protected HashMap<Integer, Text> mapText = new HashMap<Integer, Text>();
 	private HashMap<Integer, RectPos> mapRect = new HashMap<Integer, RectPos>();
 
-	private int auswahlX = -1;
-	private int auswahlY = -1;
+	protected int auswahlX = -1;
+	protected int auswahlY = -1;
 
 	private boolean[][] editableField = new boolean[9][9];
 
@@ -52,7 +52,7 @@ public class SudokuController {
 	private GridPane gridpane;
 
 	@FXML
-	private void initialize() {
+	protected void initialize() {
 
 		initMaps();
 		initEventHandler();
@@ -594,7 +594,7 @@ public class SudokuController {
 	 * 
 	 * @param mainApp
 	 */
-	public void setMainApp(MainApp mainApp) {
+	public void setMainApp(MainAppInterface mainApp) {
 		this.mainApp = mainApp;
 		sudokuAnzeigen();
 

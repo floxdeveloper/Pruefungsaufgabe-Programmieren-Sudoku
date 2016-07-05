@@ -82,7 +82,7 @@ public class SudokuGenerator {
 
 	}
 
-	private static int getNotTriedNumber() {
+	protected static int getNotTriedNumber() {
 
 		int digit = 1 + (int) (Math.random()*9);	
 		
