@@ -5,8 +5,11 @@ package helpElements;
 import sudoku.model.Sudoku;
 
 public class HelpElements {
+<<<<<<< HEAD
 
 	
+=======
+>>>>>>> branch 'master' of https://github.com/floxdeveloper/Pruefungsaufgabe-Programmieren-Sudoku.git
 	
 	public static int[][] testArrayEmpty = new int[9][9];
 	public static int[][] testArrayFilled = new int[][] 
