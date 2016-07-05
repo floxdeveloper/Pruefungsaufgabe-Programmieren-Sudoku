@@ -127,5 +127,4 @@ public void test() {
 	sudoku[3][8] = 2;
 	sudoku[4][8] = 7;
 	sudoku[8][8] = 9;
-
 }*/
