@@ -4,7 +4,7 @@ package helpElements;
 
 import sudoku.model.Sudoku;
 
-public class HelpElements {
+public class HelpElements {	
 	
 	public static int[][] testArrayEmpty = new int[9][9];
 	public static int[][] testArrayFilled = new int[][] 
