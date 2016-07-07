@@ -1,130 +1,69 @@
 package sudoku.model;
 
+import static helpElements.HelpElements.*;
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
-
-public class SudokuGeneratorTest {
-	Sudoku testSudoku;
-	int[][] testArrayFilled = new int[][] 
-			 {{5,3,4,6,7,8,9,1,2},
-			  {6,7,2,1,9,5,3,4,8},
-			  {1,9,8,3,4,2,5,6,7},
-			  {8,5,9,7,6,1,4,2,3},
-			  {4,2,6,8,5,3,7,9,1},
-			  {7,1,3,9,2,4,8,5,6},
-			  {9,6,1,5,3,7,2,8,4},
-			  {2,8,7,4,1,9,6,3,5},
-			  {3,4,5,2,8,6,1,7,9}}; 
+public class SudokuGeneratorTest 
+{
+	
+	Sudoku testSudokuFilledSU;
+	Sudoku testSudokuUniqueSolvableSU;
+	Sudoku testSudokuToGenerateSU;
+	boolean[] alreadyUsed;
+	
 	
 	@Before
 	public void setUp(){
-		testSudoku = new Sudoku(testArrayFilled);
+		testArrayEmpty = new int[9][9];
+		testArrayFilled = new int[][] 
+				 {{5,3,4,6,7,8,9,1,2},
+				  {6,7,2,1,9,5,3,4,8},
+				  {1,9,8,3,4,2,5,6,7},
+				  {8,5,9,7,6,1,4,2,3},
+				  {4,2,6,8,5,3,7,9,1},
+				  {7,1,3,9,2,4,8,5,6},
+				  {9,6,1,5,3,7,2,8,4},
+				  {2,8,7,4,1,9,6,3,5},
+				  {3,4,5,2,8,6,1,7,9}}; 
+		testSudokuFilledSU = new Sudoku(testArrayFilled);
+		testSudokuUniqueSolvableSU = new Sudoku (testArrayCountUniqueSolvable);
+		testSudokuToGenerateSU = new Sudoku(testArrayEmpty);
+		alreadyUsed = new boolean[]
+				{true, true, true, true, true, true, true, false, true};
+				
 	}
 	
 	@Test
 	public void copyArrayShouldCopy(){
-		assertArrayEquals("Arrays should be the same", testArrayFilled, testSudoku.copySudokuArray());
+		assertArrayEquals("Arrays should be the same", testArrayFilled, testSudokuFilledSU.copySudokuArray());
 	}
 	
 	/*
 	@Test
-	public void moduluHochzaehlenShouldReturnFrom1to9(){
-//		assertEquals("0 % 10 should return 1", 1, sudoku.model.SudokuGenerator.getNotTriedNumber(0));
-//		assertEquals("1 % 10 should return 2", 2, sudoku.model.SudokuGenerator.getNotTriedNumber(1));
-//		assertEquals("2 % 10 should return 3", 3, sudoku.model.SudokuGenerator.getNotTriedNumber(2));
-//		assertEquals("3 % 10 should return 4", 4, sudoku.model.SudokuGenerator.getNotTriedNumber(3));
-//		assertEquals("4 % 10 should return 5", 5, sudoku.model.SudokuGenerator.getNotTriedNumber(4));
-//		assertEquals("5 % 10 should return 6", 6, sudoku.model.SudokuGenerator.getNotTriedNumber(5));
-//		assertEquals("6 % 10 should return 7", 7, sudoku.model.SudokuGenerator.getNotTriedNumber(6));
-//		assertEquals("7 % 10 should return 8", 8, sudoku.model.SudokuGenerator.getNotTriedNumber(7));
-//		assertEquals("8 % 10 should return 9", 9, sudoku.model.SudokuGenerator.getNotTriedNumber(8));
-//		assertEquals("9 % 10 should return 1", 1, sudoku.model.SudokuGenerator.getNotTriedNumber(9));
-//		assertEquals("10 % 10 should return 1", 1, sudoku.model.SudokuGenerator.getNotTriedNumber(10));
-//		assertEquals("1348973 % 10 should return 4", 4, sudoku.model.SudokuGenerator.getNotTriedNumber(1348973));
-//		assertEquals("9584 % 10 should return 5", 5, sudoku.model.SudokuGenerator.getNotTriedNumber(9584));
+	public void getNotTriedNumberShouldReturnInt()
+	{
+		int intAlreadyUsed = SudokuGenerator.getNotTriedNumber();
+		assertEquals("Should return 2", 2, intAlreadyUsed);
+		System.out.println("bla");
 	}
-	
 	*/
 	
+	@Test
+	public void generateShouldReturnSudoku()
+	{
+		testSudokuToGenerateSU = SudokuGenerator.generate(81);
+		assertEquals("Should return true because full", true, testSudokuToGenerateSU.filled());
+		
+		testSudokuToGenerateSU = SudokuGenerator.generate(20);
+		assertEquals("Should return false because not full", false, testSudokuToGenerateSU.filled());
+		
+		testSudokuToGenerateSU = SudokuGenerator.generate(0);
+		assertEquals("Should return true because empty", true, testSudokuToGenerateSU.empty());
+	}
 	
 	
-	
-	
-}
-/*public void sudokuBefuellen() {
-
-	sudoku[0][0] = 1;
-	sudoku[2][0] = 7;
-	sudoku[6][0] = 3;
-	sudoku[7][0] = 6;
-	sudoku[8][0] = 2;
-	sudoku[4][1] = 9;
-	sudoku[7][1] = 8;
-	sudoku[0][2] = 8;
-	sudoku[2][2] = 2;
-	sudoku[4][2] = 6;
-	sudoku[6][2] = 5;
-	sudoku[8][2] = 9;
-	sudoku[1][3] = 6;
-	sudoku[3][3] = 5;
-	sudoku[6][3] = 2;
-	sudoku[8][3] = 3;
-	sudoku[1][4] = 3;
-	sudoku[6][4] = 7;
-	sudoku[8][4] = 8;
-	sudoku[1][5] = 1;
-	sudoku[3][5] = 3;
-	sudoku[4][5] = 7;
-	sudoku[5][5] = 8;
-	sudoku[8][5] = 5;
-	sudoku[0][6] = 3;
-	sudoku[3][6] = 9;
-	sudoku[5][6] = 5;
-	sudoku[8][6] = 6;
-	sudoku[0][7] = 5;
-	sudoku[1][7] = 8;
-	sudoku[5][7] = 1;
-	sudoku[3][8] = 4;
-	sudoku[5][8] = 6;
-	sudoku[6][8] = 8;
-	sudoku[8][8] = 7;
 
 }
-
-public void test() {
-
-	sudoku[0][0] = 3;
-	sudoku[4][0] = 2;
-	sudoku[5][0] = 8;
-	sudoku[2][1] = 1;
-	sudoku[3][1] = 7;
-	sudoku[7][1] = 9;
-	sudoku[8][1] = 4;
-	sudoku[0][2] = 7;
-	sudoku[1][2] = 8;
-	sudoku[5][2] = 6;
-	sudoku[6][2] = 5;
-	sudoku[3][3] = 3;
-	sudoku[4][3] = 5;
-	sudoku[8][3] = 8;
-	sudoku[1][4] = 9;
-	sudoku[2][4] = 8;
-	sudoku[6][4] = 7;
-	sudoku[7][4] = 3;
-	sudoku[0][5] = 4;
-	sudoku[4][5] = 1;
-	sudoku[5][5] = 9;
-	sudoku[2][6] = 4;
-	sudoku[3][6] = 6;
-	sudoku[7][6] = 7;
-	sudoku[8][6] = 5;
-	sudoku[0][7] = 8;
-	sudoku[1][7] = 3;
-	sudoku[5][7] = 4;
-	sudoku[6][7] = 1;
-	sudoku[3][8] = 2;
-	sudoku[4][8] = 7;
-	sudoku[8][8] = 9;
-}*/
