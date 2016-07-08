@@ -23,12 +23,12 @@ public class CompleteSudokuGuiTest{
 		robot = new FxRobot();
 	}
 	
-//	@Test
-//	public void testIfAboutWindowOpensAndCanBeClosed(){
-//		robot.clickOn("#help");
-//		robot.clickOn("#about");
-//		robot.clickOn("#closeButton");
-//	}
+	@Test
+	public void testIfAboutWindowOpensAndCanBeClosed(){
+		robot.clickOn("#help");
+		robot.clickOn("#about");
+		robot.clickOn("#closeButton");
+	}
 	
 	@Test
 	public void testSudokuGenerate10Mal(){

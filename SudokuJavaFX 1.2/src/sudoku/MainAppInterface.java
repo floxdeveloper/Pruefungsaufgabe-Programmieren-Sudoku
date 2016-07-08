@@ -20,6 +20,8 @@ public interface MainAppInterface {
 
 	void lockScreen();
 
+	void unlockScreen();
+	
 	/**
 	 * Shows the sudoku solver inside the root layout.
 	 */

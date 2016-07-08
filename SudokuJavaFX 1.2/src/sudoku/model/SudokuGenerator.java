@@ -4,7 +4,7 @@ package sudoku.model;
 public class SudokuGenerator {
 
 	
-	private static boolean[] alreadyUsed = new boolean[9];
+	protected static boolean[] alreadyUsed = new boolean[9];
 
 	public static Sudoku generate(int numberOfClues) {		
 		
@@ -87,7 +87,7 @@ public class SudokuGenerator {
 		return getNotTriedNumber();
 	}
 	
-	private static void resetAlreadyUsed(){
+	protected static void resetAlreadyUsed(){
 		
 		for (int i = 0; i < alreadyUsed.length; i++)
 			alreadyUsed[i]=false;
