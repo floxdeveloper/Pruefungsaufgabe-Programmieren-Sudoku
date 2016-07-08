@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
+
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sudoku.MainAppInterface;
+import sudoku.MainApp;
 import sudoku.MainAppTest;
 import sudoku.model.Solvability;
 import sudoku.model.Sudoku;
@@ -30,7 +31,7 @@ import sudoku.model.SudokuGenerator;
 
 public class WrapperController implements PropertyChangeListener {
 
-	private MainAppInterface mainApp;
+	private MainApp mainApp;
 	
 
 	@FXML
@@ -227,7 +228,7 @@ public class WrapperController implements PropertyChangeListener {
 	 * 
 	 * @param mainApp
 	 */
-	public void setMainApp(MainAppInterface mainApp) {
+	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 
 	}

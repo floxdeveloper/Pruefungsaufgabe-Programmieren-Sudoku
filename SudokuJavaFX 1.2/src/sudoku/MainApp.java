@@ -3,6 +3,7 @@ package sudoku;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +23,7 @@ import sudoku.model.Sudoku;
 import sudoku.view.SudokuController;
 import sudoku.view.WrapperController;
 
-public class MainApp extends Application implements MainAppInterface {
+public class MainApp extends Application  {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
@@ -31,7 +32,7 @@ public class MainApp extends Application implements MainAppInterface {
 	private WrapperController wcontroller;
 
 	
-	@Override
+	 
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("SudokuSolver");
@@ -76,7 +77,6 @@ public class MainApp extends Application implements MainAppInterface {
 	 * Verbindet das Root Layout mit der Main Stage und dem WrapperController
 	 * Zeigt die neue Szene an
 	 */
-	@Override
 	public void initRootLayout() {
 		try {
 			// Load root layout from fxml file.
@@ -97,14 +97,25 @@ public class MainApp extends Application implements MainAppInterface {
 		}
 	}
 
+	
+	
+	
 	private Stage currentStage;
 	
-	@Override
-
 	public Stage getCurrentStage() {
 		return this.currentStage;
 	}
 
+	private Task currentTask;
+	
+	public void setCurrentTask (Task<Void> t){
+		currentTask = t;
+	}
+	
+	public void cancleCurrentTask(){	
+		if(currentTask!=null)
+			currentTask.cancel();
+	}
 	
 	
 
@@ -112,7 +123,7 @@ public class MainApp extends Application implements MainAppInterface {
 	/**
 	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
 	 */
-	@Override
+
 	public void lockScreen() {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
@@ -144,7 +155,7 @@ public class MainApp extends Application implements MainAppInterface {
 			e.printStackTrace();
 		}
 	}
-	@Override
+	 
 	public void unlockScreen() {
 		try{
 			currentStage.close();
@@ -159,7 +170,7 @@ public class MainApp extends Application implements MainAppInterface {
 	 * Zeigt den Sudoku Solver im rootLayout und setzt den SudokuController in
 	 * die Mainapp.
 	 */
-	@Override
+	 
 	public void initSudokuLayout() {
 		try {
 			// Load person overview.
@@ -191,7 +202,7 @@ public class MainApp extends Application implements MainAppInterface {
 	 *            gibt den Haupttext der Warnung an
 	 */
 
-	@Override
+	 
 	public void warning(String header, String content) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(primaryStage);
@@ -238,7 +249,7 @@ public class MainApp extends Application implements MainAppInterface {
 	 * @param content
 	 *            gibt den Haupttext der Fehlermeldung an
 	 */
-	@Override
+	 
 	public void error(String header, String content) {
 
 		Alert alert = new Alert(AlertType.ERROR);
@@ -256,7 +267,7 @@ public class MainApp extends Application implements MainAppInterface {
 	}
 
 	
-	@Override
+	 
 	public SudokuController getSudokuController() {
 		return scontroller;
 	}
@@ -272,7 +283,7 @@ public class MainApp extends Application implements MainAppInterface {
 	 * @param array
 	 * @return true wenn gesetzt; false sonst
 	 */
-	@Override
+	 
 	public boolean setSudoku(int[][] array) {
 
 	
@@ -292,7 +303,7 @@ public class MainApp extends Application implements MainAppInterface {
 	 * @param s
 	 * @return true, da Sudoku immer Regeln entspricht
 	 */
-	@Override
+	 
 	public boolean setSudoku(Sudoku s) {
 		sudoku = s;
 		scontroller.sudokuChanged();
@@ -301,7 +312,7 @@ public class MainApp extends Application implements MainAppInterface {
 	}
 
 
-	@Override
+	 
 	public Sudoku getSudoku() {
 		return sudoku;
 	}
@@ -310,7 +321,7 @@ public class MainApp extends Application implements MainAppInterface {
 		launch(args);
 	}
 
-	@Override
+	 
 	public Window getPrimaryStage() {
 		return primaryStage;
 	}

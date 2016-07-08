@@ -2,27 +2,17 @@ package sudoku.view;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import sudoku.MainAppInterface;
-import sudoku.MainAppTest;
+import sudoku.MainApp;
 
 public class InputNumberPopupController {
 
-	private MainAppInterface mainApp;
+	private MainApp mainApp;
 	private PropertyChangeSupport support = new PropertyChangeSupport(this);
 
 	@FXML
@@ -80,7 +70,7 @@ public class InputNumberPopupController {
 	 * 
 	 * @param m
 	 */
-	public void setMainApp(MainAppInterface m) {
+	public void setMainApp(MainApp m) {
 		mainApp = m;
 	}
 
