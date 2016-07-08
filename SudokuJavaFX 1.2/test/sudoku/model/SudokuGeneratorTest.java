@@ -14,6 +14,7 @@ public class SudokuGeneratorTest
 	Sudoku testSudokuFilledSU;
 	Sudoku testSudokuUniqueSolvableSU;
 	Sudoku testSudokuToGenerateSU;
+	int[] alreadyUsedNumbers;
 	
 	
 	@Before
@@ -32,6 +33,7 @@ public class SudokuGeneratorTest
 		testSudokuFilledSU = new Sudoku(testArrayFilled);
 		testSudokuUniqueSolvableSU = new Sudoku (testArrayCountUniqueSolvable);
 		testSudokuToGenerateSU = new Sudoku(testArrayEmpty);
+		alreadyUsedNumbers = new int[9];
 				
 	}
 	
@@ -44,7 +46,8 @@ public class SudokuGeneratorTest
 	@Test
 	public void getNotTriedNumberShouldReturnInt()
 	{
-		int[] alreadyUsedNumbers = new int[9];
+		SudokuGenerator.resetAlreadyUsed();
+		
 		
 		for (int i = 0; i < 9; i++)
 		{
