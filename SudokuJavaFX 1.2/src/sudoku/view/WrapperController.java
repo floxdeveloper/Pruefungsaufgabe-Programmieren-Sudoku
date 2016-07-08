@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sudoku.MainAppInterface;
 import sudoku.MainAppTest;
+import sudoku.model.Solvability;
 import sudoku.model.Sudoku;
 import sudoku.model.SudokuGenerator;
 
@@ -207,14 +208,18 @@ public class WrapperController implements PropertyChangeListener {
 	
 	@FXML
 	private void handleCheck(){
-		int ergebnis = mainApp.getSudoku().checkUniqueSolvable();
+		Solvability ergebnis = mainApp.getSudoku().checkUniqueSolvable();
 		
-		if (ergebnis == 0)
+		if (ergebnis == Solvability.notSolvable)
+			mainApp.information("Not uniquely solvable", "The entered Sudoku is not solvable. We have stopped trying.");
+		else if (ergebnis == Solvability.probablyNotSolvable)
 			mainApp.information("Not uniquely solvable", "The entered Sudoku is very unlikely solvable. We have stopped trying.");
-		else if (ergebnis == 1)			
+		else if (ergebnis == Solvability.uniquelySolvable)			
 			mainApp.information("Uniquely solvable", "The Sudoku you have entered is uniquely solvable.");
-		else
+		else if (ergebnis == Solvability.notUniquleySolvable)
 			mainApp.information("Not uniquely solvable", "The Sudoku you have entered has two or more valid solutions.");
+		else
+			mainApp.error("Unexpected Error", "Please try again");
 	}
 
 	/**
@@ -263,7 +268,7 @@ public class WrapperController implements PropertyChangeListener {
 			});
 			task.setOnSucceeded(e -> {
 				System.out.println("Succeded");
-				mainApp.getCurrentStage().close();
+				mainApp.unlockScreen();
 			});
 			task.setOnCancelled(e -> {
 				System.out.println("Cancelled");
