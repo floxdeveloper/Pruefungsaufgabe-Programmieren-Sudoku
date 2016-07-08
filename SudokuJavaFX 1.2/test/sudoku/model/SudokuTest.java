@@ -144,11 +144,17 @@ public class SudokuTest
 		testSudokuCountUniqueSolvableSU.solve();
 		assertEquals("Should be solved (true)", true, testSudokuCountUniqueSolvableSU.fertig);
 		
+		assertEquals("Should not be solved (false)", false, testSudokuHalfFilledSU.fertig);
 		testSudokuHalfFilledSU.solve();
 		assertEquals("Should be solved (true)", true, testSudokuHalfFilledSU.fertig);
 		
+		assertEquals("Should not be solved (false)", false, testSudokuEmptySU.fertig);
 		testSudokuEmptySU.solve();
 		assertEquals("Should be solved (true)", true, testSudokuEmptySU.fertig);
+		
+		assertEquals("Should not be solved (false)", false, testSudokuFilledSU.fertig);
+		testSudokuFilledSU.solve(); // fertig = true
+		assertEquals("Should be solved (true)", true, testSudokuFilledSU.fertig);
 	}
 	
 	
