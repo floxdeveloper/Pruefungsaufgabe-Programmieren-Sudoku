@@ -32,7 +32,7 @@ public class SudokuController {
 	protected int auswahlX = -1;
 	protected int auswahlY = -1;
 
-	private boolean[][] editableField = new boolean[9][9];
+	protected boolean[][] editableField = new boolean[9][9];
 
 	private boolean editable = true;
 
@@ -69,7 +69,7 @@ public class SudokuController {
 					Text t = getKoordinate(i,j);
 					t.setText(" ");
 					t.setFill(Color.BLACK);
-					mainApp.getSudokuController().setEditable(true);
+					setEditable(true);
 				}
 
 			}
@@ -120,16 +120,19 @@ public class SudokuController {
 	}
 
 	// gibt Text an der Koordinate
-	private Text getKoordinate(int vert, int hor) {
+	protected Text getKoordinate(int vert, int hor) {
 
 		return mapText.get(vert * 9 + hor);
 
 	}
 
 	public void handleEingabe(int eingabe) {
+		
+		boolean alreadyFilled = mainApp.getSudoku().filled();
+		
 		if (eingabe < 10 && eingabe >= 0 && auswahlX != -1 && auswahlY != -1) {
 			if (eingabe == 0) {
-				getKoordinate(auswahlX, auswahlY).setText("");
+				getKoordinate(auswahlX, auswahlY).setText(" ");
 			} else {
 				getKoordinate(auswahlX, auswahlY).setText(Integer.toString(eingabe));
 			}
@@ -141,7 +144,7 @@ public class SudokuController {
 			unselect();
 
 			// Wenn Sudoku gelöst ist -> Congrationlations ausgeben
-			if (mainApp.getSudoku().filled()) {
+			if (mainApp.getSudoku().filled() && !alreadyFilled) {
 
 				try {
 					// Load the fxml file and create a new stage for the popup
