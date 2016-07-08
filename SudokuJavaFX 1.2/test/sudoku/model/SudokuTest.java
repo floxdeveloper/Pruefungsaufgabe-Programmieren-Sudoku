@@ -76,7 +76,7 @@ public class SudokuTest
 	@Test
 	public void getSudokuArrayShouldReturnArray()
 	{
-		assertTrue("Should be the same",  testArrayFilled ==  testSudokuFilledSU.getSudokuArray());
+		assertTrue("Should be the same",  testArrayFilled == testSudokuFilledSU.getSudokuArray());
 	}
 	
 	@Test
@@ -107,8 +107,10 @@ public class SudokuTest
 	@Test
 	public void checkUniqueSolvableShouldReturnCorrectBool()
 	{
-		// check for true = unique solvable
-		assertEquals("Should return true = unique solvable", true,  testSudokuCountUniqueSolvableSU.checkUniqueSolvable());	
+		// check for 1 = unique solvable
+		assertEquals("Should return 1 = unique solvable", 1,  testSudokuCountUniqueSolvableSU.checkUniqueSolvable());
+		// check for 2 = not clearly solvable
+		assertEquals("Should return 2 = not clearly solvable", 2,  testSudokuWithNullSU.checkUniqueSolvable());
 	}
 	
 	@Test
