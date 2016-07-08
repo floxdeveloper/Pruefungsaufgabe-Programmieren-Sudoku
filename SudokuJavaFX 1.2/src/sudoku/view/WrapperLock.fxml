@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="460.0" maxWidth="400.0" minHeight="460.0" minWidth="400.0" prefHeight="460.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sudoku.view.WrapperLockController">
+
+<AnchorPane maxHeight="127.0" maxWidth="127.0" minHeight="127.0" minWidth="127.0" prefHeight="150.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="closeButton" layoutX="168.0" layoutY="399.0" mnemonicParsing="false" onAction="#handleClose" text="Cancel" />
+      <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="0.0" layoutY="0.0">
+         <image>
+            <Image url="@../../../resources/images/LoadingCircle.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
