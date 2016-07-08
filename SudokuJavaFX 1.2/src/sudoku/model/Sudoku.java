@@ -9,16 +9,27 @@ public class Sudoku implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int[][] sudokuArray = new int[9][9];
-	private int[][] sudokuSaved = new int[9][9];
+	protected int[][] sudokuArray = new int[9][9];
+	protected int[][] sudokuSaved = new int[9][9];
 
+	
+	private Solvability solvability = Solvability.notEvaluated;
+	
+	
 	// Für solveIfInTime
 	private long solveStarted = -1;
 	private int timeToSolve;
+	private boolean ranOutOfTime = false;
 
 	// Gefüllt nach solveCount (0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht
 	// eindeutig lösbar)
 	protected int solveCounter;
+	
+	
+	
+	
+	
+	
 	protected boolean fertig;
 
 	/**
@@ -35,30 +46,44 @@ public class Sudoku implements Serializable {
 
 	/**
 	 * Methode löst das Sudoku ohne Aussage über Anzahl der Lösungen zu treffen.
-	 * Bei unlösbarem Sudoku ist sudoku danach in Zustand, wie vor. Nach zehn
+	 * Bei unlösbarem Sudoku ist sudoku danach in Zustand, wie zuvor. Nach zehn
 	 * Sekunden kann man von nicht lösbar ausgehen. Methodenaufruf
 	 */
 	public void solve() {
 
-		solveStarted = System.currentTimeMillis();
-		timeToSolve = 10;
+		initMaxSolveTime(10);
 
 		fertig = false;
 		sudokuBT();
 
 		solveStarted = -1;
+		
+		if (ranOutOfTime)
+			solvability = Solvability.probablyNotSolvable;
+		else if (filled())
+			solvability = Solvability.Solvable;
+		else
+			solvability = Solvability.notSolvable;
 	}
 
 	public void solveIfUnderOneSec() {
 
-		solveStarted = System.currentTimeMillis();
-		timeToSolve = 1;
+		initMaxSolveTime(1);
 
 		fertig = false;
 		sudokuBT();
+		
+		solvability = Solvability.notEvaluated;
 
 		solveStarted = -1;
 
+	}
+	
+	private void initMaxSolveTime(int timeToSolve){
+		
+		solveStarted = System.currentTimeMillis();
+		this.timeToSolve = timeToSolve ;
+		ranOutOfTime=false;		
 	}
 
 	/**
@@ -67,8 +92,7 @@ public class Sudoku implements Serializable {
 	 * abgebrochen.
 	 */
 	public void solveCount() {
-		solveStarted = System.currentTimeMillis();
-		timeToSolve = 10;
+		initMaxSolveTime(10);
 		solveCounter = 0;
 		fertig = false;
 		sudokuBTCount();
@@ -77,6 +101,18 @@ public class Sudoku implements Serializable {
 			sudokuArray = copyArray(sudokuSaved);
 
 		solveStarted = -1;
+		
+		if (ranOutOfTime)
+			solvability = Solvability.probablyNotSolvable;
+		else if (solveCounter == 0)
+			solvability = Solvability.notSolvable;
+		else if(solveCounter == 1)
+			solvability = Solvability.uniquelySolvable;
+		else if(solveCounter == 2)
+			solvability = Solvability.notUniquleySolvable;
+		else
+			solvability = Solvability.notEvaluated;
+			
 
 	}
 
@@ -221,6 +257,11 @@ public class Sudoku implements Serializable {
 		return copyArray(sudokuArray);
 
 	}
+	
+	public Solvability getSolvability(){
+		
+		return solvability;
+	}
 
 	/**
 	 * Löst sudokuArray mithilfe von Backtracking. Stoppt bei erster Lösung. Bei
@@ -233,8 +274,15 @@ public class Sudoku implements Serializable {
 		int ykoord = koord[1];
 
 		// beende BT
-		if (fertig == true || (solveStarted != -1 && System.currentTimeMillis() > solveStarted + timeToSolve * 1000))
+		if (fertig == true )
 			return;
+		if (solveStarted != -1 && System.currentTimeMillis() > solveStarted + timeToSolve * 1000){
+			ranOutOfTime=true;
+			return;
+			
+			
+		}
+		
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
 		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
 			fertig = true;
@@ -267,9 +315,12 @@ public class Sudoku implements Serializable {
 		int ykoord = koord[1];
 
 		// beende BT
-		if (fertig == true && solveCounter > 1
-				|| (solveStarted != -1 && System.currentTimeMillis() > solveStarted + timeToSolve * 1000))
+		if (fertig == true && solveCounter > 1)
 			return;
+		if (solveStarted != -1 && System.currentTimeMillis() > solveStarted + timeToSolve * 1000){
+			ranOutOfTime=true;
+			return;
+		}
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
 		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
 			if (fertig == false) {
@@ -376,12 +427,12 @@ public class Sudoku implements Serializable {
 	}
 
 	// checkt, ob es zum gegebenen Sudoku eine einzigartige Loesung gibt
-	public int checkUniqueSolvable() {
+	public Solvability checkUniqueSolvable() {
 
 		int[][] temp = copyArray(sudokuArray);
 		Sudoku tempSudoku = new Sudoku(temp);
 		tempSudoku.solveCount();
-		return tempSudoku.getSolveCounter();
+		return tempSudoku.getSolvability();
 
 	}
 }
