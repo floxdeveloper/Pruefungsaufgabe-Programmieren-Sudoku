@@ -20,15 +20,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sudoku.MainAppInterface;
+import sudoku.MainApp;
 import sudoku.MainAppTest;
 import sudoku.model.Solvability;
 import sudoku.model.Sudoku;
-import sudoku.model.SudokuGenerator;
 
 public class SudokuController {
 
-	private MainAppInterface mainApp;
+	private MainApp mainApp;
 	protected HashMap<Integer, Text> mapText = new HashMap<Integer, Text>();
 	protected HashMap<Integer, RectPos> mapRect = new HashMap<Integer, RectPos>();
 
@@ -254,6 +253,13 @@ public class SudokuController {
 			task.setOnRunning(e -> {
 				mainApp.lockScreen();
 			});
+			
+			task.setOnCancelled(e -> {
+				mainApp.unlockScreen();
+			});
+			
+			
+			
 			task.setOnSucceeded(e -> {
 				mainApp.unlockScreen();
 				if (!mainApp.getSudoku().filled()) {
@@ -283,6 +289,8 @@ public class SudokuController {
 				mainApp.error("Unexpected error while solving", "");
 	
 			});
+			
+			mainApp.setCurrentTask(task);
 
 			new Thread(task).start();
 
@@ -667,7 +675,7 @@ public class SudokuController {
 	 * 
 	 * @param mainApp
 	 */
-	public void setMainApp(MainAppInterface mainApp) {
+	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		sudokuAnzeigen();
 

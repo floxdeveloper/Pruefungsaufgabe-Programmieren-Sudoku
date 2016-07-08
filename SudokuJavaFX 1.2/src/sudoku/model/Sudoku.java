@@ -13,10 +13,10 @@ public class Sudoku implements Serializable {
 	protected int[][] sudokuSaved = new int[9][9];
 
 	
+	//Wird nach solve aus unten stehenden Variablen gebildet
 	private Solvability solvability = Solvability.notEvaluated;
 	
-	
-	// Für solveIfInTime
+	// Variablen für solve
 	private long solveStarted = -1;
 	private int timeToSolve;
 	private boolean ranOutOfTime = false;
