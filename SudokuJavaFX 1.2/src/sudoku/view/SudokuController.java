@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
 
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import sudoku.MainAppInterface;
 import sudoku.MainAppTest;
 import sudoku.model.Solvability;
 import sudoku.model.Sudoku;
+import sudoku.model.SudokuGenerator;
 
 public class SudokuController {
 
@@ -60,14 +62,13 @@ public class SudokuController {
 		allEditable();
 
 	}
-	
 
 	// Resetet alle Felder die nicht
 	public void resetNotLocked() {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				if (editableField[i][j]) {
-					Text t = getKoordinate(i,j);
+					Text t = getKoordinate(i, j);
 					t.setText(" ");
 					t.setFill(Color.BLACK);
 					setEditable(true);
@@ -128,9 +129,9 @@ public class SudokuController {
 	}
 
 	public void handleEingabe(int eingabe) {
-		
+
 		boolean alreadyFilled = mainApp.getSudoku().filled();
-		
+
 		if (eingabe < 10 && eingabe >= 0 && auswahlX != -1 && auswahlY != -1) {
 			if (eingabe == 0) {
 				getKoordinate(auswahlX, auswahlY).setText(" ");
@@ -237,22 +238,53 @@ public class SudokuController {
 			// Bei unlösbaren Sudokus stoppt Backtracking ohne ein gefülltes
 			// Sudoku zurück zu lassen -> kann danach abgefragt werden obs
 			// geklappt hat
-			mainApp.getSudoku().solve();
 
-			if (!mainApp.getSudoku().filled()) {
-				// Farbe wieder auf schwarz ändern
-				resetNotLocked();
-				if(mainApp.getSudoku().getSolvability()== Solvability.notSolvable)
-					mainApp.error("Definitely unsolvable Sudoku", "The Sudoku you have entered is definitely not solvable.");
-				else if (mainApp.getSudoku().getSolvability()== Solvability.probablyNotSolvable)
-					mainApp.error("Probably unsolvable Sudoku", "The Sudoku you have entered is highly unlikely solvable. We stopped trying.");
-				else
-					mainApp.error("Unsolvable Sudoku", "The Sudoku you have entered is not solvable.");
+			Task<Void> task = new Task<Void>() {
 
-			} else
-				editable = false;
+				@Override
+				protected Void call() throws Exception {
+					mainApp.getSudoku().solve();
+					return null;
 
-			sudokuAnzeigen();
+				}
+
+			};
+
+			task.setOnRunning(e -> {
+				mainApp.lockScreen();
+			});
+			task.setOnSucceeded(e -> {
+				mainApp.unlockScreen();
+				if (!mainApp.getSudoku().filled()) {
+					// Farbe wieder auf schwarz ändern
+					resetNotLocked();
+					
+					
+					if (mainApp.getSudoku().getSolvability() == Solvability.notSolvable)
+						mainApp.error("Definitely unsolvable Sudoku",
+								"The Sudoku you have entered is definitely not solvable.");
+					else if (mainApp.getSudoku().getSolvability() == Solvability.probablyNotSolvable)
+						mainApp.error("Probably unsolvable Sudoku",
+								"The Sudoku you have entered is highly unlikely solvable. We stopped trying.");
+					else
+						mainApp.error("Unsolvable Sudoku", "The Sudoku you have entered is not solvable.");
+
+				} else
+					editable = false;
+
+				sudokuAnzeigen();
+
+			});
+			
+			task.setOnFailed(e -> {
+				mainApp.unlockScreen();
+				sudokuAnzeigen();
+				mainApp.error("Unexpected error while solving", "");
+	
+			});
+
+			new Thread(task).start();
+
 		}
 
 	}
@@ -267,49 +299,77 @@ public class SudokuController {
 	@FXML
 	private void handleHint() {
 
-		// Wenn nicht editiertbar -> nichts machen
+		// Wenn vollständig ausgefüllt -> nichts machen
 		if (mainApp.getSudoku().filled())
 			return;
-
+		
 		int[][] sudokuArray = mainApp.getSudoku().copySudokuArray();
 		int[][] sudokuArraySolve = mainApp.getSudoku().copySudokuArray();
 
 		Sudoku sudoku = new Sudoku(sudokuArraySolve);
-		sudoku.solve();
+		
+		Task<Void> task = new Task<Void>() {
 
-		// Sudoku nicht lösbar -> Error
-		if (!sudoku.filled()) {
-			
-			if(mainApp.getSudoku().getSolvability()== Solvability.notSolvable)
+			@Override
+			protected Void call() throws Exception {
+				sudoku.solve();
+				return null;
+			}
+
+		};
+
+		task.setOnRunning(e -> {
+			mainApp.lockScreen();
+		});
+		
+		task.setOnSucceeded(e -> {
+			mainApp.unlockScreen();
+			// Sudoku nicht lösbar -> Error
+			if (sudoku.filled()) {
+				boolean hintGiven = false;
+
+				while (!hintGiven) {
+
+					int xKoord = (int) (Math.random() * 9);
+					int yKoord = (int) (Math.random() * 9);
+
+					if (sudokuArray[xKoord][yKoord] == 0) {
+
+						sudokuArray[xKoord][yKoord] = sudokuArraySolve[xKoord][yKoord];
+						mainApp.setSudoku(sudokuArray);
+						hintGiven = true;
+
+						if (mainApp.getSudoku().filled()) {
+							setEditable(false);
+
+							unselect();
+						}
+					}
+					}
+				mainApp.unlockScreen();
+			}else {
+			mainApp.unlockScreen();
+			if (sudoku.getSolvability() == Solvability.notSolvable)
 				mainApp.error("Unable to give a hint.", "The Sudoku you have entered is definitely not solvable.");
-			else if (mainApp.getSudoku().getSolvability()== Solvability.probablyNotSolvable)
+			else if (sudoku.getSolvability() == Solvability.probablyNotSolvable)
 				mainApp.error("Unable to give a hint.", "The Sudoku you have entered is higly unlikely solvable.");
 			else
 				mainApp.error("Unable to give a hint.", "The Sudoku you have entered is not solvable.");
-			return;
-
-		}
-
-		boolean hintGiven = false;
-
-		while (!hintGiven) {
-
-			int xKoord = (int) (Math.random() * 9);
-			int yKoord = (int) (Math.random() * 9);
-
-			if (sudokuArray[xKoord][yKoord] == 0) {
-
-				sudokuArray[xKoord][yKoord] = sudokuArraySolve[xKoord][yKoord];
-				mainApp.setSudoku(sudokuArray);
-				hintGiven = true;
-
-				if (mainApp.getSudoku().filled()) {
-					setEditable(false);
-
-					unselect();
-				}
 			}
-		}
+		});
+		
+		task.setOnFailed(e -> {
+			mainApp.unlockScreen();
+			sudokuAnzeigen();
+			mainApp.error("Unexpected error", "Could not give a hint");
+
+		});
+
+		new Thread(task).start();
+
+		
+
+		
 	}
 
 	@FXML
@@ -386,7 +446,6 @@ public class SudokuController {
 		}
 
 	}
-
 
 	public void colorAllBlack() {
 

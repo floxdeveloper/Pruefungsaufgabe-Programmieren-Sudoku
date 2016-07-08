@@ -139,7 +139,6 @@ public class MainApp extends Application implements MainAppInterface {
 			this.currentStage = dialogStage;
 			// Show the dialog and wait until the user closes it
 			dialogStage.show();
-			System.out.println("bla");
 			
 		} catch (IOException e) {
 			e.printStackTrace();
