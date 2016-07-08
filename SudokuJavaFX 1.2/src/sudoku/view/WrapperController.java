@@ -263,7 +263,7 @@ public class WrapperController implements PropertyChangeListener {
 			});
 			task.setOnSucceeded(e -> {
 				System.out.println("Succeded");
-				mainApp.getCurrentStage().close();
+				mainApp.unlockScreen();
 			});
 			task.setOnCancelled(e -> {
 				System.out.println("Cancelled");
