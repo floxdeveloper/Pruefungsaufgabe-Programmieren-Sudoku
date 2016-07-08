@@ -31,7 +31,7 @@ public class CompleteSudokuGuiTest{
 	}
 	
 	@Test
-	public void testSudokuGenerate10Mal(){
+	public void testSudokuGenerate(){
 		robot.clickOn("#sudoku");
 		robot.clickOn("#generate");
 		robot.clickOn("#eingabecb");
