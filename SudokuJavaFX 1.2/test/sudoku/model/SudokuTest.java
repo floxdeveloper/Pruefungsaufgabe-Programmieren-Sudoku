@@ -20,6 +20,7 @@ public class SudokuTest
 	Sudoku testSudokuFilledNumberTwo;
 	
 	
+	
 	@Before
 	public void setUp()
 	{
@@ -103,15 +104,7 @@ public class SudokuTest
 		assertEquals("Should return 0 = unsolvable", 0, testSudokuCountUnSolvableSU.solveCounter);
 		*/
 	}
-		
-	@Test
-	public void checkUniqueSolvableShouldReturnCorrectBool()
-	{
-		// check for 1 = unique solvable
-		assertEquals("Should return 1 = unique solvable", 1,  testSudokuCountUniqueSolvableSU.checkUniqueSolvable());
-		// check for 2 = not clearly solvable
-		assertEquals("Should return 2 = not clearly solvable", 2,  testSudokuWithNullSU.checkUniqueSolvable());
-	}
+	
 	
 	@Test
 	public void checkIfCorrectSudokuShoudlReturnCorrectBool()
@@ -157,9 +150,33 @@ public class SudokuTest
 		assertEquals("Should be solved (true)", true, testSudokuFilledSU.fertig);
 	}
 	
+	@Test
+	public void solveShouldSetSolvability()
+	{
+		assertEquals("Should be 'not evaluated'", Solvability.notEvaluated, testSudokuFilledSU.getSolvability());
+		testSudokuFilledSU.solve();
+		assertEquals("Should be solvable", Solvability.Solvable, testSudokuFilledSU.getSolvability());
+		
+		testSudokuCountUnSolvableSU.solve();
+		assertEquals("Should be 'probably not solvable'", Solvability.probablyNotSolvable, testSudokuCountUnSolvableSU.getSolvability());
+		
+		//testSudokuCountUniqueSolvableSU.solve();
+		//assertEquals("Should be 'uniquely solvable'", Solvability.uniquelySolvable, testSudokuCountUniqueSolvableSU.getSolvability());
+		
+		//assertEquals(Solvability.notUniquleySolvable, .getSolvability());
+		//assertEquals(Solvability.notSolvable, .getSolvability());
+		
+	}
 	
-	
-	
+	@Test
+	public void checkUniqueSolvableShouldReturnSolvability()
+	{
+		assertEquals("Should be ' uniquely solvable'", Solvability.uniquelySolvable, testSudokuFilledSU.checkUniqueSolvable());
+		
+		assertEquals("Should be 'probably not solvable'", Solvability.probablyNotSolvable, testSudokuCountUnSolvableSU.checkUniqueSolvable());
+		
+		assertTrue("Should be 'uniquely solvable'", Solvability.uniquelySolvable == testSudokuCountUniqueSolvableSU.checkUniqueSolvable());
+	}
 	
 }
 	
