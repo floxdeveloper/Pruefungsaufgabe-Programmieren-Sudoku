@@ -127,6 +127,9 @@ public class SudokuController {
 	}
 
 	public void handleEingabe(int eingabe) {
+		
+		boolean alreadyFilled = mainApp.getSudoku().filled();
+		
 		if (eingabe < 10 && eingabe >= 0 && auswahlX != -1 && auswahlY != -1) {
 			if (eingabe == 0) {
 				getKoordinate(auswahlX, auswahlY).setText("");
@@ -141,7 +144,7 @@ public class SudokuController {
 			unselect();
 
 			// Wenn Sudoku gelöst ist -> Congrationlations ausgeben
-			if (mainApp.getSudoku().filled()) {
+			if (mainApp.getSudoku().filled() && !alreadyFilled) {
 
 				try {
 					// Load the fxml file and create a new stage for the popup

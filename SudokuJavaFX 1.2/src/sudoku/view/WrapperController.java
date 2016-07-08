@@ -207,11 +207,14 @@ public class WrapperController implements PropertyChangeListener {
 	
 	@FXML
 	private void handleCheck(){
-		if (mainApp.getSudoku().checkUniqueSolvable())
-			mainApp.information("Uniquely solvable", "The Sudoku you have entered is uniquely solvable.");
-		else 
-			mainApp.information("Not uniquely solvable", "The Sudoku you have entered is NOT uniquely solvable.");
+		int ergebnis = mainApp.getSudoku().checkUniqueSolvable();
 		
+		if (ergebnis == 0)
+			mainApp.information("Not uniquely solvable", "The entered Sudoku is very unlikely solvable. We have stopped trying.");
+		else if (ergebnis == 1)			
+			mainApp.information("Uniquely solvable", "The Sudoku you have entered is uniquely solvable.");
+		else
+			mainApp.information("Not uniquely solvable", "The Sudoku you have entered has two or more valid solutions.");
 	}
 
 	/**
