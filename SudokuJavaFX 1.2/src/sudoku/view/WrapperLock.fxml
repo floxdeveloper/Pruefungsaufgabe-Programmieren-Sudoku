@@ -3,8 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="460.0" maxWidth="400.0" minHeight="460.0" minWidth="400.0" prefHeight="460.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sudoku.view.WrapperLockController">
-   <children>
-      <Button fx:id="closeButton" layoutX="168.0" layoutY="399.0" mnemonicParsing="false" onAction="#handleClose" text="Cancel" />
-   </children>
+<AnchorPane maxHeight="150.0" maxWidth="150.0" minHeight="150.0" minWidth="150.0" prefHeight="150.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+
 </AnchorPane>
