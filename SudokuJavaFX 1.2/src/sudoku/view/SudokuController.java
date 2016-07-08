@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sudoku.MainAppInterface;
 import sudoku.MainAppTest;
+import sudoku.model.Solvability;
 import sudoku.model.Sudoku;
 
 public class SudokuController {
@@ -32,7 +33,7 @@ public class SudokuController {
 	protected int auswahlX = -1;
 	protected int auswahlY = -1;
 
-	private boolean[][] editableField = new boolean[9][9];
+	protected boolean[][] editableField = new boolean[9][9];
 
 	private boolean editable = true;
 
@@ -69,7 +70,7 @@ public class SudokuController {
 					Text t = getKoordinate(i,j);
 					t.setText(" ");
 					t.setFill(Color.BLACK);
-					mainApp.getSudokuController().setEditable(true);
+					setEditable(true);
 				}
 
 			}
@@ -120,7 +121,7 @@ public class SudokuController {
 	}
 
 	// gibt Text an der Koordinate
-	private Text getKoordinate(int vert, int hor) {
+	protected Text getKoordinate(int vert, int hor) {
 
 		return mapText.get(vert * 9 + hor);
 
@@ -132,7 +133,7 @@ public class SudokuController {
 		
 		if (eingabe < 10 && eingabe >= 0 && auswahlX != -1 && auswahlY != -1) {
 			if (eingabe == 0) {
-				getKoordinate(auswahlX, auswahlY).setText("");
+				getKoordinate(auswahlX, auswahlY).setText(" ");
 			} else {
 				getKoordinate(auswahlX, auswahlY).setText(Integer.toString(eingabe));
 			}
@@ -241,8 +242,12 @@ public class SudokuController {
 			if (!mainApp.getSudoku().filled()) {
 				// Farbe wieder auf schwarz ändern
 				resetNotLocked();
-
-				mainApp.error("Unsolvable Sudoku", "The Sudoku you have entered is not solvable.");
+				if(mainApp.getSudoku().getSolvability()== Solvability.notSolvable)
+					mainApp.error("Definitely unsolvable Sudoku", "The Sudoku you have entered is definitely not solvable.");
+				else if (mainApp.getSudoku().getSolvability()== Solvability.probablyNotSolvable)
+					mainApp.error("Probably unsolvable Sudoku", "The Sudoku you have entered is highly unlikely solvable. We stopped trying.");
+				else
+					mainApp.error("Unsolvable Sudoku", "The Sudoku you have entered is not solvable.");
 
 			} else
 				editable = false;
@@ -274,8 +279,13 @@ public class SudokuController {
 
 		// Sudoku nicht lösbar -> Error
 		if (!sudoku.filled()) {
-
-			mainApp.error("Unable to give a hint.", "The Sudoku you have entered is not solvable.");
+			
+			if(mainApp.getSudoku().getSolvability()== Solvability.notSolvable)
+				mainApp.error("Unable to give a hint.", "The Sudoku you have entered is definitely not solvable.");
+			else if (mainApp.getSudoku().getSolvability()== Solvability.probablyNotSolvable)
+				mainApp.error("Unable to give a hint.", "The Sudoku you have entered is higly unlikely solvable.");
+			else
+				mainApp.error("Unable to give a hint.", "The Sudoku you have entered is not solvable.");
 			return;
 
 		}

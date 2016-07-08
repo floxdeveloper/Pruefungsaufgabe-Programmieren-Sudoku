@@ -5,7 +5,6 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -29,6 +28,7 @@ public class MainApp extends Application implements MainAppInterface {
 	private BorderPane rootLayout;
 	private Sudoku sudoku;
 	private SudokuController scontroller;
+	private WrapperController wcontroller;
 
 	
 	@Override
@@ -85,8 +85,8 @@ public class MainApp extends Application implements MainAppInterface {
 			rootLayout = (BorderPane) loader.load();
 
 			// Set controller to Main Stage
-			WrapperController controller = loader.getController();
-			controller.setMainApp(this);
+			wcontroller = loader.getController();
+			wcontroller.setMainApp(this);
 
 			// Show the scene containing the root layout.
 			Scene scene = new Scene(rootLayout);
@@ -260,6 +260,10 @@ public class MainApp extends Application implements MainAppInterface {
 	@Override
 	public SudokuController getSudokuController() {
 		return scontroller;
+	}
+	
+	public WrapperController getWrapperController() {
+		return wcontroller;
 	}
 
 	/**
