@@ -27,7 +27,7 @@ public class SudokuController {
 
 	private MainAppInterface mainApp;
 	protected HashMap<Integer, Text> mapText = new HashMap<Integer, Text>();
-	private HashMap<Integer, RectPos> mapRect = new HashMap<Integer, RectPos>();
+	protected HashMap<Integer, RectPos> mapRect = new HashMap<Integer, RectPos>();
 
 	protected int auswahlX = -1;
 	protected int auswahlY = -1;
@@ -153,6 +153,7 @@ public class SudokuController {
 					loader.setLocation(MainAppTest.class.getResource("view/Congratulation.fxml"));
 					AnchorPane page = (AnchorPane) loader.load();
 
+					page.setId("CongratulationPage");
 					// Create the dialog Stage.
 					Stage dialogStage = new Stage();
 					dialogStage.initStyle(StageStyle.UTILITY);
