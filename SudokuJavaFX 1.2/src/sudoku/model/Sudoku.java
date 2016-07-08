@@ -12,6 +12,9 @@ public class Sudoku implements Serializable {
 	private int[][] sudokuArray = new int[9][9];
 	private int[][] sudokuSaved = new int[9][9];
 
+	// Für solveIfInTime
+	private long solveStarted = -1;
+	private int timeToSolve;
 
 	// Gefüllt nach solveCount (0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht
 	// eindeutig lösbar)
@@ -32,25 +35,48 @@ public class Sudoku implements Serializable {
 
 	/**
 	 * Methode löst das Sudoku ohne Aussage über Anzahl der Lösungen zu treffen.
-	 * Bei unlösbarem Sudoku ist sudoku danach in Zustand, wie vor
-	 * Methodenaufruf
+	 * Bei unlösbarem Sudoku ist sudoku danach in Zustand, wie vor. Nach zehn
+	 * Sekunden kann man von nicht lösbar ausgehen. Methodenaufruf
 	 */
 	public void solve() {
+
+		solveStarted = System.currentTimeMillis();
+		timeToSolve = 10;
 
 		fertig = false;
 		sudokuBT();
 
+		solveStarted = -1;
+	}
+
+	public void solveIfUnderOneSec() {
+
+		solveStarted = System.currentTimeMillis();
+		timeToSolve = 1;
+
+		fertig = false;
+		sudokuBT();
+
+		solveStarted = -1;
+
 	}
 
 	/**
-	 * Löst das sudokuArray mittels sudokuBTCount. Wenn Sudoku nicht lösbar
+	 * Löst das sudokuArray mittels sudokuBTCount. Wenn Sudoku nicht lösbar ist
+	 * ist es nach Methode unverändert. Nach 10 Sekunden wird Methode
+	 * abgebrochen.
 	 */
 	public void solveCount() {
+		solveStarted = System.currentTimeMillis();
+		timeToSolve = 10;
 		solveCounter = 0;
 		fertig = false;
 		sudokuBTCount();
+
 		if (solveCounter > 0)
 			sudokuArray = copyArray(sudokuSaved);
+
+		solveStarted = -1;
 
 	}
 
@@ -207,7 +233,7 @@ public class Sudoku implements Serializable {
 		int ykoord = koord[1];
 
 		// beende BT
-		if (fertig == true)
+		if (fertig == true || (solveStarted != -1 && System.currentTimeMillis() > solveStarted + timeToSolve * 1000))
 			return;
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
 		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
@@ -241,7 +267,8 @@ public class Sudoku implements Serializable {
 		int ykoord = koord[1];
 
 		// beende BT
-		if (fertig == true && solveCounter > 1)
+		if (fertig == true && solveCounter > 1
+				|| (solveStarted != -1 && System.currentTimeMillis() > solveStarted + timeToSolve * 1000))
 			return;
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
 		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
@@ -349,13 +376,12 @@ public class Sudoku implements Serializable {
 	}
 
 	// checkt, ob es zum gegebenen Sudoku eine einzigartige Loesung gibt
-	public boolean checkUniqueSolvable() {
+	public int checkUniqueSolvable() {
+
 		int[][] temp = copyArray(sudokuArray);
 		Sudoku tempSudoku = new Sudoku(temp);
 		tempSudoku.solveCount();
-		if (tempSudoku.getSolveCounter() != 1)
-			return false;
-		else
-			return true;
+		return tempSudoku.getSolveCounter();
+
 	}
 }

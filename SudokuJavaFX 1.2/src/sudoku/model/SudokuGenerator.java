@@ -4,7 +4,7 @@ package sudoku.model;
 public class SudokuGenerator {
 
 	
-	private static boolean[] alreadyUsed = new boolean[9];
+	protected static boolean[] alreadyUsed = new boolean[9];
 
 	public static Sudoku generate(int numberOfClues) {		
 		
@@ -20,17 +20,11 @@ public class SudokuGenerator {
 		int[][] copy = copySudokuArray(arraySudoku);
 		Sudoku objectSudoku = new Sudoku(copy);
 		int enteredFields = 0;
-		
-		long timestamp = System.currentTimeMillis();
 
 		while (enteredFields < numberOfClues ) {
 			
-			System.out.println(System.currentTimeMillis());
-			if (System.currentTimeMillis()-2000 > timestamp){
-				System.out.println("restart");
-				return generate(numberOfClues);
-				
-			}
+		
+			
 			
 			resetAlreadyUsed();
 			
@@ -58,8 +52,7 @@ public class SudokuGenerator {
 						filledPos = false;
 					} else {
 						//Prüft Lösbarkeit
-						objectSudoku.solve();
-
+						objectSudoku.solveIfUnderOneSec();
 						// Ist so nicht lösbar -> nächste Zahl probieren
 						if (!objectSudoku.filled()) {
 							digit = getNotTriedNumber();
@@ -94,7 +87,7 @@ public class SudokuGenerator {
 		return getNotTriedNumber();
 	}
 	
-	private static void resetAlreadyUsed(){
+	protected static void resetAlreadyUsed(){
 		
 		for (int i = 0; i < alreadyUsed.length; i++)
 			alreadyUsed[i]=false;
