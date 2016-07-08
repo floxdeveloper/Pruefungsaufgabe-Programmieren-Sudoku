@@ -92,6 +92,12 @@ public class SudokuControllerTest {
 		
 	}
 
+	public void testHandleReset(){
+		sController.auswahlX = 1;
+		sController.auswahlY = 1;
+		
+	}
+	
 	@Test
 	public void testCongratulationDialogAfterLastSuccessfulEingabe(){
 		mainApp.getSudoku().setSudokuIfCorrect(HelpElements.testArrayCountUniqueSolvable);
@@ -166,6 +172,8 @@ public class SudokuControllerTest {
 		
 		assertEquals("8 in r11 wieder schwarz, statt rot", Color.BLACK, sController.mapText.get(1*9 + 1).getFill());
 	}
+	
+	
 	
 	@After
 	public void clean(){
