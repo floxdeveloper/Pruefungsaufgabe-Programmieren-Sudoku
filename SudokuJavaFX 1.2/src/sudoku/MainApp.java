@@ -146,7 +146,15 @@ public class MainApp extends Application implements MainAppInterface {
 			e.printStackTrace();
 		}
 	}
-
+	@Override
+	public void unlockScreen() {
+		try{
+			currentStage.close();
+		}
+		catch(NullPointerException e){
+			e.printStackTrace();
+		}
+	}
 	
 	
 	/**

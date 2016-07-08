@@ -32,6 +32,11 @@ public class FakeMainApp implements MainAppInterface {
 	}
 
 	@Override
+	public void unlockScreen() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
 	public void initSudokuLayout() {
 		// TODO Auto-generated method stub
 
@@ -84,5 +89,7 @@ public class FakeMainApp implements MainAppInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }
