@@ -132,10 +132,10 @@ public class MainApp extends Application implements MainAppInterface {
 
 			// set Stage boundaries to the lower right corner of the visible
 			// bounds of the main screen
-			dialogStage.setHeight(150);
-			dialogStage.setWidth(150);
-			dialogStage.setX(this.primaryStage.getX()+134);
-			dialogStage.setY(this.primaryStage.getY()+195);
+			dialogStage.setHeight(127);
+			dialogStage.setWidth(127);
+			dialogStage.setX(this.primaryStage.getX()+144);
+			dialogStage.setY(this.primaryStage.getY()+196);
 			this.currentStage = dialogStage;
 			// Show the dialog and wait until the user closes it
 			dialogStage.show();
