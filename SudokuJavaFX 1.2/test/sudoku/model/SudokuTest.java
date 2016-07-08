@@ -67,7 +67,6 @@ public class SudokuTest
 	@Test
 	public void sudokuResetShouldReturnArrayWithNulls()
 	{
-		//sudokuReset doesn't return anything
 		// First reset
 		 testSudokuFilledSU.sudokuReset();
 		//Then check array
