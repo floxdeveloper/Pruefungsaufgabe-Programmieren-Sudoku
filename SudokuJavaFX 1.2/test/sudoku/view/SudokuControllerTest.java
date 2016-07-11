@@ -92,10 +92,28 @@ public class SudokuControllerTest {
 		
 	}
 
+	@Test
 	public void testHandleReset(){
 		sController.auswahlX = 1;
 		sController.auswahlY = 1;
 		
+		sController.handleEingabe(9);
+		
+		robot.clickOn("#r01");
+		
+		robot.clickOn("#reset");
+		robot.clickOn("OK");
+		
+		assertEquals("In dem Feld 1,1 darf muss die 9 entfernt worden sein", " ", sController.getKoordinate(1, 1).getText());
+		
+		//Nach dem Reset sind auch die Felder wieder editierbar -> Test
+		
+		sController.auswahlX = 1;
+		sController.auswahlY = 1;
+		
+		sController.handleEingabe(9);
+		
+		assertEquals("In dem Feld konnte eine 9 eingegeben werden", "9", sController.getKoordinate(1, 1).getText());
 	}
 	
 	@Test
