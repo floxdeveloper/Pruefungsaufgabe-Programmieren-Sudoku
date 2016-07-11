@@ -465,7 +465,7 @@
           <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSolve" text="Solve" ><tooltip> <Tooltip text="Solves the Sudoku"  /> </tooltip> </Button>
                     <Button mnemonicParsing="false" onAction="#handleHint" text="Hint" ><tooltip> <Tooltip text="Fills in on element"  /> </tooltip> </Button>
           
-            <Button mnemonicParsing="false" onAction="#handleReset" text="Reset" ><tooltip> <Tooltip text="Resets the Sudoku (show empty Suodku)"  /> </tooltip> </Button>
+            <Button id="reset" mnemonicParsing="false" onAction="#handleReset" text="Reset" ><tooltip> <Tooltip text="Resets the Sudoku (show empty Suodku)"  /> </tooltip> </Button>
         </buttons>
       </ButtonBar>
       <Line endX="395.0" endY="14.0" startX="5.0" startY="14.0" strokeWidth="2.0" AnchorPane.bottomAnchor="434.5" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="12.5" />
