@@ -40,17 +40,6 @@ public class MainApp extends Application  {
 		return wcontroller;
 	}
 
-	private Stage currentStage;
-
-	public Stage getCurrentStage() {
-		return this.currentStage;
-	}
-
-	private Task<Void> currentTask;
-
-	public void setCurrentTask (Task<Void> t){
-		currentTask = t;
-	}
 
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -115,11 +104,12 @@ public class MainApp extends Application  {
 	}
 
 	
-	public void cancelCurrentTask(){	
-		if(currentTask!=null)
-			currentTask.cancel();
+
+	private Stage currentStage;
+
+	public Stage getCurrentStage() {
+		return this.currentStage;
 	}
-	
 
 	/**
 	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.

@@ -174,13 +174,12 @@ public class SudokuController {
 			}
 		}
 	}
-	
-	
+
 	/**
-	 *  Zeigt Congratulation Bildschirm an.
+	 * Zeigt Congratulation Bildschirm an.
 	 */
-	private void showCongratulation(){
-	
+	private void showCongratulation() {
+
 		try {
 			// Load the fxml file and create a new stage for the popup
 			// dialog.
@@ -209,10 +208,8 @@ public class SudokuController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	
 
 	/**
 	 * Bei Klick auf Reset. Sudoku wird auf leer zurückgesetzt.
@@ -268,7 +265,6 @@ public class SudokuController {
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
-
 			unselect();
 
 			// User Input blau einfärben
@@ -281,24 +277,16 @@ public class SudokuController {
 			// Bei unlösbaren Sudokus stoppt Backtracking ohne ein gefülltes
 			// Sudoku zurück zu lassen -> kann danach abgefragt werden obs
 			// geklappt hat
-
 			Task<Void> task = new Task<Void>() {
-
 				@Override
 				protected Void call() throws Exception {
 					mainApp.getSudoku().solve();
 					return null;
-
 				}
-
 			};
-
+			//
 			task.setOnRunning(e -> {
 				mainApp.lockScreen();
-			});
-
-			task.setOnCancelled(e -> {
-				mainApp.unlockScreen();
 			});
 
 			task.setOnSucceeded(e -> {
@@ -316,9 +304,11 @@ public class SudokuController {
 					else
 						mainApp.error("Unsolvable Sudoku", "The Sudoku you have entered is not solvable.");
 
-				} else
+				} else {
 					editable = false;
-
+				}
+				
+				//Lade Sudoku in GUI (entweder gelöst oder bei unlösbarem Sudoku wie davor)
 				sudokuAnzeigen();
 
 			});
@@ -329,16 +319,9 @@ public class SudokuController {
 				mainApp.error("Unexpected error while solving", "");
 
 			});
-
-			mainApp.setCurrentTask(task);
-
 			new Thread(task).start();
-
 		}
-
 	}
-
-
 
 	/**
 	 * Trägt bei lösbarem Sudoku einen zufälligen Hinweis ein. Bei unlösbarem
@@ -412,9 +395,7 @@ public class SudokuController {
 			mainApp.error("Unexpected error", "Could not give a hint");
 
 		});
-
 		new Thread(task).start();
-
 	}
 
 	/**
