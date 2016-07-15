@@ -29,16 +29,35 @@ public class MainApp extends Application  {
 	private BorderPane rootLayout;
 	private Sudoku sudoku;
 	private SudokuController scontroller;
+	
+	public SudokuController getSudokuController() {
+		return scontroller;
+	}
+
 	private WrapperController wcontroller;
 
-	
-	 
+	public WrapperController getWrapperController() {
+		return wcontroller;
+	}
+
+	private Stage currentStage;
+
+	public Stage getCurrentStage() {
+		return this.currentStage;
+	}
+
+	private Task<Void> currentTask;
+
+	public void setCurrentTask (Task<Void> t){
+		currentTask = t;
+	}
+
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("SudokuSolver");
 		primaryStage.setResizable(false);
 
-		// Set the application icon.
+		// Setzt das Icon für die Applikation.
 		this.primaryStage.getIcons().add(new Image("file:resources/images/sudoku.png"));
 
 		// Leeres Sudoku in MainApp laden
@@ -48,14 +67,14 @@ public class MainApp extends Application  {
 		initRootLayout();
 		initSudokuLayout();
 
-		// Verarbeitet Tastatureingaben -> um Zahlen eingeben zu können
+		// Verarbeitet Tastatureingaben, um Zahlen eingeben zu können.
 		primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 			public void handle(final KeyEvent keyEvent) {
 
 				try {
 					int eingabe = Integer.parseInt(keyEvent.getText());
 
-					// Mit 0 soll man nicht löschen können
+					// Mit 0 soll man nicht löschen können.
 					if (eingabe != 0)
 						scontroller.handleEingabe(eingabe);
 				}
@@ -70,8 +89,6 @@ public class MainApp extends Application  {
 
 		});
 	}
-
-	// Load RootLayout
 	
 	/**
 	 * Verbindet das Root Layout mit der Main Stage und dem WrapperController
@@ -79,16 +96,16 @@ public class MainApp extends Application  {
 	 */
 	public void initRootLayout() {
 		try {
-			// Load root layout from fxml file.
+			// Lädt das root-Layout von der fxml-Datei.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/Wrapper.fxml"));
 			rootLayout = (BorderPane) loader.load();
 
-			// Set controller to Main Stage
+			// Setzt controller als MainStage.
 			wcontroller = loader.getController();
 			wcontroller.setMainApp(this);
 
-			// Show the scene containing the root layout.
+			// Zeigt die scene, welche das root-Layout beinhaltet.
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -98,27 +115,11 @@ public class MainApp extends Application  {
 	}
 
 	
-	
-	
-	private Stage currentStage;
-	
-	public Stage getCurrentStage() {
-		return this.currentStage;
-	}
-
-	private Task currentTask;
-	
-	public void setCurrentTask (Task<Void> t){
-		currentTask = t;
-	}
-	
-	public void cancleCurrentTask(){	
+	public void cancelCurrentTask(){	
 		if(currentTask!=null)
 			currentTask.cancel();
 	}
 	
-	
-
 
 	/**
 	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
@@ -126,7 +127,7 @@ public class MainApp extends Application  {
 
 	public void lockScreen() {
 		try {
-			// Load the fxml file and create a new stage for the popup dialog.
+			//Lädt fxml-Datei und erzeugt eine neue stage für das Popup-gif.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainAppTest.class.getResource("view/WrapperLock.fxml"));
 			AnchorPane pane = (AnchorPane) loader.load();
@@ -141,14 +142,13 @@ public class MainApp extends Application  {
 			Scene scene = new Scene(pane);
 			dialogStage.setScene(scene);
 
-			// set Stage boundaries to the lower right corner of the visible
-			// bounds of the main screen
+			// Setze Größe und setze das gif in die Mitte vom Sudokufeld.
 			dialogStage.setHeight(127);
 			dialogStage.setWidth(127);
 			dialogStage.setX(this.primaryStage.getX()+144);
 			dialogStage.setY(this.primaryStage.getY()+196);
 			this.currentStage = dialogStage;
-			// Show the dialog and wait until the user closes it
+			// Zeigt das gif an, bis es extern geschlossen wird.
 			dialogStage.show();
 			
 		} catch (IOException e) {
@@ -167,25 +167,25 @@ public class MainApp extends Application  {
 	
 	
 	/**
-	 * Zeigt den Sudoku Solver im rootLayout und setzt den SudokuController in
+	 * Zeigt den Sudoku-Solver im rootLayout und setzt den SudokuController in
 	 * die Mainapp.
 	 */
 	 
 	public void initSudokuLayout() {
 		try {
-			// Load person overview.
+			// Lädt die Übersicht.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/Sudoku.fxml"));
 			AnchorPane sudoku = (AnchorPane) loader.load();
 
-			// Set sudoku solver into the center of root layout.
+			// Setzt den Sudoku-Solver in die Mitte vom root-Layout.
 			rootLayout.setCenter(sudoku);
 
-			// Set controller to Main Stage
+			// Setzt controller als Main Stage.
 			SudokuController controller = loader.getController();
 			controller.setMainApp(this);
 
-			// Verweis auf Controller um beim set Sudoku die GUI neu zu laden
+			// Verweis auf Controller um beim setSudoku die GUI neu zu laden
 			scontroller = controller;
 
 		} catch (IOException e) {
@@ -194,7 +194,7 @@ public class MainApp extends Application  {
 	}
 
 	/**
-	 * Gibt eine Warnung mit mainApp als owner aus
+	 * Gibt eine Warnung mit mainApp als owner aus.
 	 * 
 	 * @param header
 	 *            gibt den header der Warnung an
@@ -219,7 +219,7 @@ public class MainApp extends Application  {
 	}
 		
 	/**
-	 * Gibt eine Informationsmeldung mit mainApp als owner aus
+	 * Gibt eine Informationsmeldung mit mainApp als owner aus.
 	 * 
 	 * @param header
 	 *            gibt den header der Information an
@@ -242,7 +242,7 @@ public class MainApp extends Application  {
 	}
 
 	/**
-	 * Gibt einen Fehler mit mainApp als owner aus
+	 * Gibt einen Fehler mit mainApp als owner aus.
 	 * 
 	 * @param header
 	 *            gibt den header der Fehlermeldung an
@@ -257,7 +257,7 @@ public class MainApp extends Application  {
 		alert.setTitle("Error");
 
 		if (header.equals(""))
-			header = "An unexpected error has occured.";
+			header = "Ein unerwarteter Fehler ist aufgetreten.";
 
 		alert.setHeaderText(header);
 		alert.setContentText(content);
@@ -265,20 +265,14 @@ public class MainApp extends Application  {
 		alert.showAndWait();
 
 	}
-
-	
 	 
-	public SudokuController getSudokuController() {
-		return scontroller;
-	}
-	
-	public WrapperController getWrapperController() {
-		return wcontroller;
+	public Sudoku getSudoku() {
+		return sudoku;
 	}
 
 	/**
 	 * 
-	 * Sudoku wird gesetzt wenn es den Regeln entspricht. Updated GUI.
+	 * Sudoku wird gesetzt, falls es den Regeln entspricht. Updatet GUI.
 	 * 
 	 * @param array
 	 * @return true wenn gesetzt; false sonst
@@ -287,8 +281,8 @@ public class MainApp extends Application  {
 	public boolean setSudoku(int[][] array) {
 
 	
-		// Setzt Sudoku Array und überprüft ob es den Regeln entspricht -> wenn
-		// nicht bleibt alter Stand bestehen
+		// Setzt Sudoku-Array und überprüft, ob es den Regeln entspricht -> wenn
+		// nicht, bleibt alter Stand bestehen
 		if (!sudoku.setSudokuIfCorrect(array))
 			return false;
 		
@@ -310,17 +304,6 @@ public class MainApp extends Application  {
 		return true;
 
 	}
-
-
-	 
-	public Sudoku getSudoku() {
-		return sudoku;
-	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 	 
 	public Window getPrimaryStage() {
 		return primaryStage;
@@ -328,5 +311,9 @@ public class MainApp extends Application  {
 	
 	public Parent getRoot(){
 		return rootLayout;
+	}
+
+	public static void main(String[] args) {
+		launch(args);
 	}
 }
