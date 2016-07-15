@@ -360,19 +360,15 @@ public class SudokuController {
 				boolean hintGiven = false;
 
 				while (!hintGiven) {
-
 					int xKoord = (int) (Math.random() * 9);
 					int yKoord = (int) (Math.random() * 9);
 
 					if (sudokuArray[xKoord][yKoord] == 0) {
-
 						sudokuArray[xKoord][yKoord] = sudokuArraySolve[xKoord][yKoord];
 						mainApp.setSudoku(sudokuArray);
 						hintGiven = true;
-
 						if (mainApp.getSudoku().filled()) {
 							setEditable(false);
-
 							unselect();
 						}
 					}
