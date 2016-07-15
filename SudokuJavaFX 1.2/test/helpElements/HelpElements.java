@@ -67,13 +67,27 @@ public class HelpElements {
 		  {0,6,0,0,0,0,2,8,0},
 		  {0,0,0,4,1,9,0,0,5},
 		  {0,0,0,0,0,0,0,7,0}};
-		  
-	public static Sudoku testSudokuEmpty;
-	public static Sudoku testSudokuFilled;
-	public static Sudoku testSudokuWithNull;
-	public static Sudoku testSudokuCountUniqueSolvable;
-	public static Sudoku testSudokuCountUnSolvable;
-	public static Sudoku testSudokuFalse;
-	public static Sudoku testSudokuHalfFilled;
-		  
+	public static int[][] testArrayUnSolvable = new int[][]
+	     {{1,2,3,4,5,6,0,0,0},
+		  {0,0,0,0,0,0,0,9,0}, 
+		  {0,0,0,0,0,0,0,0,0},
+		  {0,0,0,0,0,0,0,0,0},
+		  {0,0,0,0,0,0,0,0,0},
+		  {0,0,0,0,0,0,0,0,0},
+		  {0,0,0,0,0,0,0,0,0},
+		  {0,0,0,0,0,0,0,0,0},
+		  {0,0,0,0,0,0,0,0,0}};
+	public static int[][] testArray10x10 = new int[10][10];
+	public static int[][] testArray9x7 = new int[9][7];
+	public static int[][] testArrayWithANumber10 = new int[][]
+		 {{5,3,4,6,7,8,9,1,10}, // 2
+		  {6,7,2,1,9,5,3,4,8},
+		  {1,9,8,3,4,2,5,6,7},
+		  {8,5,9,7,6,1,4,2,3},
+		  {4,2,6,8,5,3,7,9,1},
+		  {7,1,3,9,2,4,8,5,6},
+		  {9,6,1,5,3,7,2,8,4},
+		  {2,8,7,4,1,9,6,3,5},
+		  {3,4,5,2,8,6,1,7,9}};
+	 
 }
