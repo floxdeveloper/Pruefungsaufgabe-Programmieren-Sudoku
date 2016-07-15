@@ -17,10 +17,10 @@ import sudoku.view.WrapperControllerTest;
 	CompleteSudokuGuiTest.class,
 	SudokuGeneratorTest.class,
 	SudokuTest.class,
-	InputNumberPopupControllerTest.class,
+	//InputNumberPopupControllerTest.class,
 	RectPosTest.class,
 	SudokuControllerTest.class,
-	WrapperControllerTest.class
+	//WrapperControllerTest.class
 })
 public class AllTests {
 

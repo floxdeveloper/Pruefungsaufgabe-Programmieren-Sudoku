@@ -212,7 +212,7 @@ public class WrapperController implements PropertyChangeListener {
 		Solvability ergebnis = mainApp.getSudoku().checkUniqueSolvable();
 		
 		if (ergebnis == Solvability.notSolvable)
-			mainApp.information("Not uniquely solvable", "The entered Sudoku is not solvable. We have stopped trying.");
+			mainApp.information("Not uniquely solvable", "The entered Sudoku is definitely not solvable.");
 		else if (ergebnis == Solvability.probablyNotSolvable)
 			mainApp.information("Not uniquely solvable", "The entered Sudoku is very unlikely solvable. We have stopped trying.");
 		else if (ergebnis == Solvability.uniquelySolvable)			
