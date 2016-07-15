@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="211.0" fitWidth="453.0">
          <image>
-            <Image url="@../../../resources/images/Congtratiolation.png" />
+            <Image url="@../../../resources/images/Congratulations.png" />
          </image>
       </ImageView>
       <Button fx:id="ok" layoutX="204.0" layoutY="172.0" mnemonicParsing="false" onAction="#handleOk" text="YEAH" AnchorPane.topAnchor="172.0" />
