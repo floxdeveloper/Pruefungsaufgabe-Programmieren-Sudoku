@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sudoku.MainApp;
 import sudoku.MainAppTest;
+import sudoku.model.RectPos;
 import sudoku.model.Solvability;
 import sudoku.model.Sudoku;
 

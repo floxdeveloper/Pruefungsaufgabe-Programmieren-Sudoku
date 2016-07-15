@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import sudoku.view.RectPos?>
+<?import sudoku.model.RectPos?>
 
 <AnchorPane maxHeight="450.0" maxWidth="400.0" minHeight="450.0" minWidth="400.0" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sudoku.view.SudokuController">
    <children>

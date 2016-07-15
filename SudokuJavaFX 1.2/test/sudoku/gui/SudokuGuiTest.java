@@ -6,7 +6,7 @@ import org.testfx.api.FxToolkit;
 
 import javafx.scene.layout.AnchorPane;
 import sudoku.MainApp;
-import sudoku.view.RectPos;
+import sudoku.model.RectPos;
 
 public class SudokuGuiTest{
 	AnchorPane rootLayout;
