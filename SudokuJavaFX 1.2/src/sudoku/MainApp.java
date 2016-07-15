@@ -303,6 +303,11 @@ public class MainApp extends Application  {
 		return rootLayout;
 	}
 
+	/**
+	 * Ruft die JavaFX Methode launch auf, die die graphische Applikation vorbereitet.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

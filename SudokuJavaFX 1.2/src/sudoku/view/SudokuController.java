@@ -721,6 +721,11 @@ public class SudokuController {
 
 	}
 
+	/**
+	 * Setzt generelle Editierbarkeit.
+	 * 
+	 * @param wert
+	 */
 	public void setEditable(boolean wert) {
 		editable = wert;
 
