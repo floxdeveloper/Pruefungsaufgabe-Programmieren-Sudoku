@@ -292,7 +292,7 @@ public class MainApp extends Application  {
 		if (!sudoku.setSudokuIfCorrect(array))
 			return false;
 		
-		scontroller.sudokuChanged();
+		scontroller.sudokuAnzeigen();
 		return true;
 
 	}
@@ -306,7 +306,7 @@ public class MainApp extends Application  {
 	 
 	public boolean setSudoku(Sudoku s) {
 		sudoku = s;
-		scontroller.sudokuChanged();
+		scontroller.sudokuAnzeigen();
 		return true;
 
 	}

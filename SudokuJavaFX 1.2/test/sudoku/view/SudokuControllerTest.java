@@ -149,7 +149,7 @@ public class SudokuControllerTest {
 		
 		assertEquals("Testfeld und alle anderen Felder sind leer", " ", sController.mapText.get(0).getText());
 		
-		sController.sudokuChanged();
+		sController.sudokuAnzeigen();
 		
 		assertEquals("Testfeld ist 5 und alle anderen Felder sind gefüllt", "5", sController.mapText.get(0).getText());
 	}

@@ -16,6 +16,9 @@ public class CongratulationController {
 	}
 	
 	
+	/**
+	 *  Schlieﬂt den Congratulations Bildschirm
+	 */
 	@FXML
 	private void handleOk(){
 		stage.close();
