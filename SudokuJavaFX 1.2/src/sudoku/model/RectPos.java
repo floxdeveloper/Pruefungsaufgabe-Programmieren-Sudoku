@@ -1,4 +1,4 @@
-package sudoku.view;
+package sudoku.model;
 
 import javafx.scene.shape.Rectangle;
 

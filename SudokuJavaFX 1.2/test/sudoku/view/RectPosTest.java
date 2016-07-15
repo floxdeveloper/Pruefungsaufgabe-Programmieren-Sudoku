@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import sudoku.model.RectPos;
+
 public class RectPosTest {
 	RectPos rectPos;
 	int intX, intY;
