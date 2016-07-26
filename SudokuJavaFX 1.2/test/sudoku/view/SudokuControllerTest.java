@@ -18,6 +18,7 @@ import helpElements.HelpElements;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import sudoku.MainApp;
+import sudoku.model.Sudoku;
 
 @RunWith(JUnit4.class)
 public class SudokuControllerTest {
@@ -116,17 +117,26 @@ public class SudokuControllerTest {
 		assertEquals("In dem Feld konnte eine 9 eingegeben werden", "9", sController.getKoordinate(1, 1).getText());
 	}
 	
-//	@Test
-//	public void testCongratulationDialogAfterLastSuccessfulEingabe(){
-//		mainApp.getSudoku().setSudokuIfCorrect(HelpElements.testArrayCountUniqueSolvable);
-//		sController.sudokuChanged();
-//		
-//		robot.clickOn("#r08");
-//		robot.type(KeyCode.DIGIT2);
-//		
-//		assertEquals("Nach selbstst. Lösen öffnet sich Congratulation Dialog", "CongratulationPage", new WindowFinderImpl().listWindows().get(1).getScene().getRoot().getId());
-//		
-//	}
+	@Test 
+	public void testhandleSolveWithFilledSudoku(){
+	}
+	
+	@Test
+	public void testHandleSolveWithEmptySuduko(){
+		Sudoku empty = (Sudoku) (HelpElements.testSudokuEmpty);
+	}
+	
+	@Test
+	public void testCongratulationDialogAfterLastSuccessfulEingabe(){
+		mainApp.getSudoku().setSudokuIfCorrect(HelpElements.testArrayCountUniqueSolvable);
+		sController.sudokuAnzeigen();
+		
+		robot.clickOn("#r08");
+		robot.type(KeyCode.DIGIT2);
+		
+		assertEquals("Nach selbstst. Lösen öffnet sich Congratulation Dialog", "CongratulationPage", new WindowFinderImpl().listWindows().get(1).getScene().getRoot().getId());
+		
+	}
 	
 	@Test
 	public void testLockEnteredFields(){
