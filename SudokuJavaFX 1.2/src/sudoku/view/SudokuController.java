@@ -95,7 +95,7 @@ public class SudokuController {
 	}
 
 	/**
-	 * Setzt jedes Feld der Editierbarkeitsmatrix auf editierbar.
+	 * Setzt jedes Feld der Editierbarkeitsmatrix auf 'editierbar'.
 	 */
 	private void allEditable() {
 
@@ -107,8 +107,8 @@ public class SudokuController {
 	}
 
 	/**
-	 * Alle aktuell Eingetragenen Felder werden in der Editierbarkeitsmatrix auf
-	 * nicht editierbar gesetzt. Diese Zahlen werden blau zur Visualisierung der
+	 * Alle aktuell eingetragenen Felder werden in der Editierbarkeitsmatrix auf
+	 * 'nicht editierbar' gesetzt. Diese Zahlen werden blau zur Visualisierung der
 	 * Editierbarkeit.
 	 */
 	public void lockEnteredFields() {
@@ -145,8 +145,8 @@ public class SudokuController {
 	}
 
 	/**
-	 * Wenn ein Feld angewählt ist wird eingabe an diese Position eingetragen.
-	 * Ist es die letzte Notwendige Eingabe ist Sudoku gelöst und wird
+	 * Wenn ein Feld angewählt ist, wird eingabe an diese Position eingetragen.
+	 * Ist es die letzte notwendige Eingabe, ist Sudoku gelöst und wird
 	 * uneditierbar.
 	 * 
 	 * @param eingabe
@@ -162,34 +162,32 @@ public class SudokuController {
 				getKoordinate(auswahlX, auswahlY).setText(Integer.toString(eingabe));
 			}
 
-			// Liesst GUI aus und schreibt in Sudoku (bei falscher Eingabe wird
+			// Liest GUI aus und schreibt in Sudoku (bei falscher Eingabe wird
 			// alter Stand geladen)
 			sudokuAuslesen();
 
 			unselect();
 
-			// Wenn Sudoku gelöst ist -> Congrationlations ausgeben
+			// Wenn Sudoku gelöst ist, Congratulations ausgeben.
 			if (mainApp.getSudoku().filled() && !alreadyFilled) {
 				showCongratulation();
 			}
 		}
 	}
-	
-	
+
 	/**
-	 *  Zeigt Congratulation Bildschirm an.
+	 * Zeigt Congratulation-Bildschirm an.
 	 */
-	private void showCongratulation(){
-	
+	private void showCongratulation() {
+
 		try {
-			// Load the fxml file and create a new stage for the popup
-			// dialog.
+			// Lädt fxml-Datei und erzeugt eine neue stage für das Popup.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainAppTest.class.getResource("view/Congratulation.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			page.setId("CongratulationPage");
-			// Create the dialog Stage.
+			// Erzeugt die dialogStage.
 			Stage dialogStage = new Stage();
 			dialogStage.initStyle(StageStyle.UTILITY);
 			dialogStage.initOwner(mainApp.getPrimaryStage());
@@ -197,11 +195,11 @@ public class SudokuController {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
-			// Set controller to Main Stage
+			// Setzt controller auf die dialogStage.
 			CongratulationController controller = loader.getController();
 			controller.setStage(dialogStage);
 
-			// Show the dialog and wait until the user closes it
+			// Zeigt die dialogStage an, bis der Benutzer sie schließt.
 			dialogStage.showAndWait();
 
 			mainApp.getSudokuController().setEditable(false);
@@ -209,18 +207,16 @@ public class SudokuController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	
 
 	/**
-	 * Bei Klick auf Reset. Sudoku wird auf leer zurückgesetzt.
+	 * Bei Klick auf Reset: Sudoku wird auf leer zurückgesetzt.
 	 */
 	@FXML
 	private void handleReset() {
 
-		// Bei leerem Sudoku ist alert überflüssig
+		// Bei leerem Sudoku ist alert überflüssig.
 		if (mainApp.getSudoku().empty())
 			return;
 
@@ -228,10 +224,10 @@ public class SudokuController {
 		alert.setTitle("Reset Confirmation");
 		alert.setHeaderText("Reset Sudoku?");
 
-		// Get the Stage.
+		// Holt sich die Stage.
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 
-		// Add a custom icon.
+		// Fügt das Logo hinzu.
 		stage.getIcons().add(new Image("file:resources/images/sudoku.png"));
 
 		Optional<ButtonType> result = alert.showAndWait();
@@ -241,13 +237,13 @@ public class SudokuController {
 			sudokuAnzeigen();
 			editable = true;
 
-			// Alle Textfelder wieder einschwärzen und editierbar machen
+			// Schwärzt alle Textfelder wieder ein und macht sie editierbar.
 			resetEditability();
 		}
 	}
 
 	/**
-	 * Bei Klick auf Solve. Alle aktuell eingefüllten Felder werden gesperrt und
+	 * Bei Klick auf Solve: Alle aktuell eingefüllten Felder werden gesperrt und
 	 * uneditierbar gemacht. Sudoku wird gelöst und angezeigt.
 	 */
 	@FXML
@@ -260,47 +256,38 @@ public class SudokuController {
 		alert.setTitle("Solve Confirmation");
 		alert.setHeaderText("Solve Sudoku?");
 
-		// Get the Stage.
+		// Holt sich die Stage.
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 
-		// Add a custom icon.
+		// Fügt das Logo hinzu.
 		stage.getIcons().add(new Image("file:resources/images/sudoku.png"));
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
-
 			unselect();
 
-			// User Input blau einfärben
+			// Färbt User Input blau ein.
 			lockEnteredFields();
 
-			// Wenn nicht nach Sudoku Regeln -> würde hier altes anzeigen (kommt
+			// Wenn nicht nach Sudoku Regeln: zeigt hier altes Sudoku an (kommt
 			// nie vor da nach jeder Eingabe gecheckt wird)
 			sudokuAuslesen();
 
-			// Bei unlösbaren Sudokus stoppt Backtracking ohne ein gefülltes
-			// Sudoku zurück zu lassen -> kann danach abgefragt werden obs
+			// Bei unlösbaren Sudokus stoppt Backtracking, ohne ein gefülltes
+			// Sudoku zurück zu lassen. Danach kann abgefragt werden, ob es
 			// geklappt hat
-
 			Task<Void> task = new Task<Void>() {
-
 				@Override
 				protected Void call() throws Exception {
 					mainApp.getSudoku().solve();
 					return null;
-
 				}
-
 			};
-
+			// Lockt den Screen, wenn der Thread läuft.
 			task.setOnRunning(e -> {
 				mainApp.lockScreen();
 			});
-
-			task.setOnCancelled(e -> {
-				mainApp.unlockScreen();
-			});
-
+			// Unlockt den Screen, wenn der Thread abgelaufen ist.
 			task.setOnSucceeded(e -> {
 				mainApp.unlockScreen();
 				if (!mainApp.getSudoku().filled()) {
@@ -316,9 +303,11 @@ public class SudokuController {
 					else
 						mainApp.error("Unsolvable Sudoku", "The Sudoku you have entered is not solvable.");
 
-				} else
+				} else {
 					editable = false;
-
+				}
+				
+				//Lädt Sudoku in GUI (entweder gelöst oder bei unlösbarem Sudoku wie davor).
 				sudokuAnzeigen();
 
 			});
@@ -326,19 +315,12 @@ public class SudokuController {
 			task.setOnFailed(e -> {
 				mainApp.unlockScreen();
 				sudokuAnzeigen();
-				mainApp.error("Unexpected error while solving", "");
+				mainApp.error("Unexpected error while solving.", "");
 
 			});
-
-			mainApp.setCurrentTask(task);
-
 			new Thread(task).start();
-
 		}
-
 	}
-
-
 
 	/**
 	 * Trägt bei lösbarem Sudoku einen zufälligen Hinweis ein. Bei unlösbarem
@@ -347,7 +329,7 @@ public class SudokuController {
 	@FXML
 	private void handleHint() {
 
-		// Wenn vollständig ausgefüllt -> nichts machen
+		// Wenn vollständig ausgefüllt, nichts machen.
 		if (mainApp.getSudoku().filled())
 			return;
 
@@ -377,19 +359,15 @@ public class SudokuController {
 				boolean hintGiven = false;
 
 				while (!hintGiven) {
-
 					int xKoord = (int) (Math.random() * 9);
 					int yKoord = (int) (Math.random() * 9);
 
 					if (sudokuArray[xKoord][yKoord] == 0) {
-
 						sudokuArray[xKoord][yKoord] = sudokuArraySolve[xKoord][yKoord];
 						mainApp.setSudoku(sudokuArray);
 						hintGiven = true;
-
 						if (mainApp.getSudoku().filled()) {
 							setEditable(false);
-
 							unselect();
 						}
 					}
@@ -412,9 +390,7 @@ public class SudokuController {
 			mainApp.error("Unexpected error", "Could not give a hint");
 
 		});
-
 		new Thread(task).start();
-
 	}
 
 	/**
@@ -436,10 +412,10 @@ public class SudokuController {
 	}
 
 	/**
-	 * Setzt wenn GUI Soduku den Regeln entspricht das Sudoku. Sonst wird GUI
+	 * Setzt, wenn GUI Sudoku den Regeln entspricht. Sonst wird GUI
 	 * auf Sudoku zurücksgesetzt.
 	 * 
-	 * @return false wenn ausgelesenes Sudoku nicht den Regeln etspricht. True
+	 * @return false: wenn ausgelesenes Sudoku nicht den Regeln entspricht, true:
 	 *         sonst
 	 */
 	private boolean sudokuAuslesen() {
@@ -462,7 +438,7 @@ public class SudokuController {
 			// Alten Stand anzeigen
 			sudokuAnzeigen();
 
-			mainApp.warning("False input", "You entered a number that can´t be placed at this location");
+			mainApp.warning("False input.", "You entered a number that can´t be placed at this location.");
 			return false;
 		}
 
@@ -493,7 +469,7 @@ public class SudokuController {
 
 	/**
 	 * Selektiert das Feld an Position (sourceX,sourceY). Wenn es bereits
-	 * selektiert ist, wird es aabgewählt.
+	 * selektiert ist, wird es abgewählt.
 	 * 
 	 * @param sourceX
 	 * @param sourceY
@@ -523,7 +499,7 @@ public class SudokuController {
 	}
 
 	/**
-	 * Initialisert die Text- und Rechteckmap.
+	 * Initialisiert die Text- und Rechteckmap.
 	 */
 	private void initMaps() {
 
@@ -704,11 +680,11 @@ public class SudokuController {
 		for (int i = 0; i < 81; i++) {
 			RectPos aktRect = mapRect.get(i);
 
-			// Setzt bei jedem Rechteck X und Y Koordinate im Gridpane
+			// Setzt bei jedem Rechteck X und Y Koordinate im Gridpane.
 			aktRect.setPosX(i / 9);
 			aktRect.setPosY(i % 9);
 
-			// Initialisierung des Klich Event Handlers auf Rechtecke
+			// Initialisierung des Klick-EventHandlers auf Rechtecke.
 			aktRect.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 				int sourceX, sourceY = -1;
@@ -744,6 +720,11 @@ public class SudokuController {
 
 	}
 
+	/**
+	 * Setzt generelle Editierbarkeit.
+	 * 
+	 * @param wert
+	 */
 	public void setEditable(boolean wert) {
 		editable = wert;
 

@@ -18,8 +18,10 @@ public class SudokuTest
 	Sudoku testSudokuFalseSU;
 	Sudoku testSudokuHalfFilledSU;
 	Sudoku testSudokuFilledNumberTwo;
-	
-	
+	Sudoku testSudokuUnSolvableSU;
+	Sudoku testSudoku10x10SU;
+	Sudoku testSudoku9x7SU;
+	Sudoku testSudokuWithA10SU;
 	
 	@Before
 	public void setUp()
@@ -46,6 +48,10 @@ public class SudokuTest
 		testSudokuFalseSU = new Sudoku (testArrayFalse);
 		testSudokuHalfFilledSU = new Sudoku(testArrayHalfFilled);
 		testSudokuFilledNumberTwo = new Sudoku(testArrayFilled);
+		testSudokuUnSolvableSU = new Sudoku(testArrayUnSolvable);
+		testSudoku10x10SU = new Sudoku(testArray10x10);
+		testSudoku9x7SU = new Sudoku(testArray9x7);
+		testSudokuWithA10SU = new Sudoku(testArrayWithANumber10);
 	}
 	
 	@Test
@@ -159,11 +165,21 @@ public class SudokuTest
 		testSudokuCountUnSolvableSU.solve();
 		assertEquals("Should be 'probably not solvable'", Solvability.probablyNotSolvable, testSudokuCountUnSolvableSU.getSolvability());
 		
-		//testSudokuCountUniqueSolvableSU.solve();
-		//assertEquals("Should be 'uniquely solvable'", Solvability.uniquelySolvable, testSudokuCountUniqueSolvableSU.getSolvability());
+		testSudokuFilledSU.solve();
+		assertEquals("Should be 'solvable'", Solvability.Solvable, testSudokuFilledSU.getSolvability());
 		
-		//assertEquals(Solvability.notUniquleySolvable, .getSolvability());
-		//assertEquals(Solvability.notSolvable, .getSolvability());
+		testSudokuUnSolvableSU.solve();
+		assertEquals("Should be 'not solvable'", Solvability.notSolvable, testSudokuUnSolvableSU.getSolvability());
+		
+	}
+	
+	@Test
+	public void solveCountShouldReturnCorrectSolvability()
+	{
+		assertEquals("Should return 'not evaluated'", Solvability.notEvaluated, testSudokuUnSolvableSU.getSolvability());
+		testSudokuUnSolvableSU.solveCount();
+		assertEquals("Should return 'not solvable'", Solvability.notSolvable, testSudokuUnSolvableSU.getSolvability());
+		
 		
 	}
 	
@@ -171,11 +187,25 @@ public class SudokuTest
 	public void checkUniqueSolvableShouldReturnSolvability()
 	{
 		assertEquals("Should be ' uniquely solvable'", Solvability.uniquelySolvable, testSudokuFilledSU.checkUniqueSolvable());
-		
 		assertEquals("Should be 'probably not solvable'", Solvability.probablyNotSolvable, testSudokuCountUnSolvableSU.checkUniqueSolvable());
-		
 		assertTrue("Should be 'uniquely solvable'", Solvability.uniquelySolvable == testSudokuCountUniqueSolvableSU.checkUniqueSolvable());
 	}
 	
+	@Test
+	public void checkIfCorrectSudokuShouldReturnCorrectBool()
+	{
+		assertEquals("Should return false because 10x10", false, testSudoku10x10SU.checkIfCorrectSudoku(testArray10x10));
+		assertEquals("Should return false because 8x7", false, testSudoku9x7SU.checkIfCorrectSudoku(testArray9x7));
+		assertEquals("Should return true because 9x9", true, testSudokuEmptySU.checkIfCorrectSudoku(testArrayEmpty));
+		assertEquals("Should return false because there is a 10", false, testSudokuWithA10SU.checkIfCorrectSudoku(testArrayWithANumber10));
+	}
+	
+	@Test
+	public void solveIfUnderOneSecondShouldSolveSudoku()
+	{
+		// Checks if Sudoku is solvable under one second
+		testSudokuCountUniqueSolvableSU.solveIfUnderOneSec();
+		assertEquals("Should return 'not evaluated'", Solvability.notEvaluated, testSudokuCountUnSolvableSU.getSolvability());
+	}
 }
 	
