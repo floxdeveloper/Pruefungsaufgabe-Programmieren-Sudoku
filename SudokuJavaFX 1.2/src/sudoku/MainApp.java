@@ -62,7 +62,7 @@ public class MainApp extends Application  {
 	
 	
 	/**
-	 *Setzt Sudoku-Array und überprüft, ob es den Regeln entspricht -> wenn
+	 * Setzt Sudoku-Array und überprüft, ob es den Regeln entspricht - wenn
 	 * nicht, bleibt alter Stand bestehen
 	 * @param array - neues Sudoku vom Typ zweidimensionales Array
 	 * @return true - Suduku konnte gesetzt werden, false - nicht gesetzt, da nicht korrekt
@@ -158,7 +158,7 @@ public class MainApp extends Application  {
 
 	/**
 	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
-	 * Fensterelemente sind nicht mehr klickbar -> Keine Bearbeitung, bis Verarbeitung abgeschlossen
+	 * Fensterelemente sind nicht mehr klickbar - Keine Bearbeitung, bis Verarbeitung abgeschlossen
 	 */
 
 	public void lockScreen() {
@@ -195,7 +195,7 @@ public class MainApp extends Application  {
 	
 	
 	/**
-	 * Entsperrt die Anwendung -> Bearbeitung möglich, Elemente klickbar
+	 * Entsperrt die Anwendung - Bearbeitung möglich, Elemente klickbar
 	 */
 	public void unlockScreen() {
 		try{

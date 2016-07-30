@@ -67,7 +67,7 @@ public class SudokuController {
 
 	/**
 	 * Wird von MainApp aufgerufen und setzt den Verweis auf diese.
-	 * Zusätzlich wird das Sudoku geladen -> angezeigt
+	 * Zusätzlich wird das Sudoku geladen und dann angezeigt
 	 * @param mainApp
 	 */
 	public void setMainApp(MainApp mainApp) {
