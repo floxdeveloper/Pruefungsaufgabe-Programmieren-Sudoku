@@ -54,9 +54,42 @@ public class SudokuController {
 	@FXML
 	private GridPane gridpane;
 
+	/**
+	 * Gibt angefordertes Textfield zurück.
+	 * 
+	 * @param hor - Horizontaler Wert des Arrays
+	 * @param vert - Vertikaler Wert des Arrays
+	 * @return Textfield an Position (hor/vert)
+	 */
+	protected Text getKoordinate(int hor, int vert) {
+		return mapText.get(hor * 9 + vert);	
+	}
+
+	/**
+	 * Wird von MainApp aufgerufen und setzt den Verweis auf diese.
+	 * Zusätzlich wird das Sudoku geladen -> angezeigt
+	 * @param mainApp
+	 */
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+		sudokuAnzeigen();
+	
+	}
+
+	/**
+	 * Setzt generelle Editierbarkeit.
+	 * 
+	 * @param wert - true oder false
+	 */
+	public void setEditable(boolean wert) {
+		editable = wert;
+	}
+
+	/**
+	 * Zusammengefasste Initialisierungsmethode für Maps, EventHandler und die Editierbarkeit
+	 */
 	@FXML
 	protected void initialize() {
-
 		initMaps();
 		initEventHandler();
 		allEditable();
@@ -109,7 +142,7 @@ public class SudokuController {
 	/**
 	 * Alle aktuell eingetragenen Felder werden in der Editierbarkeitsmatrix auf
 	 * 'nicht editierbar' gesetzt. Diese Zahlen werden blau zur Visualisierung der
-	 * Editierbarkeit.
+	 * Nicht-Editierbarkeit.
 	 */
 	public void lockEnteredFields() {
 		unselect();
@@ -132,24 +165,12 @@ public class SudokuController {
 	}
 
 	/**
-	 * Gibt angefordertes Textfield zurück.
-	 * 
-	 * @param vert
-	 * @param hor
-	 * @return Textfield an Position (hor/vert)
-	 */
-	protected Text getKoordinate(int hor, int vert) {
-
-		return mapText.get(hor * 9 + vert);
-
-	}
-
-	/**
 	 * Wenn ein Feld angewählt ist, wird eingabe an diese Position eingetragen.
 	 * Ist es die letzte notwendige Eingabe, ist Sudoku gelöst und wird
+	 * Zusätlich Überprüfung, ob Eingabe einer Sudokuzahl entspricht 0-9
 	 * uneditierbar.
 	 * 
-	 * @param eingabe
+	 * @param eingabe - Vom Benutzer ins Feld eingegebene Zahl
 	 */
 	public void handleEingabe(int eingabe) {
 
@@ -324,7 +345,7 @@ public class SudokuController {
 
 	/**
 	 * Trägt bei lösbarem Sudoku einen zufälligen Hinweis ein. Bei unlösbarem
-	 * Sudoku bleibt Sudoku unverändert.
+	 * oder vollem Sudoku bleibt Sudoku unverändert.
 	 */
 	@FXML
 	private void handleHint() {
@@ -413,10 +434,10 @@ public class SudokuController {
 
 	/**
 	 * Setzt, wenn GUI Sudoku den Regeln entspricht. Sonst wird GUI
-	 * auf Sudoku zurücksgesetzt.
+	 * auf Sudoku zurückgesetzt.
 	 * 
-	 * @return false: wenn ausgelesenes Sudoku nicht den Regeln entspricht, true:
-	 *         sonst
+	 * @return true - ausgelesenes Sudoku entspricht den Regeln
+	 * false - sonst
 	 */
 	private boolean sudokuAuslesen() {
 
@@ -446,7 +467,7 @@ public class SudokuController {
 	}
 
 	/**
-	 * Wählt aktuelles selektiertes Feld ab.
+	 * Wählt aktuell selektiertes Feld ab.
 	 */
 	public void unselect() {
 		if (auswahlX != -1 && auswahlY != -1)
@@ -471,8 +492,8 @@ public class SudokuController {
 	 * Selektiert das Feld an Position (sourceX,sourceY). Wenn es bereits
 	 * selektiert ist, wird es abgewählt.
 	 * 
-	 * @param sourceX
-	 * @param sourceY
+	 * @param sourceX - horizontale Position des Felds
+	 * @param sourceY - vertikale Position des Felds
 	 */
 	public void select(int sourceX, int sourceY) {
 
@@ -707,27 +728,6 @@ public class SudokuController {
 				}
 			});
 		}
-	}
-
-	/**
-	 * Wird von MainApp aufgerufen und setzt den Verweis auf diese.
-	 * 
-	 * @param mainApp
-	 */
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-		sudokuAnzeigen();
-
-	}
-
-	/**
-	 * Setzt generelle Editierbarkeit.
-	 * 
-	 * @param wert
-	 */
-	public void setEditable(boolean wert) {
-		editable = wert;
-
 	}
 
 }

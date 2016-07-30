@@ -34,22 +34,27 @@ public class WrapperController implements PropertyChangeListener {
 
 	private MainApp mainApp;
 
-	@FXML
-	private void initialize() {
-
+	/**
+	 * Wird von der Main-Applikation gerufen. 
+	 * @param mainApp
+	 */
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+	
 	}
 	
 	/**
-	 * 
+	 * Setzt die nicht gesperrten Felder zurück
 	 */
 	@FXML
 	private void handleResetNotLocked() {
-		
 		mainApp.getSudokuController().resetNotLocked();
 		
 	}
 
-	// Beim Klick auf Sudoku -> Generate solvable Sudoku
+	/**
+	 * Öffnet das InputNumberPopup, damit die Einstellungen für das  zu generierende Sudoku getätigt werden können
+	 */
 	@FXML
 	private void handleGenerate() {
 
@@ -87,21 +92,25 @@ public class WrapperController implements PropertyChangeListener {
 
 	}
 	
+	/**
+	 * Löst das Zurücksetzen der Editierbarkeit über die MainApp aus
+	 */	
 	@FXML
 	private void handleResetEditability(){
-		
 		mainApp.getSudokuController().resetEditability();
-		
 	}
 	
+	/**
+	 * Löst die Sperrung der bereits eingegebenen Zahlen über die MainApp aus
+	 */
 	@FXML
 	private void handleLockEntered(){
-		
 		mainApp.getSudokuController().lockEnteredFields();
-		
 	}
 
-	// Beim Klick auf Sudoku -> Save
+	/**
+	 * Öffnet den Dateimanager des Betriebssystems, um das Sudoku als binäres Objekt zu speichern
+	 */
 	@FXML
 	private void handleSave() {
 		
@@ -135,7 +144,9 @@ public class WrapperController implements PropertyChangeListener {
 
 	}
 
-	// Beim Klick auf Sudoku -> Load
+	/**
+	 * Öffnet den Dateimanager des Betriebssystems, um das binäre Objekt eines gespeicherten Sudokus zu laden
+	 */
 	@FXML
 	private void handleLoad() {
 
@@ -174,6 +185,9 @@ public class WrapperController implements PropertyChangeListener {
 
 	}
 
+	/**
+	 * Zeigt einen Dialog mit Informationen über die Verfasser und die Entstehung der Anwendung an
+	 */
 	@FXML
 	public void handleAbout() {
 
@@ -199,6 +213,9 @@ public class WrapperController implements PropertyChangeListener {
 		}
 	}
 	
+	/**
+	 * Löst die Überprüfung der Lösbarkeit des eingegeben Sudokus über die MainApp aus
+	 */
 	@FXML
 	private void handleCheck(){
 		Solvability ergebnis = mainApp.getSudoku().checkUniqueSolvable();
@@ -216,18 +233,7 @@ public class WrapperController implements PropertyChangeListener {
 	}
 
 	/**
-	 * Wird von der Main-Applikation gerufen.
-	 * 
-	 * @param mainApp
-	 */
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-
-	}
-
-	
-	/* (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * Wird ausgelöst, wenn sich eine Eigenschaft an der Oberfläche ändert
 	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		

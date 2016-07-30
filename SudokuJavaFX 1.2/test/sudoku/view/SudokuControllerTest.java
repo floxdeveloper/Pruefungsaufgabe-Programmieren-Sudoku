@@ -117,14 +117,6 @@ public class SudokuControllerTest {
 		assertEquals("In dem Feld konnte eine 9 eingegeben werden", "9", sController.getKoordinate(1, 1).getText());
 	}
 	
-	@Test 
-	public void testhandleSolveWithFilledSudoku(){
-	}
-	
-	@Test
-	public void testHandleSolveWithEmptySuduko(){
-		Sudoku empty = (Sudoku) (HelpElements.testSudokuEmpty);
-	}
 	
 	@Test
 	public void testCongratulationDialogAfterLastSuccessfulEingabe(){
