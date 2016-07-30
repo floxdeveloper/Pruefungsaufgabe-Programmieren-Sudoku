@@ -36,7 +36,7 @@ public class InputNumberPopupController {
 	}
 
 	/**
-	 * Adds a PropertyChangeListener to the PropertyChangeSupport
+	 * Fügt PropertyChangeListener zu ProbertyChangeSupport hinzu
 	 * 
 	 * @param p
 	 */
@@ -66,7 +66,7 @@ public class InputNumberPopupController {
 	}
 
 	/**
-	 * Sets the MainApp Reference
+	 * Setzt MainApp Referenz
 	 * 
 	 * @param m
 	 */
@@ -75,7 +75,7 @@ public class InputNumberPopupController {
 	}
 
 	/**
-	 * Handles the user's choice to break
+	 * Schließt Fenster 
 	 */
 	@FXML
 	private void handleAbbrechen() {
