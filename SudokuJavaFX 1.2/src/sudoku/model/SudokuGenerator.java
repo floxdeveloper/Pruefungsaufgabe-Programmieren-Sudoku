@@ -4,6 +4,41 @@ package sudoku.model;
 public class SudokuGenerator {
 
 	protected static boolean[] alreadyUsed = new boolean[9];
+	
+	/**
+	 * Gibt Zahl zurück, die noch nicht seit dem Reset von alreadyUsed rurückgegeben wurde.
+	 * @return int
+	 */
+	protected static int getNotTriedNumber() {
+		//Um Fehler zu vermeiden, wenn alle Zahlen schon verwendet wurden
+		boolean error = true;
+		for (int i = 0; i < alreadyUsed.length; i++){
+			if (alreadyUsed[i]==false)
+				error = false;
+		}
+		if (error)
+			return -1;
+		
+		int digit = 1 + (int) (Math.random()*9);	
+		if (!alreadyUsed[digit-1]){
+		alreadyUsed[digit-1]=true;
+		return digit;
+		}	
+		return getNotTriedNumber();
+	}
+	
+	protected static void resetAlreadyUsed(){
+		for (int i = 0; i < alreadyUsed.length; i++)
+			alreadyUsed[i]=false;
+	}
+	
+	
+	
+	/**
+	 * Generiert ein Sudoku mit gefüllten Feldern, deren Anzahl numberOfClues entspricht.
+	 * @param numberOfClues - Anzahl der gefüllten Felder
+	 * @return Sudoku, das den Regeln entspricht und lösbar ist
+	 */
 	public static Sudoku generate(int numberOfClues) {		
 		
 		// IntArray mit leeren Feldern erzeugen
@@ -65,38 +100,14 @@ public class SudokuGenerator {
 		}
 	}
 
-	/**
-	 * Gibt Zahl zurück, die noch nicht seit dem Reset von alreadyUsed rurückgegeben wurde. 
-	 * 
-	 * @return int
-	 */
-	protected static int getNotTriedNumber() {
-		//Um Fehler zu vermeiden, wenn alle Zahlen schon verwednet wurden
-		boolean error = true;
-		for (int i = 0; i < alreadyUsed.length; i++){
-			if (alreadyUsed[i]==false)
-				error = false;
-		}
-		if (error)
-			return -1;
-		
-		int digit = 1 + (int) (Math.random()*9);	
-		if (!alreadyUsed[digit-1]){
-		alreadyUsed[digit-1]=true;
-		return digit;
-		}	
-		return getNotTriedNumber();
-	}
 	
-	protected static void resetAlreadyUsed(){
-		for (int i = 0; i < alreadyUsed.length; i++)
-			alreadyUsed[i]=false;
-	}
+	
+	
 
 	/**
 	 * Gibt neu erzeugtes Feld mit Inhalt von array zurück.
 	 * 
-	 * @param array
+	 * @param array zweidimensionales Array
 	 * @return kopiertes array
 	 */
 	private static int[][] copySudokuArray(int[][] array) {

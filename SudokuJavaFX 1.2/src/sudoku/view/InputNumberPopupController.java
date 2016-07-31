@@ -14,17 +14,25 @@ public class InputNumberPopupController {
 
 	private MainApp mainApp;
 	private PropertyChangeSupport support = new PropertyChangeSupport(this);
-
+	private Stage stage;
 	@FXML
 	private ComboBox<Integer> eingabecb;
 
-	// TODO auf Englisch ändern
+	
 	/**
-	 * 
+	 * Setzt die Stage
+	 * @param stage - zu setzende Stage
+	 */
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
+	/**
+	 * Fügt ins Dropdownmenü die passenden Verknüpfungen mit den auswählbaren Zahlen ein
 	 */
 	@FXML
 	private void initialize() {
-
+	
 		// Sets Item of ComboBox
 		ObservableList<Integer> a1 = FXCollections.observableArrayList();
 		for (int i = 20; i < 81; i++) {
@@ -32,11 +40,11 @@ public class InputNumberPopupController {
 		}
 		eingabecb.setVisibleRowCount(10);
 		eingabecb.setItems(a1);
-
+	
 	}
 
 	/**
-	 * Adds a PropertyChangeListener to the PropertyChangeSupport
+	 * Fügt PropertyChangeListener zu ProbertyChangeSupport hinzu
 	 * 
 	 * @param p
 	 */
@@ -44,15 +52,13 @@ public class InputNumberPopupController {
 		support.addPropertyChangeListener(p);
 	}
 
-	private Stage stage;
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
-	}
-
+	
+	
+	/**
+	 * Überprüft die eingegebene Zahl an bereits gefüllten Feldern des zu generierenden Sudoku
+	 */
 	@FXML
 	private void handleAbsenden() {
-		// TODO Bei nicht ausgewählter Zahl -> Exception (fixen)
 		try {
 			support.firePropertyChange("InputNumber", 0, (int) eingabecb.getValue());
 			stage.close();
@@ -66,16 +72,16 @@ public class InputNumberPopupController {
 	}
 
 	/**
-	 * Sets the MainApp Reference
+	 * Setzt MainApp Referenz
 	 * 
-	 * @param m
+	 * @param m - MainApp
 	 */
 	public void setMainApp(MainApp m) {
 		mainApp = m;
 	}
 
 	/**
-	 * Handles the user's choice to break
+	 * Schließt Fenster 
 	 */
 	@FXML
 	private void handleAbbrechen() {

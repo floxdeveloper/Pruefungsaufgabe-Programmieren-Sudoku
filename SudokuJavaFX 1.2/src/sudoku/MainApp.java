@@ -23,24 +23,77 @@ import sudoku.model.Sudoku;
 import sudoku.view.SudokuController;
 import sudoku.view.WrapperController;
 
+/**
+ * @author Bro
+ *
+ */
 public class MainApp extends Application  {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private Sudoku sudoku;
 	private SudokuController scontroller;
+	private WrapperController wcontroller;
+	private Stage currentStage;
 	
 	public SudokuController getSudokuController() {
 		return scontroller;
 	}
-
-	private WrapperController wcontroller;
-
+	
 	public WrapperController getWrapperController() {
 		return wcontroller;
 	}
+	
+	public Stage getCurrentStage() {
+		return this.currentStage;
+	}
+	
+	public Sudoku getSudoku() {
+		return sudoku;
+	}
+	
+	public Window getPrimaryStage() {
+		return primaryStage;
+	}
+	
+	public Parent getRoot(){
+		return rootLayout;
+	}
+	
+	
+	/**
+	 * Setzt Sudoku-Array und überprüft, ob es den Regeln entspricht - wenn
+	 * nicht, bleibt alter Stand bestehen
+	 * @param array - neues Sudoku vom Typ zweidimensionales Array
+	 * @return true - Suduku konnte gesetzt werden, false - nicht gesetzt, da nicht korrekt
+	 */
+	public boolean setSudoku(int[][] array) {
+		if (!sudoku.setSudokuIfCorrect(array))
+			return false;
+		
+		scontroller.sudokuAnzeigen();
+		return true;
 
+	}
+	
+	/**
+	 * Man setzt s als neues Sudoku und updatet GUI.
+	 * 
+	 * @param s neues Sudoku vom Typ Sudoku
+	 * @return true, da Sudoku immer Regeln entspricht und somit als neues Sudoku gesetzt werden kann
+	 */
+	 
+	public boolean setSudoku(Sudoku s) {
+		sudoku = s;
+		scontroller.sudokuAnzeigen();
+		return true;
 
+	}
+
+/**
+ * Primary Stage wird geladen und konfiguriert. 
+ * Hauptfenster wird mit Komponenten und Handlern verknüpft.
+ */
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("SudokuSolver");
@@ -80,7 +133,7 @@ public class MainApp extends Application  {
 	}
 	
 	/**
-	 * Verbindet das Root Layout mit der Main Stage und dem WrapperController
+	 * Verbindet das Root Layout mit der Main Stage und dem WrapperController.
 	 * Zeigt die neue Szene an
 	 */
 	public void initRootLayout() {
@@ -103,16 +156,9 @@ public class MainApp extends Application  {
 		}
 	}
 
-	
-
-	private Stage currentStage;
-
-	public Stage getCurrentStage() {
-		return this.currentStage;
-	}
-
 	/**
 	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
+	 * Fensterelemente sind nicht mehr klickbar - Keine Bearbeitung, bis Verarbeitung abgeschlossen
 	 */
 
 	public void lockScreen() {
@@ -146,6 +192,11 @@ public class MainApp extends Application  {
 		}
 	}
 	 
+	
+	
+	/**
+	 * Entsperrt die Anwendung - Bearbeitung möglich, Elemente klickbar
+	 */
 	public void unlockScreen() {
 		try{
 			currentStage.close();
@@ -158,7 +209,8 @@ public class MainApp extends Application  {
 	
 	/**
 	 * Zeigt den Sudoku-Solver im rootLayout und setzt den SudokuController in
-	 * die Mainapp.
+	 * die MainApp.
+	 * Controller ermöglicht Reaktion auf Änderungen
 	 */
 	 
 	public void initSudokuLayout() {
@@ -184,7 +236,7 @@ public class MainApp extends Application  {
 	}
 
 	/**
-	 * Gibt eine Warnung mit mainApp als owner aus.
+	 * Gibt eine Warnung mit mainApp als Owner aus.
 	 * 
 	 * @param header
 	 *            gibt den header der Warnung an
@@ -209,10 +261,10 @@ public class MainApp extends Application  {
 	}
 		
 	/**
-	 * Gibt eine Informationsmeldung mit mainApp als owner aus.
+	 * Gibt eine Informationsmeldung mit mainApp als Owner aus.
 	 * 
 	 * @param header
-	 *            gibt den header der Information an
+	 *            gibt den Header der Information an
 	 * @param content
 	 *            gibt den Haupttext der Information an
 	 */
@@ -232,10 +284,10 @@ public class MainApp extends Application  {
 	}
 
 	/**
-	 * Gibt einen Fehler mit mainApp als owner aus.
+	 * Gibt einen Fehler mit mainApp als Owner aus.
 	 * 
 	 * @param header
-	 *            gibt den header der Fehlermeldung an
+	 *            gibt den Header der Fehlermeldung an
 	 * @param content
 	 *            gibt den Haupttext der Fehlermeldung an
 	 */
@@ -255,53 +307,7 @@ public class MainApp extends Application  {
 		alert.showAndWait();
 
 	}
-	 
-	public Sudoku getSudoku() {
-		return sudoku;
-	}
-
-	/**
-	 * 
-	 * Sudoku wird gesetzt, falls es den Regeln entspricht. Updatet GUI.
-	 * 
-	 * @param array
-	 * @return true wenn gesetzt; false sonst
-	 */
-	 
-	public boolean setSudoku(int[][] array) {
-
 	
-		// Setzt Sudoku-Array und überprüft, ob es den Regeln entspricht -> wenn
-		// nicht, bleibt alter Stand bestehen
-		if (!sudoku.setSudokuIfCorrect(array))
-			return false;
-		
-		scontroller.sudokuAnzeigen();
-		return true;
-
-	}
-	
-	/**
-	 * Man setzt s als neues sudoku und updatet GUI.
-	 * 
-	 * @param s
-	 * @return true, da Sudoku immer Regeln entspricht
-	 */
-	 
-	public boolean setSudoku(Sudoku s) {
-		sudoku = s;
-		scontroller.sudokuAnzeigen();
-		return true;
-
-	}
-	 
-	public Window getPrimaryStage() {
-		return primaryStage;
-	}
-	
-	public Parent getRoot(){
-		return rootLayout;
-	}
 
 	/**
 	 * Ruft die JavaFX Methode launch auf, die die graphische Applikation vorbereitet.
