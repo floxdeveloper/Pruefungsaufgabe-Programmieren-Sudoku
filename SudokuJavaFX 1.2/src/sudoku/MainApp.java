@@ -23,10 +23,7 @@ import sudoku.model.Sudoku;
 import sudoku.view.SudokuController;
 import sudoku.view.WrapperController;
 
-/**
- * @author Bro
- *
- */
+
 public class MainApp extends Application  {
 
 	private Stage primaryStage;
