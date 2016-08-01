@@ -3,7 +3,6 @@ package sudoku;
 import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,8 +22,12 @@ import sudoku.model.Sudoku;
 import sudoku.view.SudokuController;
 import sudoku.view.WrapperController;
 
-
-public class MainApp extends Application  {
+/**
+ * Diese Klasse bildet das Herzstück des Sudoku-Programms. Sie ruft die
+ * grafische Oberfläche auf und verwaltet sie, indem sie einige Elemente sperrt
+ * oder entsperrt und verwaltet Sudokus.
+ */
+public class MainApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
@@ -32,65 +35,97 @@ public class MainApp extends Application  {
 	private SudokuController scontroller;
 	private WrapperController wcontroller;
 	private Stage currentStage;
-	
+
+	/**
+	 * Gibt den SudokuController aus.
+	 * 
+	 * @return den SudokuController der MainApp
+	 */
 	public SudokuController getSudokuController() {
 		return scontroller;
 	}
-	
+
+	/**
+	 * Gibt den WrapperController aus.
+	 * 
+	 * @return den WrapperController der MainApp
+	 */
 	public WrapperController getWrapperController() {
 		return wcontroller;
 	}
-	
+
+	/**
+	 * Gibt die aktuelle Stage zum Handling aus.
+	 * 
+	 * @return die aktuell behandelte Stage der MainApp
+	 */
 	public Stage getCurrentStage() {
 		return this.currentStage;
 	}
-	
+
+	/**
+	 * Gibt das Sudoku aus.
+	 * 
+	 * @return das Sudoku der MainApp
+	 */
 	public Sudoku getSudoku() {
 		return sudoku;
 	}
-	
+
+	/**
+	 * Gibt die PrimaryStage zum Handling aus.
+	 * 
+	 * @return die PrimaryStage der MainApp
+	 */
 	public Window getPrimaryStage() {
 		return primaryStage;
 	}
-	
-	public Parent getRoot(){
+
+	/**
+	 * Gibt das rootLayout aus.
+	 * 
+	 * @return das rootLayout der MainApp
+	 */
+	public Parent getRoot() {
 		return rootLayout;
 	}
-	
-	
+
 	/**
 	 * Setzt Sudoku-Array und überprüft, ob es den Regeln entspricht - wenn
-	 * nicht, bleibt alter Stand bestehen
-	 * @param array - neues Sudoku vom Typ zweidimensionales Array
-	 * @return true - Suduku konnte gesetzt werden, false - nicht gesetzt, da nicht korrekt
+	 * nicht, bleibt der alte Stand bestehen.
+	 * 
+	 * @param array
+	 *            - neues Sudoku vom Typ zweidimensionales Array
+	 * @return true - Sudoku konnte gesetzt werden, false - nicht gesetzt, da
+	 *         nicht korrekt
 	 */
 	public boolean setSudoku(int[][] array) {
 		if (!sudoku.setSudokuIfCorrect(array))
 			return false;
-		
+
 		scontroller.sudokuAnzeigen();
 		return true;
 
 	}
-	
+
 	/**
-	 * Man setzt s als neues Sudoku und updatet GUI.
+	 * Setzt ein existierendes, regelkonformes Sudoku als neues Sudoku und
+	 * updatet GUI.
 	 * 
-	 * @param s neues Sudoku vom Typ Sudoku
-	 * @return true, da Sudoku immer Regeln entspricht und somit als neues Sudoku gesetzt werden kann
+	 * @param s
+	 *            neues Sudoku vom Typ Sudoku
 	 */
-	 
-	public boolean setSudoku(Sudoku s) {
+
+	public void setSudoku(Sudoku s) {
 		sudoku = s;
 		scontroller.sudokuAnzeigen();
-		return true;
-
+		return;
 	}
 
-/**
- * Primary Stage wird geladen und konfiguriert. 
- * Hauptfenster wird mit Komponenten und Handlern verknüpft.
- */
+	/**
+	 * Primary Stage wird geladen und konfiguriert. Hauptfenster wird mit
+	 * Komponenten und Handlern verknüpft.
+	 */
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("SudokuSolver");
@@ -128,10 +163,10 @@ public class MainApp extends Application  {
 
 		});
 	}
-	
+
 	/**
-	 * Verbindet das Root Layout mit der Main Stage und dem WrapperController.
-	 * Zeigt die neue Szene an
+	 * Verbindet das Root-Layout mit der Main-Stage und dem WrapperController.
+	 * Zeigt die neue Szene an.
 	 */
 	public void initRootLayout() {
 		try {
@@ -155,12 +190,13 @@ public class MainApp extends Application  {
 
 	/**
 	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
-	 * Fensterelemente sind nicht mehr klickbar - Keine Bearbeitung, bis Verarbeitung abgeschlossen
+	 * Fensterelemente sind nicht mehr klickbar: keine Bearbeitung möglich, bis
+	 * die Verarbeitung abgeschlossen ist.
 	 */
 
 	public void lockScreen() {
 		try {
-			//Lädt fxml-Datei und erzeugt eine neue stage für das Popup-gif.
+			// Lädt fxml-Datei und erzeugt eine neue stage für das Popup-gif.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainAppTest.class.getResource("view/WrapperLock.fxml"));
 			AnchorPane pane = (AnchorPane) loader.load();
@@ -178,38 +214,34 @@ public class MainApp extends Application  {
 			// Setze Größe und setze das gif in die Mitte vom Sudokufeld.
 			dialogStage.setHeight(127);
 			dialogStage.setWidth(127);
-			dialogStage.setX(this.primaryStage.getX()+144);
-			dialogStage.setY(this.primaryStage.getY()+196);
+			dialogStage.setX(this.primaryStage.getX() + 144);
+			dialogStage.setY(this.primaryStage.getY() + 196);
 			this.currentStage = dialogStage;
 			// Zeigt das gif an, bis es extern geschlossen wird.
 			dialogStage.show();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	 
-	
-	
+
 	/**
-	 * Entsperrt die Anwendung - Bearbeitung möglich, Elemente klickbar
+	 * Entsperrt die Anwendung: Bearbeitung wird ermöglicht, Elemente werden
+	 * dadurch klickbar.
 	 */
 	public void unlockScreen() {
-		try{
+		try {
 			currentStage.close();
-		}
-		catch(NullPointerException e){
+		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
 	 * Zeigt den Sudoku-Solver im rootLayout und setzt den SudokuController in
-	 * die MainApp.
-	 * Controller ermöglicht Reaktion auf Änderungen
+	 * die MainApp. Der Controller ermöglicht Reaktionen auf Änderungen.
 	 */
-	 
+
 	public void initSudokuLayout() {
 		try {
 			// Lädt die Übersicht.
@@ -236,12 +268,11 @@ public class MainApp extends Application  {
 	 * Gibt eine Warnung mit mainApp als Owner aus.
 	 * 
 	 * @param header
-	 *            gibt den header der Warnung an
+	 *            gibt den Header der Warnung an
 	 * @param content
 	 *            gibt den Haupttext der Warnung an
 	 */
 
-	 
 	public void warning(String header, String content) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(primaryStage);
@@ -256,7 +287,7 @@ public class MainApp extends Application  {
 		alert.showAndWait();
 
 	}
-		
+
 	/**
 	 * Gibt eine Informationsmeldung mit mainApp als Owner aus.
 	 * 
@@ -288,7 +319,7 @@ public class MainApp extends Application  {
 	 * @param content
 	 *            gibt den Haupttext der Fehlermeldung an
 	 */
-	 
+
 	public void error(String header, String content) {
 
 		Alert alert = new Alert(AlertType.ERROR);
@@ -304,10 +335,10 @@ public class MainApp extends Application  {
 		alert.showAndWait();
 
 	}
-	
 
 	/**
-	 * Ruft die JavaFX Methode launch auf, die die graphische Applikation vorbereitet.
+	 * Ruft die JavaFX-Methode launch auf, die die graphische Applikation
+	 * vorbereitet.
 	 * 
 	 * @param args
 	 */
