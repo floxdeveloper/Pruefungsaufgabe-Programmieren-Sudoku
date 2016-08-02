@@ -16,14 +16,13 @@ public class Sudoku implements Serializable {
 	private long solveStarted = -1;
 	private int timeToSolve;
 	private boolean ranOutOfTime = false;
-
-	// Gefüllt nach solveCount (0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht
-	// eindeutig lösbar)
+	/** 
+	* Gefüllt nach solveCount (0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht
+	* eindeutig lösbar)
+	*/
 	protected int solveCounter;
-
 	protected boolean fertig;
 
-	
 	public int getSolveCounter() {
 		return solveCounter;
 	}
@@ -73,11 +72,8 @@ public class Sudoku implements Serializable {
 	private void setBoolArrayAll(boolean[] boolArray, boolean value) {
 		for (int i = 0; i < boolArray.length; i++) {
 			boolArray[i] = value;
-
 		}
-
 	}
-	
 	
 	/**
 	 * Erzeugt ein neues Sudoku-Objekt. Wenn array nicht Regeln entspricht wird
@@ -88,7 +84,6 @@ public class Sudoku implements Serializable {
 	public Sudoku(int[][] array) {
 		if (!setSudokuIfCorrect(array))
 			sudokuReset();
-
 	}
 
 	/**
@@ -97,18 +92,16 @@ public class Sudoku implements Serializable {
 	 * zehn Sekunden kann man von Unlösbarkeit ausgehen.
 	 */
 	public void solve() {
-
 		initMaxSolveTime(10);
 
 		fertig = false;
 		sudokuBT();
-
 		solveStarted = -1;
 
 		if (ranOutOfTime)
 			solvability = Solvability.probablyNotSolvable;
-		else if (filled())
-			solvability = Solvability.Solvable;
+		else if (isFilled())
+			solvability = Solvability.solvable;
 		else
 			solvability = Solvability.notSolvable;
 	}
@@ -117,20 +110,15 @@ public class Sudoku implements Serializable {
  * Das Sudoku muss in max. einer Sekunde gelöst werden. Die Lösbarkeit wird nicht evaluiert.
  */
 	public void solveIfUnderOneSec() {
-
 		initMaxSolveTime(1);
 
 		fertig = false;
 		sudokuBT();
-
 		solvability = Solvability.notEvaluated;
-
 		solveStarted = -1;
-
 	}
 
 	private void initMaxSolveTime(int timeToSolve) {
-
 		solveStarted = System.currentTimeMillis();
 		this.timeToSolve = timeToSolve;
 		ranOutOfTime = false;
@@ -162,12 +150,7 @@ public class Sudoku implements Serializable {
 			solvability = Solvability.notUniquelySolvable;
 		else
 			solvability = Solvability.notEvaluated;
-
 	}
-
-	
-
-	
 
 	/**
 	 * Überprüft array auf Sudokuregeln (richtige Größe; nur erlaubte Werte)
@@ -179,11 +162,12 @@ public class Sudoku implements Serializable {
 		// Prüft prinzipielle Groesse
 		if (array.length != 9)
 			return false;
+		
 		for (int i = 0; i < 9; i++) {
 			if (array[i].length != 9)
 				return false;
 		}
-
+		
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				if (array[i][j] > 9 || array[i][j] < 0)
@@ -225,8 +209,6 @@ public class Sudoku implements Serializable {
 
 		// Prüft ob die 9er- Kästchen (bis jetzt) nach Sudokuregeln gefüllt
 		// wurden
-
-		// Jede Anfangswerte fürs Kästchen
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				setBoolArrayAll(zahlVerfügbar, true);
@@ -245,10 +227,7 @@ public class Sudoku implements Serializable {
 			}
 		}
 		return true;
-
 	}
-
-	
 
 	/**
 	 * @param toCopy - 9x9 Array, das zu kopierendes Sudoku enthält
@@ -262,7 +241,6 @@ public class Sudoku implements Serializable {
 			}
 		}
 		return copied;
-
 	}
 
 	/**
@@ -271,8 +249,6 @@ public class Sudoku implements Serializable {
 	public int[][] copySudokuArray() {
 		return copyArray(sudokuArray);
 	}
-
-	
 
 	/**
 	 * Löst sudokuArray mit Hilfe von Backtracking. Stoppt bei erster Lösung.
@@ -290,20 +266,15 @@ public class Sudoku implements Serializable {
 		if (solveStarted != -1 && System.currentTimeMillis() > solveStarted + timeToSolve * 1000) {
 			ranOutOfTime = true;
 			return;
-
 		}
 
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
 		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
 			fertig = true;
 		else { // backtracking
-
 			for (int i = 1; i <= 9; i++) {
 				if (isSafe(xkoord, ykoord, i)) {
 					sudokuArray[xkoord][ykoord] = i;
-					/*
-					 * if (ausgefuellt()) ausgabe(); else
-					 */
 					sudokuBT();
 
 					if (!fertig)
@@ -332,32 +303,23 @@ public class Sudoku implements Serializable {
 			return;
 		}
 		// Kein Feld mehr frei, aber alles nach Regeln gelöst -> Sudoku gelöst
-		else if (xkoord == -1) // nichts mehr auszufüllen -> fertig
+		else if (xkoord == -1){ // nichts mehr auszufüllen -> fertig
 			if (fertig == false) {
 				fertig = true;
 				sudokuSaved = copyArray(sudokuArray);
-				solveCounter++;
-			} else {
-				solveCounter++;
 			}
-
+			solveCounter++;
+		}
 		else { // backtracking
-
 			for (int i = 1; i <= 9; i++) {
 				if (isSafe(xkoord, ykoord, i)) {
 					sudokuArray[xkoord][ykoord] = i;
-					/*
-					 * if (ausgefuellt()) ausgabe(); else
-					 */
 					sudokuBTCount();
-
 					sudokuArray[xkoord][ykoord] = 0;
 				}
 			}
 		}
 	}
-
-	
 
 	/**
 	 * Prüft ob eine Zahl an der Stelle hor/ver eingesetzt werden darf
@@ -398,25 +360,21 @@ public class Sudoku implements Serializable {
 		return true;
 	}
 
-	
 	/**
 	 * Löscht alle Felder des Sudokus
 	 */
 	public void sudokuReset() {
-
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				sudokuArray[i][j] = 0;
 			}
 		}
-
 	}
 
-	
 	/**
 	 * @return true - Sudoku leer, false sonst
 	 */
-	public boolean empty() {
+	public boolean isEmpty() {
 		for (int i = 0; i < sudokuArray.length; i++) {
 			for (int j = 0; j < sudokuArray.length; j++) {
 				if (sudokuArray[i][j] != 0)
@@ -424,14 +382,13 @@ public class Sudoku implements Serializable {
 			}
 		}
 		return true;
-
 	}
 
 	
 	/**
 	 * @return true - Sudoku vollständig gefüllt, false sonst
 	 */
-	public boolean filled() {
+	public boolean isFilled() {
 		for (int i = 0; i < sudokuArray.length; i++) {
 			for (int j = 0; j < sudokuArray.length; j++) {
 				if (sudokuArray[i][j] == 0)
@@ -446,11 +403,9 @@ public class Sudoku implements Serializable {
 	 * @return uniquelySolvable oder notUniquelySolvable
 	 */
 	public Solvability checkUniqueSolvable() {
-
 		int[][] temp = copyArray(sudokuArray);
 		Sudoku tempSudoku = new Sudoku(temp);
 		tempSudoku.solveCount();
 		return tempSudoku.getSolvability();
-
 	}
 }

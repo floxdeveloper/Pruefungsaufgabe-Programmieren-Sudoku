@@ -78,13 +78,13 @@ public class SudokuGeneratorTest
 	public void generateShouldReturnSudoku()
 	{
 		testSudokuToGenerateSU = SudokuGenerator.generate(81);
-		assertEquals("Should return true because full", true, testSudokuToGenerateSU.filled());
+		assertEquals("Should return true because full", true, testSudokuToGenerateSU.isFilled());
 		
 		testSudokuToGenerateSU = SudokuGenerator.generate(20);
-		assertEquals("Should return false because not full", false, testSudokuToGenerateSU.filled());
+		assertEquals("Should return false because not full", false, testSudokuToGenerateSU.isFilled());
 		
 		testSudokuToGenerateSU = SudokuGenerator.generate(0);
-		assertEquals("Should return true because empty", true, testSudokuToGenerateSU.empty());
+		assertEquals("Should return true because empty", true, testSudokuToGenerateSU.isEmpty());
 		
 	}
 	

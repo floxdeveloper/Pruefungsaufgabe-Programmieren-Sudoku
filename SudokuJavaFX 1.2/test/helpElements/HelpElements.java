@@ -90,4 +90,16 @@ public class HelpElements {
 		  {2,8,7,4,1,9,6,3,5},
 		  {3,4,5,2,8,6,1,7,9}};
 	 
+
+		  public static int[][] copySudokuArray(int[][] array) {
+				int[][] arrayret = new int[array.length][array[0].length];
+
+				for (int i = 0; i < array.length; i++) {
+					for (int j = 0; j < array[i].length; j++) {
+						arrayret[i][j] = array[i][j];
+					}
+				}
+				return arrayret;
+			}
+		  
 }

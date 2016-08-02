@@ -18,5 +18,4 @@ public class AboutController {
 	    Stage stage = (Stage) closeButton.getScene().getWindow();
 	    stage.close();
 	}
-	
 }

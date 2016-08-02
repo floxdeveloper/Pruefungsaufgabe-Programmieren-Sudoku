@@ -1,11 +1,24 @@
 package sudoku.model;
 
-import static helpElements.HelpElements.*;
-import static org.junit.Assert.*;
-
+import static helpElements.HelpElements.testArray10x10;
+import static helpElements.HelpElements.testArray9x7;
+import static helpElements.HelpElements.testArrayCountUnSolvable;
+import static helpElements.HelpElements.testArrayCountUniqueSolvable;
+import static helpElements.HelpElements.testArrayEmpty;
+import static helpElements.HelpElements.testArrayFalse;
+import static helpElements.HelpElements.testArrayFilled;
+import static helpElements.HelpElements.testArrayHalfFilled;
+import static helpElements.HelpElements.testArrayUnSolvable;
+import static helpElements.HelpElements.testArrayWithANumber10;
+import static helpElements.HelpElements.testArrayWithNull;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import helpElements.HelpElements;
 
 public class SudokuTest 
 { 	
@@ -40,34 +53,34 @@ public class SudokuTest
 				  {2,8,7,4,1,9,6,3,5},
 				  {3,4,5,2,8,6,1,7,9}}; 
 				  
-		testSudokuEmptySU = new Sudoku (testArrayEmpty);
-		testSudokuFilledSU = new Sudoku (testArrayFilled);
-		testSudokuWithNullSU = new Sudoku (testArrayWithNull);
-		testSudokuCountUniqueSolvableSU = new Sudoku (testArrayCountUniqueSolvable);
-		testSudokuCountUnSolvableSU = new Sudoku (testArrayCountUnSolvable);
-		testSudokuFalseSU = new Sudoku (testArrayFalse);
-		testSudokuHalfFilledSU = new Sudoku(testArrayHalfFilled);
-		testSudokuFilledNumberTwo = new Sudoku(testArrayFilled);
-		testSudokuUnSolvableSU = new Sudoku(testArrayUnSolvable);
-		testSudoku10x10SU = new Sudoku(testArray10x10);
-		testSudoku9x7SU = new Sudoku(testArray9x7);
-		testSudokuWithA10SU = new Sudoku(testArrayWithANumber10);
+		testSudokuEmptySU = new Sudoku (HelpElements.copySudokuArray(testArrayEmpty));
+		testSudokuFilledSU = new Sudoku (HelpElements.copySudokuArray(testArrayFilled));
+		testSudokuWithNullSU = new Sudoku (HelpElements.copySudokuArray(testArrayWithNull));
+		testSudokuCountUniqueSolvableSU = new Sudoku (HelpElements.copySudokuArray(testArrayCountUniqueSolvable));
+		testSudokuCountUnSolvableSU = new Sudoku (HelpElements.copySudokuArray(testArrayCountUnSolvable));
+		testSudokuFalseSU = new Sudoku (HelpElements.copySudokuArray(testArrayFalse));
+		testSudokuHalfFilledSU = new Sudoku(HelpElements.copySudokuArray(testArrayHalfFilled));
+		testSudokuFilledNumberTwo = new Sudoku(HelpElements.copySudokuArray(testArrayFilled));
+		testSudokuUnSolvableSU = new Sudoku(HelpElements.copySudokuArray(testArrayUnSolvable));
+		testSudoku10x10SU = new Sudoku(HelpElements.copySudokuArray(testArray10x10));
+		testSudoku9x7SU = new Sudoku(HelpElements.copySudokuArray(testArray9x7));
+		testSudokuWithA10SU = new Sudoku(HelpElements.copySudokuArray(testArrayWithANumber10));
 	}
 	
 	@Test
 	public void emptyShouldReturnCorrectBool()
 	{
-		assertEquals("Should return true because empty", true,  testSudokuEmptySU.empty());
-	    assertEquals("Should return false because full", false,  testSudokuFilledSU.empty());
-	    assertEquals("Should return true because full with Nulls = empty", true, testSudokuWithNullSU.empty());
+		assertEquals("Should return true because empty", true,  testSudokuEmptySU.isEmpty());
+	    assertEquals("Should return false because full", false,  testSudokuFilledSU.isEmpty());
+	    assertEquals("Should return true because full with Nulls = empty", true, testSudokuWithNullSU.isEmpty());
 	}
 		
 	@Test 
 	public void filledShouldReturnCorrectBool()
 	{
-		assertEquals("Should return true because filled and != 0", true,  testSudokuFilledSU.filled());
-		assertEquals("Should return false because empty", false,  testSudokuEmptySU.filled());
-		assertEquals("Should return false because full with Nulls = empty", false, testSudokuWithNullSU.filled());
+		assertEquals("Should return true because filled and != 0", true,  testSudokuFilledSU.isFilled());
+		assertEquals("Should return false because empty", false,  testSudokuEmptySU.isFilled());
+		assertEquals("Should return false because full with Nulls = empty", false, testSudokuWithNullSU.isFilled());
 	}
 	
 	@Test
@@ -76,13 +89,13 @@ public class SudokuTest
 		// First reset
 		 testSudokuFilledSU.sudokuReset();
 		//Then check array
-		assertArrayEquals("Should return an Array filled with nulls",  testArrayWithNull,  testArrayFilled);
+		assertArrayEquals("Should return an Array filled with nulls",  testArrayWithNull,  testSudokuFilledSU.getSudokuArray());
 	}
 	
 	@Test
 	public void getSudokuArrayShouldReturnArray()
 	{
-		assertTrue("Should be the same",  testArrayFilled == testSudokuFilledSU.getSudokuArray());
+		assertArrayEquals("Should be the same",  testArrayFilled, testSudokuFilledSU.getSudokuArray());
 	}
 	
 	@Test
@@ -160,13 +173,13 @@ public class SudokuTest
 	{
 		assertEquals("Should be 'not evaluated'", Solvability.notEvaluated, testSudokuFilledSU.getSolvability());
 		testSudokuFilledSU.solve();
-		assertEquals("Should be solvable", Solvability.Solvable, testSudokuFilledSU.getSolvability());
+		assertEquals("Should be solvable", Solvability.solvable, testSudokuFilledSU.getSolvability());
 		
 		testSudokuCountUnSolvableSU.solve();
 		assertEquals("Should be 'probably not solvable'", Solvability.probablyNotSolvable, testSudokuCountUnSolvableSU.getSolvability());
 		
 		testSudokuFilledSU.solve();
-		assertEquals("Should be 'solvable'", Solvability.Solvable, testSudokuFilledSU.getSolvability());
+		assertEquals("Should be 'solvable'", Solvability.solvable, testSudokuFilledSU.getSolvability());
 		
 		testSudokuUnSolvableSU.solve();
 		assertEquals("Should be 'not solvable'", Solvability.notSolvable, testSudokuUnSolvableSU.getSolvability());
@@ -186,7 +199,7 @@ public class SudokuTest
 	@Test
 	public void checkUniqueSolvableShouldReturnSolvability()
 	{
-		assertEquals("Should be ' uniquely solvable'", Solvability.uniquelySolvable, testSudokuFilledSU.checkUniqueSolvable());
+		assertEquals("Should be 'uniquely solvable'", Solvability.uniquelySolvable, testSudokuFilledSU.checkUniqueSolvable());
 		assertEquals("Should be 'probably not solvable'", Solvability.probablyNotSolvable, testSudokuCountUnSolvableSU.checkUniqueSolvable());
 		assertTrue("Should be 'uniquely solvable'", Solvability.uniquelySolvable == testSudokuCountUniqueSolvableSU.checkUniqueSolvable());
 	}
