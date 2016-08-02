@@ -23,8 +23,8 @@ import sudoku.view.SudokuController;
 import sudoku.view.WrapperController;
 
 /**
- * Diese Klasse bildet das Herzstück des Sudoku-Programms. Sie ruft die
- * grafische Oberfläche auf und verwaltet sie, indem sie einige Elemente sperrt
+ * Diese Klasse bildet die Grundlage des Sudoku-Programms. Sie ruft die
+ * graphische Oberfläche auf und verwaltet sie, indem sie einige Elemente sperrt
  * oder entsperrt und verwaltet Sudokus.
  */
 public class MainApp extends Application {
@@ -105,7 +105,6 @@ public class MainApp extends Application {
 
 		scontroller.sudokuAnzeigen();
 		return true;
-
 	}
 
 	/**
@@ -115,11 +114,9 @@ public class MainApp extends Application {
 	 * @param s
 	 *            neues Sudoku vom Typ Sudoku
 	 */
-
 	public void setSudoku(Sudoku s) {
 		sudoku = s;
 		scontroller.sudokuAnzeigen();
-		return;
 	}
 
 	/**
@@ -147,20 +144,15 @@ public class MainApp extends Application {
 
 				try {
 					int eingabe = Integer.parseInt(keyEvent.getText());
-
 					// Mit 0 soll man nicht löschen können.
 					if (eingabe != 0)
 						scontroller.handleEingabe(eingabe);
-				}
-
-				catch (NumberFormatException e) {
+				}catch (NumberFormatException e) {
 					if (keyEvent.getCode() == KeyCode.DELETE || keyEvent.getCode() == KeyCode.SPACE
 							|| keyEvent.getCode() == KeyCode.BACK_SPACE)
 						scontroller.handleEingabe(0);
-
 				}
 			}
-
 		});
 	}
 
@@ -193,12 +185,11 @@ public class MainApp extends Application {
 	 * Fensterelemente sind nicht mehr klickbar: keine Bearbeitung möglich, bis
 	 * die Verarbeitung abgeschlossen ist.
 	 */
-
 	public void lockScreen() {
 		try {
 			// Lädt fxml-Datei und erzeugt eine neue stage für das Popup-gif.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainAppTest.class.getResource("view/WrapperLock.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/WrapperLock.fxml"));
 			AnchorPane pane = (AnchorPane) loader.load();
 
 			// Create the dialog Stage.
@@ -219,7 +210,6 @@ public class MainApp extends Application {
 			this.currentStage = dialogStage;
 			// Zeigt das gif an, bis es extern geschlossen wird.
 			dialogStage.show();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -241,7 +231,6 @@ public class MainApp extends Application {
 	 * Zeigt den Sudoku-Solver im rootLayout und setzt den SudokuController in
 	 * die MainApp. Der Controller ermöglicht Reaktionen auf Änderungen.
 	 */
-
 	public void initSudokuLayout() {
 		try {
 			// Lädt die Übersicht.
@@ -272,20 +261,18 @@ public class MainApp extends Application {
 	 * @param content
 	 *            gibt den Haupttext der Warnung an
 	 */
-
 	public void warning(String header, String content) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(primaryStage);
 		alert.setTitle("Warning");
-
+		
 		if (header.equals(""))
 			header = "Unable to do that";
 
 		alert.setHeaderText(header);
 		alert.setContentText(content);
-
+		
 		alert.showAndWait();
-
 	}
 
 	/**
@@ -308,7 +295,6 @@ public class MainApp extends Application {
 		alert.setContentText(content);
 
 		alert.showAndWait();
-
 	}
 
 	/**
@@ -319,7 +305,6 @@ public class MainApp extends Application {
 	 * @param content
 	 *            gibt den Haupttext der Fehlermeldung an
 	 */
-
 	public void error(String header, String content) {
 
 		Alert alert = new Alert(AlertType.ERROR);
@@ -333,7 +318,6 @@ public class MainApp extends Application {
 		alert.setContentText(content);
 
 		alert.showAndWait();
-
 	}
 
 	/**

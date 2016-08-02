@@ -24,7 +24,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sudoku.MainApp;
-import sudoku.MainAppTest;
 import sudoku.model.Solvability;
 import sudoku.model.Sudoku;
 import sudoku.model.SudokuGenerator;
@@ -40,7 +39,6 @@ public class WrapperController implements PropertyChangeListener {
 	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-	
 	}
 	
 	/**
@@ -49,7 +47,6 @@ public class WrapperController implements PropertyChangeListener {
 	@FXML
 	private void handleResetNotLocked() {
 		mainApp.getSudokuController().resetNotLocked();
-		
 	}
 
 	/**
@@ -57,10 +54,9 @@ public class WrapperController implements PropertyChangeListener {
 	 */
 	@FXML
 	private void handleGenerate() {
-
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainAppTest.class.getResource("view/InputNumberPopup.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/InputNumberPopup.fxml"));
 			AnchorPane pane = loader.load();
 
 			Scene scene = new Scene(pane);
@@ -89,7 +85,6 @@ public class WrapperController implements PropertyChangeListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 	
 	/**
@@ -113,9 +108,8 @@ public class WrapperController implements PropertyChangeListener {
 	 */
 	@FXML
 	private void handleSave() {
-		
 		//Man darf keine leeren Sudokus speichern.
-		if (mainApp.getSudoku().empty()) {
+		if (mainApp.getSudoku().isEmpty()) {
 			mainApp.warning("Unable to save", "You can not save an empty sudoku.");
 			return;
 		}
@@ -126,22 +120,15 @@ public class WrapperController implements PropertyChangeListener {
 		File selectedFile = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 		
 		if (selectedFile != null) {
-
 			try {
-
 				ObjectOutputStream os = new ObjectOutputStream(
 						new BufferedOutputStream(new FileOutputStream(selectedFile)));
 				os.writeObject(mainApp.getSudoku());
 				os.close();
-
 			} catch (Exception e) {
-
 				mainApp.error("Unable to save", "An error has occurred while saving");
-
 			}
-
-		} 
-
+		}
 	}
 
 	/**
@@ -149,7 +136,6 @@ public class WrapperController implements PropertyChangeListener {
 	 */
 	@FXML
 	private void handleLoad() {
-
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Load Sudoku");
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Sudokus", "*.sdk"),
@@ -158,7 +144,6 @@ public class WrapperController implements PropertyChangeListener {
 
 		if (selectedFile != null && selectedFile.exists()) {
 			try {
-
 				ObjectInputStream is = new ObjectInputStream(
 						new BufferedInputStream(new FileInputStream(selectedFile)));
 				Sudoku sudoku = (Sudoku) is.readObject();
@@ -169,20 +154,13 @@ public class WrapperController implements PropertyChangeListener {
 				// gefärbt war).
 				mainApp.getSudokuController().resetEditability();
 
-				if (mainApp.getSudoku().filled())
-					mainApp.getSudokuController().setEditable(false);
-			
-				
-
+				if (mainApp.getSudoku().isFilled())
+					mainApp.getSudokuController().setEditable(false);	
 			} catch (Exception e) {
-
 				mainApp.error("Unable to load",
 						"Please select a valid Sudoku file. This App only supports Files that are saved by itself or other instances.");
-
 			}
-
 		} 
-
 	}
 
 	/**
@@ -190,11 +168,10 @@ public class WrapperController implements PropertyChangeListener {
 	 */
 	@FXML
 	public void handleAbout() {
-
 		try {
 			// Lädt fxml-Datei und erzeugt eine neue stage für das Popup.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainAppTest.class.getResource("view/About.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/About.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// Erzeugt die dialogStage und stellt sie in den Vordergrund.
@@ -207,7 +184,6 @@ public class WrapperController implements PropertyChangeListener {
 
 			// Zeigt die dialogStage an, bis der Benutzer sie schließt.
 			dialogStage.showAndWait();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -236,9 +212,7 @@ public class WrapperController implements PropertyChangeListener {
 	 * Wird ausgelöst, wenn sich eine Eigenschaft an der Oberfläche ändert
 	 */
 	public void propertyChange(PropertyChangeEvent evt) {
-		
 		if (evt.getPropertyName().equals("InputNumber")) {
-
 			int numberOfClues = (int) evt.getNewValue();
 			// Setzt alle Textfelder auf schwarz.
 			mainApp.getSudokuController().colorAllBlack();			
@@ -265,9 +239,7 @@ public class WrapperController implements PropertyChangeListener {
 			task.setOnFailed(e -> {
 				mainApp.unlockScreen();
 			});
-			
 			new Thread(task).start();	
 			}
 	}
-
 }

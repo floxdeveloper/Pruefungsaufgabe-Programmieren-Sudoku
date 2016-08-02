@@ -32,8 +32,6 @@ public class SudokuGenerator {
 			alreadyUsed[i]=false;
 	}
 	
-	
-	
 	/**
 	 * Generiert ein Sudoku mit gefüllten Feldern, deren Anzahl numberOfClues entspricht.
 	 * @param numberOfClues - Anzahl der gefüllten Felder
@@ -64,7 +62,7 @@ public class SudokuGenerator {
 					filledPos = true;
 					arraySudoku[xKoord][yKoord] = digit;				
 					copy = copySudokuArray(arraySudoku);	
-					
+	
 					// entspricht nicht den Sudoku Regeln -> nächste Zahl probieren
 					if (!objectSudoku.setSudokuIfCorrect(copy)) {
 						digit = getNotTriedNumber();
@@ -73,7 +71,7 @@ public class SudokuGenerator {
 						//Prüft Lösbarkeit
 						objectSudoku.solveIfUnderOneSec();
 						// Ist so nicht lösbar -> nächste Zahl probieren
-						if (!objectSudoku.filled()) {
+						if (!objectSudoku.isFilled()) {
 							digit = getNotTriedNumber();
 							filledPos = false;					
 						}
@@ -85,7 +83,6 @@ public class SudokuGenerator {
 		}
 		return new Sudoku(arraySudoku);
 	}
-	
 	
 	/**
 	 * Füllt ein Array der Größe 9x9 mit Nullen
@@ -99,10 +96,6 @@ public class SudokuGenerator {
 			}
 		}
 	}
-
-	
-	
-	
 
 	/**
 	 * Gibt neu erzeugtes Feld mit Inhalt von array zurück.
@@ -120,5 +113,4 @@ public class SudokuGenerator {
 		}
 		return arrayret;
 	}
-
 }

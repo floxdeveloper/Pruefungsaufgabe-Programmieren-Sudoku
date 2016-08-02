@@ -3,6 +3,7 @@ package sudoku.view;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.After;
@@ -117,19 +118,20 @@ public class SudokuControllerTest {
 		assertEquals("In dem Feld konnte eine 9 eingegeben werden", "9", sController.getKoordinate(1, 1).getText());
 	}
 	
-	
 	@Test
 	public void testCongratulationDialogAfterLastSuccessfulEingabe(){
-		mainApp.getSudoku().setSudokuIfCorrect(HelpElements.testArrayCountUniqueSolvable);
+		int[][] testArrayCountUniquelySolvable = HelpElements.copySudokuArray(HelpElements.testArrayCountUniqueSolvable);
+		mainApp.getSudoku().setSudokuIfCorrect(testArrayCountUniquelySolvable);
 		sController.sudokuAnzeigen();
 		
 		robot.clickOn("#r08");
 		robot.type(KeyCode.DIGIT2);
 		
+		
 		assertEquals("Nach selbstst. Lösen öffnet sich Congratulation Dialog", "CongratulationPage", new WindowFinderImpl().listWindows().get(1).getScene().getRoot().getId());
 		
 	}
-	
+
 	@Test
 	public void testLockEnteredFields(){
 		sController.auswahlX = 1;
@@ -147,7 +149,8 @@ public class SudokuControllerTest {
 	
 	@Test
 	public void testSudokuChanged(){
-		mainApp.getSudoku().setSudokuIfCorrect(HelpElements.testArrayCountUniqueSolvable);
+		int[][] testArrayCountUniquelySolvable = HelpElements.copySudokuArray(HelpElements.testArrayCountUniqueSolvable);
+		mainApp.getSudoku().setSudokuIfCorrect(testArrayCountUniquelySolvable);
 		
 		assertEquals("Testfeld und alle anderen Felder sind leer", " ", sController.mapText.get(0).getText());
 		
@@ -161,7 +164,7 @@ public class SudokuControllerTest {
 		//setze das Rechteck r00 auf select
 		sController.auswahlX = 0;
 		sController.auswahlY = 0;
-		sController.mapRect.get(9 * 0 + 0).setStroke(Color.RED);
+		sController.mapRect.get(9 * sController.auswahlX + sController.auswahlY).setStroke(Color.RED);
 		
 		sController.auswahlX = 0;
 		sController.auswahlY = 0;		

@@ -7,14 +7,12 @@ import javafx.stage.Stage;
 public class CongratulationController {
 
 	@FXML
-	private Button ok;
-	
+	private Button ok;	
 	private Stage stage;
 	
 	public void setStage(Stage stage){
 		this.stage=stage;
 	}
-	
 	
 	/**
 	 *  Schlieﬂt den Congratulations Bildschirm
@@ -23,5 +21,4 @@ public class CongratulationController {
 	private void handleOk(){
 		stage.close();
 	}
-	
 }
