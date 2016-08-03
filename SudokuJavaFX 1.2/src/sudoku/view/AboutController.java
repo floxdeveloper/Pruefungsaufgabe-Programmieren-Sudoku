@@ -5,13 +5,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * Diese Klasse verwaltet das Popup-Menu unter About.
+ */
 public class AboutController {
 	
 	@FXML 
 	Button closeButton;
 	
 	/**
-	 * Schlieﬂt die aktuelle Stage
+	 * Schlieﬂt die aktuelle Stage.
 	 */
 	@FXML
 	public void handleClose(ActionEvent event) {

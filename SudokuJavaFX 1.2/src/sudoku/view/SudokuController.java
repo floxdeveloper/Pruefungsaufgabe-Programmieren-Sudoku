@@ -25,6 +25,10 @@ import sudoku.model.RectPos;
 import sudoku.model.Solvability;
 import sudoku.model.Sudoku;
 
+/**
+ * Diese Klasse verwaltet die GUI des Sudokus. Sie ist zuständig für die Interaktionen
+ * des Benutzers mit dem Sudoku und verwaltet zudem die Editierbarkeit der Sudokufelder.
+ */
 public class SudokuController {
 
 	private MainApp mainApp;
@@ -66,7 +70,7 @@ public class SudokuController {
 
 	/**
 	 * Wird von MainApp aufgerufen und setzt den Verweis auf diese.
-	 * Zusätzlich wird das Sudoku geladen und dann angezeigt
+	 * Zusätzlich wird das Sudoku geladen und dann angezeigt.
 	 * @param mainApp
 	 */
 	public void setMainApp(MainApp mainApp) {
@@ -84,7 +88,7 @@ public class SudokuController {
 	}
 
 	/**
-	 * Zusammengefasste Initialisierungsmethode für Maps, EventHandler und die Editierbarkeit
+	 * Zusammengefasste Initialisierungsmethode für Maps, EventHandler und die Editierbarkeit.
 	 */
 	@FXML
 	protected void initialize() {
@@ -157,11 +161,10 @@ public class SudokuController {
 
 	/**
 	 * Wenn ein Feld angewählt ist, wird eingabe an diese Position eingetragen.
-	 * Ist es die letzte notwendige Eingabe, ist Sudoku gelöst und wird
-	 * Zusätlich Überprüfung, ob Eingabe einer Sudokuzahl entspricht 0-9
-	 * uneditierbar.
+	 * Ist es die letzte notwendige Eingabe, ist Sudoku gelöst und es wird
+	 * zusätzlich überprüft, ob die Eingabe einer Sudokuzahl entspricht.
 	 * 
-	 * @param eingabe - Vom Benutzer ins Feld eingegebene Zahl
+	 * @param eingabe - vom Benutzer ins Feld eingegebene Zahl
 	 */
 	public void handleEingabe(int eingabe) {
 		boolean alreadyFilled = mainApp.getSudoku().isFilled();
@@ -186,7 +189,7 @@ public class SudokuController {
 	}
 
 	/**
-	 * Zeigt Congratulation-Bildschirm an.
+	 * Zeigt den Congratulations-Bildschirm an.
 	 */
 	private void showCongratulation() {
 		try {
@@ -218,7 +221,7 @@ public class SudokuController {
 	}
 
 	/**
-	 * Bei Klick auf Reset: Sudoku wird auf leer zurückgesetzt.
+	 * Bei Klick auf Reset wird das Sudoku auf leer zurückgesetzt.
 	 */
 	@FXML
 	private void handleReset() {
@@ -247,8 +250,8 @@ public class SudokuController {
 	}
 
 	/**
-	 * Bei Klick auf Solve: Alle aktuell eingefüllten Felder werden gesperrt und
-	 * uneditierbar gemacht. Sudoku wird gelöst und angezeigt.
+	 * Bei Klick auf Solve werden alle aktuell eingefüllten Felder gesperrt und
+	 * uneditierbar gemacht. Das Sudoku wird gelöst und angezeigt.
 	 */
 	@FXML
 	private void handleSolve() {

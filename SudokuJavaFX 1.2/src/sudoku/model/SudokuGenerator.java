@@ -7,6 +7,8 @@ package sudoku.model;
  * Nach jedem Schritt wird auf Lösbarkeit geprüft. 
  * Falls das Sudoku lösbar bleibt, wird eine weitere Zahl hinzugefügt,
  * ansonsten wird eine andere Zahl ausprobiert.
+ * Die Anzahl von vorgegebenen Zahlen stellt gleichzeitig den 
+ * Schwierigkeitsgrad dar (20-30: schwierig, 31-50: mittel, 51-80: leicht).
  */
 public class SudokuGenerator {
 

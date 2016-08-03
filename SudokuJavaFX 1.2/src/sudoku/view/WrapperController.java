@@ -28,13 +28,17 @@ import sudoku.model.Solvability;
 import sudoku.model.Sudoku;
 import sudoku.model.SudokuGenerator;
 
-
+/**
+ * Diese Klasse verwaltet alle Interaktionen des Benutzers mit den Schaltflächen
+ * um das Sudokufeld herum. Sie führt zudem das Speichern und Laden eines Sudokus aus.
+ *
+ */
 public class WrapperController implements PropertyChangeListener {
 
 	private MainApp mainApp;
 
 	/**
-	 * Wird von der Main-Applikation gerufen. 
+	 * Wird von der Main-Applikation aufgerufen. 
 	 * @param mainApp
 	 */
 	public void setMainApp(MainApp mainApp) {
@@ -42,7 +46,7 @@ public class WrapperController implements PropertyChangeListener {
 	}
 	
 	/**
-	 * Setzt die nicht gesperrten Felder zurück
+	 * Setzt die nicht gesperrten Felder zurück.
 	 */
 	@FXML
 	private void handleResetNotLocked() {
@@ -50,7 +54,7 @@ public class WrapperController implements PropertyChangeListener {
 	}
 
 	/**
-	 * Öffnet das InputNumberPopup, damit die Einstellungen für das  zu generierende Sudoku getätigt werden können
+	 * Öffnet das InputNumberPopup, damit die Einstellungen für das zu generierende Sudoku getätigt werden können.
 	 */
 	@FXML
 	private void handleGenerate() {
@@ -88,7 +92,7 @@ public class WrapperController implements PropertyChangeListener {
 	}
 	
 	/**
-	 * Löst das Zurücksetzen der Editierbarkeit über die MainApp aus
+	 * Löst das Zurücksetzen der Editierbarkeit über die MainApp aus.
 	 */	
 	@FXML
 	private void handleResetEditability(){
@@ -96,7 +100,7 @@ public class WrapperController implements PropertyChangeListener {
 	}
 	
 	/**
-	 * Löst die Sperrung der bereits eingegebenen Zahlen über die MainApp aus
+	 * Löst die Sperrung der bereits eingegebenen Zahlen über die MainApp aus.
 	 */
 	@FXML
 	private void handleLockEntered(){
@@ -104,13 +108,13 @@ public class WrapperController implements PropertyChangeListener {
 	}
 
 	/**
-	 * Öffnet den Dateimanager des Betriebssystems, um das Sudoku als binäres Objekt zu speichern
+	 * Öffnet den Dateimanager des Betriebssystems, um das Sudoku als binäres Objekt zu speichern.
 	 */
 	@FXML
 	private void handleSave() {
 		//Man darf keine leeren Sudokus speichern.
 		if (mainApp.getSudoku().isEmpty()) {
-			mainApp.warning("Unable to save", "You can not save an empty sudoku.");
+			mainApp.warning("Unable to save", "You cannot save an empty sudoku.");
 			return;
 		}
 		
@@ -126,13 +130,13 @@ public class WrapperController implements PropertyChangeListener {
 				os.writeObject(mainApp.getSudoku());
 				os.close();
 			} catch (Exception e) {
-				mainApp.error("Unable to save", "An error has occurred while saving");
+				mainApp.error("Unable to save", "An error has occurred while saving.");
 			}
 		}
 	}
 
 	/**
-	 * Öffnet den Dateimanager des Betriebssystems, um das binäre Objekt eines gespeicherten Sudokus zu laden
+	 * Öffnet den Dateimanager des Betriebssystems, um das binäre Objekt eines gespeicherten Sudokus zu laden.
 	 */
 	@FXML
 	private void handleLoad() {
@@ -164,7 +168,7 @@ public class WrapperController implements PropertyChangeListener {
 	}
 
 	/**
-	 * Zeigt einen Dialog mit Informationen über die Verfasser und die Entstehung der Anwendung an
+	 * Zeigt einen Dialog mit Informationen über die Verfasser und die Entstehung der Anwendung an.
 	 */
 	@FXML
 	public void handleAbout() {
@@ -190,7 +194,7 @@ public class WrapperController implements PropertyChangeListener {
 	}
 	
 	/**
-	 * Löst die Überprüfung der Lösbarkeit des eingegeben Sudokus über die MainApp aus
+	 * Löst die Überprüfung der Lösbarkeit des eingegeben Sudokus über die MainApp aus.
 	 */
 	@FXML
 	private void handleCheck(){
@@ -209,7 +213,8 @@ public class WrapperController implements PropertyChangeListener {
 	}
 
 	/**
-	 * Wird ausgelöst, wenn sich eine Eigenschaft an der Oberfläche ändert
+	 * Wird ausgelöst, sobald man die Anzahl der vorgegebenen Zahlen eingibt. 
+	 * Führt generate() von SudokuGenerator aus und setzt das generierte Sudoku.
 	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("InputNumber")) {

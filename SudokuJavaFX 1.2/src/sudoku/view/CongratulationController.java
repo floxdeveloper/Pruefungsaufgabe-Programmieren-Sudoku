@@ -3,7 +3,9 @@ package sudoku.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
+/**
+ * Diese Klasse verwaltet das Congratulations-Popup.
+ */
 public class CongratulationController {
 
 	@FXML
@@ -15,7 +17,7 @@ public class CongratulationController {
 	}
 	
 	/**
-	 *  Schlieﬂt den Congratulations Bildschirm
+	 *  Schlieﬂt das Congratulations-Popup bei einem Knopfdruck auf 'OK'.
 	 */
 	@FXML
 	private void handleOk(){

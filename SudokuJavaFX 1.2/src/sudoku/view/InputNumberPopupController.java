@@ -10,6 +10,11 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import sudoku.MainApp;
 
+/**
+ * Diese Klasse verwaltet das Popup, welches sich beim Generieren eines Sudokus öffnet.
+ * Um die gewünschte Anzahl an vorgegebenen Zahlen an den Wrapper zu schicken, wird auf
+ * einen PropertyChange zurückgegriffen.
+ */
 public class InputNumberPopupController {
 
 	private MainApp mainApp;
@@ -19,7 +24,7 @@ public class InputNumberPopupController {
 	private ComboBox<Integer> eingabecb;
 
 	/**
-	 * Setzt die Stage
+	 * Setzt die Stage.
 	 * @param stage - zu setzende Stage
 	 */
 	public void setStage(Stage stage) {
@@ -27,7 +32,7 @@ public class InputNumberPopupController {
 	}
 
 	/**
-	 * Fügt ins Dropdownmenü die passenden Verknüpfungen mit den auswählbaren Zahlen ein
+	 * Fügt ins Dropdownmenü die passenden Verknüpfungen mit den auswählbaren Zahlen zwischen 20 und 80 ein.
 	 */
 	@FXML
 	private void initialize() {	
@@ -41,7 +46,7 @@ public class InputNumberPopupController {
 	}
 
 	/**
-	 * Fügt PropertyChangeListener zu ProbertyChangeSupport hinzu
+	 * Fügt PropertyChangeListener zu PropertyChangeSupport hinzu.
 	 * 
 	 * @param p
 	 */
@@ -50,7 +55,8 @@ public class InputNumberPopupController {
 	}
 
 	/**
-	 * Überprüft die eingegebene Zahl an bereits gefüllten Feldern des zu generierenden Sudoku
+	 * Überprüft die eingegebene Zahl an bereits gefüllten Feldern des zu generierenden Sudokus.
+	 * Wirft eine Fehlermeldung aus, falls keine Zahl gewählt wurde.
 	 */
 	@FXML
 	private void handleAbsenden() {
@@ -63,7 +69,7 @@ public class InputNumberPopupController {
 	}
 
 	/**
-	 * Setzt MainApp Referenz
+	 * Setzt die MainApp-Referenz.
 	 * 
 	 * @param m - MainApp
 	 */
@@ -72,7 +78,7 @@ public class InputNumberPopupController {
 	}
 
 	/**
-	 * Schließt Fenster 
+	 * Schließt Fenster.
 	 */
 	@FXML
 	private void handleAbbrechen() {
