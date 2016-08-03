@@ -1,6 +1,8 @@
 package sudoku.model;
 
-
+/**
+ * Diese Enumeration bildet die einzelnen Lösbarkeitsstufen auf Strings ab.
+ */
 public enum Solvability {
   notEvaluated /**Nicht überprüft */,
   notSolvable/**Nachgewiesen nicht lösbar*/,

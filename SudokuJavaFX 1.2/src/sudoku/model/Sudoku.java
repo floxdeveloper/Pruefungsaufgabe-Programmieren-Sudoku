@@ -1,7 +1,9 @@
 package sudoku.model;
 
 import java.io.Serializable;
-
+	/**
+	 * Diese Klasse definiert den abstrakten Datentyp Sudoku und seine Operationen.
+	 */
 public class Sudoku implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -22,19 +24,36 @@ public class Sudoku implements Serializable {
 	*/
 	protected int solveCounter;
 	protected boolean fertig;
-
+	
+	/**
+	 * Gibt den solveCounter aus.
+	 * @return die Anzahl der möglichen Lösungen (2 = zwei oder mehr Lösungen).
+	 */
 	public int getSolveCounter() {
 		return solveCounter;
 	}
-
+	
+	/**
+	 * Gibt das sudokuArray aus.
+	 * @return das sudokuArray als Feld
+	 */
 	public int[][] getSudokuArray() {
 		return sudokuArray;
 	}
 	
+	/**
+	 * Gibt als String aus, welche Art der Lösbarkeit vorhanden ist.
+	 * @return die Art der Lösbarkeit in Form eines Strings
+	 */
 	public Solvability getSolvability() {
 		return solvability;
 	}
 	
+	/**
+	 * Hilfsfunktion für sudokuBT und sudokuBTCount. Gibt die nächste 
+	 * Koordinate aus, die ausprobiert werden muss.
+	 * @return die nächste zu probierende Koordinate oder {-1, -1}, falls komplett durchprobiert
+	 */
 	private int[] getNextCoordinate() {
 		for (int j = 0; j < sudokuArray.length; j++) {
 			for (int i = 0; i < sudokuArray.length; i++) {
@@ -46,9 +65,8 @@ public class Sudoku implements Serializable {
 		return new int[] { -1, -1 }; // nichts mehr auszufüllen -> fertig
 	}
 	
-	
 	/**
-	 * Wenn sudokuArray den Regeln entspricht, wird es gesetzt.
+	 * Entspricht sudokuArray den Regeln, wird es gesetzt.
 	 * 
 	 * 
 	 * @param array 9x9 Array, das Sudoku enthält
@@ -106,9 +124,9 @@ public class Sudoku implements Serializable {
 			solvability = Solvability.notSolvable;
 	}
 	
-/**
- * Das Sudoku muss in max. einer Sekunde gelöst werden. Die Lösbarkeit wird nicht evaluiert.
- */
+	/**
+	 * Das Sudoku muss in max. einer Sekunde gelöst werden. Die Lösbarkeit wird nicht evaluiert.
+	 */
 	public void solveIfUnderOneSec() {
 		initMaxSolveTime(1);
 
@@ -125,8 +143,8 @@ public class Sudoku implements Serializable {
 	}
 
 	/**
-	 * Löst das sudokuArray mittels sudokuBTCount. Wenn Sudoku nicht lösbar ist
-	 * ist es nach Methode unverändert. Nach 10 Sekunden wird Methode
+	 * Löst das sudokuArray mittels sudokuBTCount. Wenn das Sudoku nicht lösbar ist
+	 * ist es nach Methode unverändert. Nach 10 Sekunden wird die Methode
 	 * abgebrochen.
 	 */
 	public void solveCount() {
@@ -153,13 +171,13 @@ public class Sudoku implements Serializable {
 	}
 
 	/**
-	 * Überprüft array auf Sudokuregeln (richtige Größe; nur erlaubte Werte)
+	 * Überprüft array auf Sudokuregeln (richtige Größe; nur erlaubte Werte).
 	 * 
 	 * @param array 9x9 Array, das zu überprüfendes Sudoku enthält
 	 * @return true: wenn es Regeln entspricht; false: sonst
 	 */
 	public boolean checkIfCorrectSudoku(int[][] array) {
-		// Prüft prinzipielle Groesse
+		// Prüft prinzipielle Groesse.
 		if (array.length != 9)
 			return false;
 		
@@ -177,7 +195,7 @@ public class Sudoku implements Serializable {
 
 		boolean[] zahlVerfügbar = new boolean[9];
 
-		// Prüft ob Zeilen (bis jetzt) nach Sudokuregeln gefüllt wurden
+		// Prüft ob Zeilen (bis jetzt) nach Sudokuregeln gefüllt wurden.
 		for (int i = 0; i < 9; i++) {
 			// macht alle Zahlen wieder verfügbar
 			setBoolArrayAll(zahlVerfügbar, true);
@@ -192,7 +210,7 @@ public class Sudoku implements Serializable {
 			}
 		}
 
-		// Prüft ob Spalten (bis jetzt) nach Sudokuregeln gefüllt wurden
+		// Prüft ob Spalten (bis jetzt) nach Sudokuregeln gefüllt wurden.
 		for (int i = 0; i < 9; i++) {
 			// macht alle Zahlen wieder verfügbar
 			setBoolArrayAll(zahlVerfügbar, true);
@@ -208,7 +226,7 @@ public class Sudoku implements Serializable {
 		}
 
 		// Prüft ob die 9er- Kästchen (bis jetzt) nach Sudokuregeln gefüllt
-		// wurden
+		// wurden.
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				setBoolArrayAll(zahlVerfügbar, true);
@@ -244,14 +262,16 @@ public class Sudoku implements Serializable {
 	}
 
 	/**
-	 * @return Kopie von sudokuArray
+	 * Erzeugt eine referenzungebundene Kopie vom sudokuArray.
+	 * @return eine Kopie von sudokuArray
 	 */
 	public int[][] copySudokuArray() {
 		return copyArray(sudokuArray);
 	}
 
 	/**
-	 * Löst sudokuArray mit Hilfe von Backtracking. Stoppt bei erster Lösung.
+	 * Löst sudokuArray mit Hilfe von Backtracking. Stoppt bei erster Lösung. 
+	 * Im worst case liegt die Komplexität bei O(n!).
 	 * Bei keiner Lösung bleibt sudokuArray im Anfangszustand.
 	 */
 	private void sudokuBT() {
@@ -285,9 +305,11 @@ public class Sudoku implements Serializable {
 	}
 
 	/**
-	 * Löst sudokuArray mit Backtracking. Speichert die erste Lösung in
-	 * sudokuSaved zwischen. Schaut, ob es mindestens eine zweite Lösung gibt.
-	 * Bricht dann ab. Füllt Count-Variable.
+	 * Löst sudokuArray mit Backtracking und speichert die erste Lösung in
+	 * sudokuSaved zwischen. Schaut danach, ob es mindestens eine zweite Lösung gibt 
+	 * und bricht dann ab. Füllt Count-Variable.
+	 * Komplexität des Algorithmus liegt wieder bei O(n!), 
+	 * die durchschnittliche Laufzeit übersteigt allerdings die von sudokuBT
 	 */
 	private void sudokuBTCount() {
 
@@ -322,7 +344,7 @@ public class Sudoku implements Serializable {
 	}
 
 	/**
-	 * Prüft ob eine Zahl an der Stelle hor/ver eingesetzt werden darf
+	 * Prüft, ob eine Zahl an der Stelle hor/ver eingesetzt werden darf.
 	 * @param hor - Horizontaler Wert des zu überprüfenden SudokuArrays
 	 * @param ver - Vertikaler Wert des zu überprüfenden SudokuArrays
 	 * @param zahl - Die Zahl, die an der Stelle hor/ver eingetragen werden soll
@@ -361,7 +383,7 @@ public class Sudoku implements Serializable {
 	}
 
 	/**
-	 * Löscht alle Felder des Sudokus
+	 * Löscht alle Felder des Sudokus.
 	 */
 	public void sudokuReset() {
 		for (int i = 0; i < 9; i++) {
@@ -372,7 +394,8 @@ public class Sudoku implements Serializable {
 	}
 
 	/**
-	 * @return true - Sudoku leer, false sonst
+	 * Überprüft, ob das Sudoku leer ist.
+	 * @return true - Sudoku leer, false - sonst
 	 */
 	public boolean isEmpty() {
 		for (int i = 0; i < sudokuArray.length; i++) {
@@ -386,7 +409,8 @@ public class Sudoku implements Serializable {
 
 	
 	/**
-	 * @return true - Sudoku vollständig gefüllt, false sonst
+	 * Überprüft, ob das Sudoku vollständig gefüllt ist.
+	 * @return true - Sudoku vollständig gefüllt, false - sonst
 	 */
 	public boolean isFilled() {
 		for (int i = 0; i < sudokuArray.length; i++) {
@@ -398,7 +422,7 @@ public class Sudoku implements Serializable {
 		return true;
 	}
 
-	/**Konrolliert, ob es zum gegebenen Sudoku eine einzigartige Lösung gibt
+	/**Konrolliert, ob es zum gegebenen Sudoku eine einzigartige Lösung gibt.
 	 * 
 	 * @return uniquelySolvable oder notUniquelySolvable
 	 */

@@ -1,8 +1,18 @@
 
 package sudoku.model;
-
+/**
+ * Diese Klasse generiert Sudokus. Dabei werden, abhängig von der gewünschten
+ * Anzahl von vorgegebenen Zahlen, schrittweise zufällig Felder ausgewählt, 
+ * in die dann je eine gültige Zahl nach Sudokuregeln hinzugefügt wird.
+ * Nach jedem Schritt wird auf Lösbarkeit geprüft. 
+ * Falls das Sudoku lösbar bleibt, wird eine weitere Zahl hinzugefügt,
+ * ansonsten wird eine andere Zahl ausprobiert.
+ */
 public class SudokuGenerator {
 
+	/**
+	 * Symbolisiert alle möglichen Zahlen zwischen 1-9.
+	 */
 	protected static boolean[] alreadyUsed = new boolean[9];
 	
 	/**
@@ -27,6 +37,9 @@ public class SudokuGenerator {
 		return getNotTriedNumber();
 	}
 	
+	/**
+	 * Entfernt alle Markierungen, sodass wieder Zahlen zwischen 1-9 eingesetzt werden können.
+	 */
 	protected static void resetAlreadyUsed(){
 		for (int i = 0; i < alreadyUsed.length; i++)
 			alreadyUsed[i]=false;
@@ -85,7 +98,7 @@ public class SudokuGenerator {
 	}
 	
 	/**
-	 * Füllt ein Array der Größe 9x9 mit Nullen
+	 * Füllt ein Array der Größe 9x9 mit Nullen.
 	 * 
 	 * @param array
 	 */
@@ -98,10 +111,10 @@ public class SudokuGenerator {
 	}
 
 	/**
-	 * Gibt neu erzeugtes Feld mit Inhalt von array zurück.
+	 * Gibt neu erzeugtes Feld mit dem Inhalt von array zurück.
 	 * 
-	 * @param array zweidimensionales Array
-	 * @return kopiertes array
+	 * @param array zwei-dimensionales Array
+	 * @return kopiertes Array
 	 */
 	private static int[][] copySudokuArray(int[][] array) {
 		int[][] arrayret = new int[9][9];
