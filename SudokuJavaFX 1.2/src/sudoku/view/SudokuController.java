@@ -71,6 +71,7 @@ public class SudokuController {
 	/**
 	 * Wird von MainApp aufgerufen und setzt den Verweis auf diese.
 	 * Zusätzlich wird das Sudoku geladen und dann angezeigt.
+	 * 
 	 * @param mainApp
 	 */
 	public void setMainApp(MainApp mainApp) {
@@ -275,11 +276,11 @@ public class SudokuController {
 			// Färbt User Input blau ein.
 			lockEnteredFields();
 
-			// Wenn nicht nach Sudoku Regeln: zeigt hier altes Sudoku an (kommt
+			// Wenn nicht nach Sudoku-Regeln: zeigt hier altes Sudoku an (kommt
 			// nie vor da nach jeder Eingabe gecheckt wird)
 			sudokuAuslesen();
 
-			// Bei unlösbaren Sudokus stoppt Backtracking, ohne ein gefülltes
+			// Bei unlösbaren Sudokus stoppt Backtracking ohne ein gefülltes
 			// Sudoku zurück zu lassen. Danach kann abgefragt werden, ob es
 			// geklappt hat
 			Task<Void> task = new Task<Void>() {
@@ -297,7 +298,7 @@ public class SudokuController {
 			task.setOnSucceeded(e -> {
 				mainApp.unlockScreen();
 				if (!mainApp.getSudoku().isFilled()) {
-					// Farbe wieder auf schwarz ändern
+					// Farbe wieder auf schwarz ändern.
 					resetNotLocked();
 
 					if (mainApp.getSudoku().getSolvability() == Solvability.notSolvable)
@@ -488,10 +489,10 @@ public class SudokuController {
 	}
 
 	/**
-	 * Initialisiert die Text- und Rechteckmap.
+	 * Initialisiert die Text- und Rechteck-Map.
 	 */
 	private void initMaps() {
-		// Text map wird gefüllt
+		// Text-Map wird gefüllt
 		mapText.put(0, t00);
 		mapText.put(1, t01);
 		mapText.put(2, t02);
@@ -574,7 +575,7 @@ public class SudokuController {
 		mapText.put(79, t87);
 		mapText.put(80, t88);
 
-		// Rechteck map wird gefüllt
+		// Rechteck-Map wird gefüllt
 		mapRect.put(0, r00);
 		mapRect.put(1, r01);
 		mapRect.put(2, r02);

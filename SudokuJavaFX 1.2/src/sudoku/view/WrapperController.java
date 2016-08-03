@@ -39,6 +39,7 @@ public class WrapperController implements PropertyChangeListener {
 
 	/**
 	 * Wird von der Main-Applikation aufgerufen. 
+	 * 
 	 * @param mainApp
 	 */
 	public void setMainApp(MainApp mainApp) {
@@ -54,7 +55,8 @@ public class WrapperController implements PropertyChangeListener {
 	}
 
 	/**
-	 * Öffnet das InputNumberPopup, damit die Einstellungen für das zu generierende Sudoku getätigt werden können.
+	 * Öffnet das InputNumberPopup, damit die Einstellungen für das zu generierende 
+	 * Sudoku getätigt werden können.
 	 */
 	@FXML
 	private void handleGenerate() {
@@ -68,7 +70,6 @@ public class WrapperController implements PropertyChangeListener {
 			
 			// Setzt das Icon für das Popup.
 			stage.getIcons().add(new Image("file:resources/images/sudoku.png"));
-			
 			
 			//Lässt Eingabe auf das Main-Fenster nicht mehr zu.
 			stage.initOwner(mainApp.getPrimaryStage());

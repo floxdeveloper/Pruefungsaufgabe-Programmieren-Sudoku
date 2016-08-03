@@ -51,9 +51,7 @@ public class CompleteSudokuGuiTest{
 		try {
 			FxToolkit.cleanupStages();
 		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 }

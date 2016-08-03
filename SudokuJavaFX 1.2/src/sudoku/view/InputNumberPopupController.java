@@ -25,6 +25,7 @@ public class InputNumberPopupController {
 
 	/**
 	 * Setzt die Stage.
+	 * 
 	 * @param stage - zu setzende Stage
 	 */
 	public void setStage(Stage stage) {

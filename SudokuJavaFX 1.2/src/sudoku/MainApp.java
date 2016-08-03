@@ -254,7 +254,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Gibt eine Warnung mit mainApp als Owner aus.
+	 * Gibt eine Warnung mit MainApp als Owner aus.
 	 * 
 	 * @param header
 	 *            gibt den Header der Warnung an
@@ -276,7 +276,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Gibt eine Informationsmeldung mit mainApp als Owner aus.
+	 * Gibt eine Informationsmeldung mit MainApp als Owner aus.
 	 * 
 	 * @param header
 	 *            gibt den Header der Information an
@@ -298,7 +298,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Gibt einen Fehler mit mainApp als Owner aus.
+	 * Gibt einen Fehler mit MainApp als Owner aus.
 	 * 
 	 * @param header
 	 *            gibt den Header der Fehlermeldung an

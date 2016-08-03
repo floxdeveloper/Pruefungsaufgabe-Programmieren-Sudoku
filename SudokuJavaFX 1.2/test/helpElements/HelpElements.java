@@ -1,7 +1,5 @@
 package helpElements;
 
-
-
 import sudoku.model.Sudoku;
 
 public class HelpElements {	
@@ -90,7 +88,6 @@ public class HelpElements {
 		  {2,8,7,4,1,9,6,3,5},
 		  {3,4,5,2,8,6,1,7,9}};
 	 
-
 		  public static int[][] copySudokuArray(int[][] array) {
 				int[][] arrayret = new int[array.length][array[0].length];
 
@@ -100,6 +97,5 @@ public class HelpElements {
 					}
 				}
 				return arrayret;
-			}
-		  
+			}		  
 }

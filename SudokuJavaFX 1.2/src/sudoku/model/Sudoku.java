@@ -1,6 +1,7 @@
 package sudoku.model;
 
 import java.io.Serializable;
+
 	/**
 	 * Diese Klasse definiert den abstrakten Datentyp Sudoku und seine Operationen.
 	 */
@@ -66,7 +67,7 @@ public class Sudoku implements Serializable {
 	}
 	
 	/**
-	 * Entspricht sudokuArray den Regeln, wird es gesetzt.
+	 * Entspricht sudokuArray den Regeln wird es gesetzt.
 	 * 
 	 * 
 	 * @param array 9x9 Array, das Sudoku enthält
@@ -81,7 +82,6 @@ public class Sudoku implements Serializable {
 	}
 	
 	/**
-	 * 
 	 * Setzt alle Werte in boolArray auf value.
 	 * 
 	 * @param boolArray
@@ -106,7 +106,7 @@ public class Sudoku implements Serializable {
 
 	/**
 	 * Methode löst das Sudoku, ohne Aussage über Anzahl der Lösungen zu
-	 * treffen. Bei unlösbarem Sudoku ist sudoku danach im vorigen Zustand. Nach
+	 * treffen. Bei unlösbarem Sudoku ist Sudoku danach im vorherigen Zustand. Nach
 	 * zehn Sekunden kann man von Unlösbarkeit ausgehen.
 	 */
 	public void solve() {
@@ -309,7 +309,7 @@ public class Sudoku implements Serializable {
 	 * sudokuSaved zwischen. Schaut danach, ob es mindestens eine zweite Lösung gibt 
 	 * und bricht dann ab. Füllt Count-Variable.
 	 * Komplexität des Algorithmus liegt wieder bei O(n!), 
-	 * die durchschnittliche Laufzeit übersteigt allerdings die von sudokuBT
+	 * die durchschnittliche Laufzeit übersteigt allerdings die von sudokuBT.
 	 */
 	private void sudokuBTCount() {
 
@@ -345,6 +345,7 @@ public class Sudoku implements Serializable {
 
 	/**
 	 * Prüft, ob eine Zahl an der Stelle hor/ver eingesetzt werden darf.
+	 * 
 	 * @param hor - Horizontaler Wert des zu überprüfenden SudokuArrays
 	 * @param ver - Vertikaler Wert des zu überprüfenden SudokuArrays
 	 * @param zahl - Die Zahl, die an der Stelle hor/ver eingetragen werden soll
@@ -422,7 +423,8 @@ public class Sudoku implements Serializable {
 		return true;
 	}
 
-	/**Konrolliert, ob es zum gegebenen Sudoku eine einzigartige Lösung gibt.
+	/**
+	 * Konrolliert, ob es zum gegebenen Sudoku eine einzigartige Lösung gibt.
 	 * 
 	 * @return uniquelySolvable oder notUniquelySolvable
 	 */

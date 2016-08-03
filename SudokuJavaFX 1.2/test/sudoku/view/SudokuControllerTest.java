@@ -64,8 +64,7 @@ public class SudokuControllerTest {
 	}
 	
 	@Test
-	public void testHandleEingabe(){		
-		
+	public void testHandleEingabe(){			
 		sController.auswahlX = 1;
 		sController.auswahlY = 1;
 		sController.handleEingabe(8);		
@@ -76,7 +75,7 @@ public class SudokuControllerTest {
 		sController.handleEingabe(9);
 		assertEquals("9 wurde in der 1. Zeile und 1.Spalte eingegeben", "9" ,sController.getKoordinate(1, 1).getText());
 		
-		//warning in falschen Thread -> Testen mit Robot
+		//warning im falschen Thread -> Testen mit Robot
 		robot.clickOn("#r00");
 		robot.type(KeyCode.DIGIT9);
 		robot.clickOn("OK");
@@ -129,7 +128,6 @@ public class SudokuControllerTest {
 		
 		
 		assertEquals("Nach selbstst. Lösen öffnet sich Congratulation Dialog", "CongratulationPage", new WindowFinderImpl().listWindows().get(1).getScene().getRoot().getId());
-		
 	}
 
 	@Test
@@ -203,16 +201,12 @@ public class SudokuControllerTest {
 		try {
 			FxToolkit.cleanupApplication(mainApp);
 		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			FxToolkit.hideStage();
 		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	 
-	 
 }

@@ -11,9 +11,8 @@ public class RectPos extends Rectangle {
 	private int posY = -1;
 
 	
-	
 	/**
-	 * Setzt horizontale Position des Rechtecks
+	 * Setzt horizontale Position des Rechtecks.
 	 * @param pos - Größe der horizontalen Ausrichtung
 	 */
 	public void setPosX(int pos) {
@@ -21,7 +20,7 @@ public class RectPos extends Rectangle {
 	}
 
 	/**
-	 * Setzt vertikale Position des Rechtecks
+	 * Setzt vertikale Position des Rechtecks.
 	 * @param pos - Größe der vertikalen Ausrichtung
 	 */
 	public void setPosY(int pos) {
@@ -29,7 +28,7 @@ public class RectPos extends Rectangle {
 	}
 	
 	/**
-	 * Gibt horizontale Position des Rechtecks aus
+	 * Gibt horizontale Position des Rechtecks aus.
 	 * @return Rechtecksposition x-Achse
 	 */
 	public int getPosX(){
@@ -37,11 +36,10 @@ public class RectPos extends Rectangle {
 	}
 	
 	/**
-	 * Gibt vertikale Position des Rechtecks aus
+	 * Gibt vertikale Position des Rechtecks aus.
 	 * @return Rechtecksposition y-Achse
 	 */	
 	public int getPosY(){
 		return posY;
 	}
-
 }

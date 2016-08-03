@@ -49,7 +49,8 @@ public class SudokuGenerator {
 	
 	/**
 	 * Generiert ein Sudoku mit gefüllten Feldern, deren Anzahl numberOfClues entspricht.
-	 * @param numberOfClues - Anzahl der gefüllten Felder
+	 * 
+	 * @param numberOfClues - Gewünschte Anzahl an gefüllten Feldern
 	 * @return Sudoku, das den Regeln entspricht und lösbar ist
 	 */
 	public static Sudoku generate(int numberOfClues) {		

@@ -17,6 +17,7 @@ import sudoku.view.SudokuControllerTest;
 	RectPosTest.class,
 	SudokuControllerTest.class
 })
+
 public class AllTests {
 
 }

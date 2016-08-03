@@ -10,12 +10,10 @@ import org.junit.Test;
 
 public class SudokuGeneratorTest 
 {
-	
 	Sudoku testSudokuFilledSU;
 	Sudoku testSudokuUniqueSolvableSU;
 	Sudoku testSudokuToGenerateSU;
-	int[] alreadyUsedNumbers;
-	
+	int[] alreadyUsedNumbers;	
 	
 	@Before
 	public void setUp(){
@@ -34,7 +32,6 @@ public class SudokuGeneratorTest
 		testSudokuUniqueSolvableSU = new Sudoku (testArrayCountUniqueSolvable);
 		testSudokuToGenerateSU = new Sudoku(testArrayEmpty);
 		alreadyUsedNumbers = new int[9];
-				
 	}
 	
 	@Test
@@ -42,12 +39,10 @@ public class SudokuGeneratorTest
 		assertArrayEquals("Arrays should be the same", testArrayFilled, testSudokuFilledSU.copySudokuArray());
 	}
 	
-	
 	@Test
 	public void getNotTriedNumberShouldReturnInt()
 	{
 		SudokuGenerator.resetAlreadyUsed();
-		
 		
 		for (int i = 0; i < 9; i++)
 		{
@@ -73,7 +68,6 @@ public class SudokuGeneratorTest
 		}
 	}
 	
-	
 	@Test
 	public void generateShouldReturnSudoku()
 	{
@@ -85,9 +79,5 @@ public class SudokuGeneratorTest
 		
 		testSudokuToGenerateSU = SudokuGenerator.generate(0);
 		assertEquals("Should return true because empty", true, testSudokuToGenerateSU.isEmpty());
-		
 	}
-	
-	
-
 }

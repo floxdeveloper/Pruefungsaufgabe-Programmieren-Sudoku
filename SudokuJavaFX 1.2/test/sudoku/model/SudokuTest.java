@@ -20,8 +20,7 @@ import org.junit.Test;
 
 import helpElements.HelpElements;
 
-public class SudokuTest 
-{ 	
+public class SudokuTest {
 	
 	Sudoku testSudokuEmptySU;
 	Sudoku testSudokuFilledSU;
@@ -86,9 +85,9 @@ public class SudokuTest
 	@Test
 	public void sudokuResetShouldReturnArrayWithNulls()
 	{
-		// First reset
-		 testSudokuFilledSU.sudokuReset();
-		//Then check array
+		
+		testSudokuFilledSU.sudokuReset();
+		
 		assertArrayEquals("Should return an Array filled with nulls",  testArrayWithNull,  testSudokuFilledSU.getSudokuArray());
 	}
 	
@@ -117,7 +116,7 @@ public class SudokuTest
 		assertEquals("Should return 2 = not clearly solvable", 2,  testSudokuWithNullSU.solveCounter);
 		
 		/*
-		// check for 0 = unsolvable - takes a lot of time... 
+		// check for 0 = unsolvable - das braucht eine Weile... 
 		testSudokuCountUnSolvableSU.solveCount();
 		assertEquals("Should return 0 = unsolvable", 0, testSudokuCountUnSolvableSU.solveCounter);
 		*/
@@ -127,7 +126,6 @@ public class SudokuTest
 	@Test
 	public void checkIfCorrectSudokuShoudlReturnCorrectBool()
 	{
-		// check if available in row, column and 3x3 square
 		assertEquals("Should return true", true, testSudokuCountUniqueSolvableSU.checkIfCorrectSudoku(testArrayCountUniqueSolvable));
 		assertEquals("Should return true", true, testSudokuFilledSU.checkIfCorrectSudoku(testArrayFilled));
 		assertEquals("Should return true", true, testSudokuEmptySU.checkIfCorrectSudoku(testArrayEmpty));
@@ -139,7 +137,6 @@ public class SudokuTest
 	@Test
 	public void setSudokuIfCorrectShouldReturnCorrectBool()
 	{
-		// check if Sudoku is correct
 		assertEquals("Should return true", true, testSudokuCountUniqueSolvableSU.setSudokuIfCorrect(testArrayCountUniqueSolvable));
 		assertEquals("Should return true", true, testSudokuFilledSU.setSudokuIfCorrect(testArrayFilled));
 		assertEquals("Should return true", true, testSudokuEmptySU.setSudokuIfCorrect(testArrayEmpty));
@@ -182,8 +179,7 @@ public class SudokuTest
 		assertEquals("Should be 'solvable'", Solvability.solvable, testSudokuFilledSU.getSolvability());
 		
 		testSudokuUnSolvableSU.solve();
-		assertEquals("Should be 'not solvable'", Solvability.notSolvable, testSudokuUnSolvableSU.getSolvability());
-		
+		assertEquals("Should be 'not solvable'", Solvability.notSolvable, testSudokuUnSolvableSU.getSolvability());	
 	}
 	
 	@Test
@@ -192,8 +188,6 @@ public class SudokuTest
 		assertEquals("Should return 'not evaluated'", Solvability.notEvaluated, testSudokuUnSolvableSU.getSolvability());
 		testSudokuUnSolvableSU.solveCount();
 		assertEquals("Should return 'not solvable'", Solvability.notSolvable, testSudokuUnSolvableSU.getSolvability());
-		
-		
 	}
 	
 	@Test
@@ -216,7 +210,6 @@ public class SudokuTest
 	@Test
 	public void solveIfUnderOneSecondShouldSolveSudoku()
 	{
-		// Checks if Sudoku is solvable under one second
 		testSudokuCountUniqueSolvableSU.solveIfUnderOneSec();
 		assertEquals("Should return 'not evaluated'", Solvability.notEvaluated, testSudokuCountUnSolvableSU.getSolvability());
 	}

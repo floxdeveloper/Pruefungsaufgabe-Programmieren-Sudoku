@@ -20,17 +20,10 @@ public class RectPosTest {
 	
 	@Test
 	public void setterAndGetterWithInt(){
-		
 		rectPos.setX(intX);
 		rectPos.setY(intY);
 		
 		assertEquals(intX,rectPos.getX(),0);
 		assertEquals(intY,rectPos.getY(),0);
 	}
-	
-	
-	
-	
-	
-
 }
