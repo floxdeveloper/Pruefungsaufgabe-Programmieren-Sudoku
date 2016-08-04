@@ -14,6 +14,8 @@ import sudoku.MainApp;
  * Diese Klasse verwaltet das Popup, welches sich beim Generieren eines Sudokus öffnet.
  * Um die gewünschte Anzahl an vorgegebenen Zahlen an den Wrapper zu schicken, wird auf
  * einen PropertyChange zurückgegriffen.
+ * 
+ * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
  */
 public class InputNumberPopupController {
 
@@ -49,7 +51,7 @@ public class InputNumberPopupController {
 	/**
 	 * Fügt PropertyChangeListener zu PropertyChangeSupport hinzu.
 	 * 
-	 * @param p
+	 * @param p - PropertyChangeListener
 	 */
 	public void addListener(PropertyChangeListener p) {
 		support.addPropertyChangeListener(p);

@@ -24,8 +24,9 @@ import sudoku.view.WrapperController;
 
 /**
  * Diese Klasse bildet die Grundlage des Sudoku-Programms. Sie ruft die
- * graphische Oberfläche auf und verwaltet sie, indem sie einige Elemente sperrt
- * oder entsperrt und verwaltet Sudokus.
+ * graphische Oberfläche auf und ermöglicht das Sperren und Entsperren von dieser.
+ * 
+ * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
  */
 public class MainApp extends Application {
 
@@ -37,7 +38,7 @@ public class MainApp extends Application {
 	private Stage currentStage;
 
 	/**
-	 * Gibt den SudokuController aus.
+	 * Gibt den SudokuController zurück.
 	 * 
 	 * @return den SudokuController der MainApp
 	 */
@@ -46,7 +47,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Gibt den WrapperController aus.
+	 * Gibt den WrapperController zurück.
 	 * 
 	 * @return den WrapperController der MainApp
 	 */
@@ -55,7 +56,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Gibt die aktuelle Stage zum Handling aus.
+	 * Gibt die aktuelle Stage zurück.
 	 * 
 	 * @return die aktuell behandelte Stage der MainApp
 	 */
@@ -64,7 +65,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Gibt das Sudoku aus.
+	 * Gibt das Sudoku zurück.
 	 * 
 	 * @return das Sudoku der MainApp
 	 */
@@ -73,7 +74,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Gibt die PrimaryStage zum Handling aus.
+	 * Gibt die PrimaryStage zurück.
 	 * 
 	 * @return die PrimaryStage der MainApp
 	 */
@@ -82,7 +83,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Gibt das rootLayout aus.
+	 * Gibt das rootLayout zurück.
 	 * 
 	 * @return das rootLayout der MainApp
 	 */
@@ -94,8 +95,7 @@ public class MainApp extends Application {
 	 * Setzt Sudoku-Array und überprüft, ob es den Regeln entspricht - wenn
 	 * nicht, bleibt der alte Stand bestehen.
 	 * 
-	 * @param array
-	 *            - neues Sudoku vom Typ zweidimensionales Array
+	 * @param array - neues Sudoku vom Typ zweidimensionales Array
 	 * @return true - Sudoku konnte gesetzt werden, false - nicht gesetzt, da
 	 *         nicht korrekt
 	 */
@@ -157,7 +157,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Verbindet das Root-Layout mit der Main-Stage und dem WrapperController.
+	 * Verbindet das Root-Layout mit der primaryStage und dem WrapperController.
 	 * Zeigt die neue Szene an.
 	 */
 	public void initRootLayout() {
@@ -183,7 +183,7 @@ public class MainApp extends Application {
 	/**
 	 * Öffnet WrapperLock als Sperrbildschirm vor der primaryStage.
 	 * Fensterelemente sind nicht mehr klickbar: keine Bearbeitung möglich, bis
-	 * die Verarbeitung abgeschlossen ist.
+	 * sie durch Aufruf von unlockScreen() entsperrt wird.
 	 */
 	public void lockScreen() {
 		try {
@@ -324,7 +324,7 @@ public class MainApp extends Application {
 	 * Ruft die JavaFX-Methode launch auf, die die graphische Applikation
 	 * vorbereitet.
 	 * 
-	 * @param args
+	 * @param args - Übergabeparameter bei Programmstart
 	 */
 	public static void main(String[] args) {
 		launch(args);

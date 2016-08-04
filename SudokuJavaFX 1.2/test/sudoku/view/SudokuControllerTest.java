@@ -3,7 +3,6 @@ package sudoku.view;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.After;
@@ -19,7 +18,6 @@ import helpElements.HelpElements;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import sudoku.MainApp;
-import sudoku.model.Sudoku;
 
 @RunWith(JUnit4.class)
 public class SudokuControllerTest {

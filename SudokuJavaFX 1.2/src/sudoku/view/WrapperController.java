@@ -30,17 +30,18 @@ import sudoku.model.SudokuGenerator;
 
 /**
  * Diese Klasse verwaltet alle Interaktionen des Benutzers mit den Schaltflächen
- * um das Sudokufeld herum. Sie führt zudem das Speichern und Laden eines Sudokus aus.
+ * in der Menüleiste. Sie führt zudem das Speichern und Laden eines Sudokus aus.
  *
+ * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
  */
 public class WrapperController implements PropertyChangeListener {
 
 	private MainApp mainApp;
 
 	/**
-	 * Wird von der Main-Applikation aufgerufen. 
+	 * Wird von MainApp aufgerufen. 
 	 * 
-	 * @param mainApp
+	 * @param mainApp - Die MainApp.
 	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
@@ -71,7 +72,7 @@ public class WrapperController implements PropertyChangeListener {
 			// Setzt das Icon für das Popup.
 			stage.getIcons().add(new Image("file:resources/images/sudoku.png"));
 			
-			//Lässt Eingabe auf das Main-Fenster nicht mehr zu.
+			//Lässt Interaktion mit sonstigen GUI-Elementen nicht mehr zu.
 			stage.initOwner(mainApp.getPrimaryStage());
 			stage.initModality(Modality.WINDOW_MODAL);
 		 
@@ -83,8 +84,7 @@ public class WrapperController implements PropertyChangeListener {
 			iController.setStage(stage);
 			iController.setMainApp(mainApp);
 			
-			//Wird manuell geschlossen.
-			stage.show();
+			stage.showAndWait();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -137,7 +137,8 @@ public class WrapperController implements PropertyChangeListener {
 	}
 
 	/**
-	 * Öffnet den Dateimanager des Betriebssystems, um das binäre Objekt eines gespeicherten Sudokus zu laden.
+	 * Öffnet den Dateimanager des Betriebssystems, 
+	 * um das binäre Objekt eines gespeicherten Sudokus zu laden.
 	 */
 	@FXML
 	private void handleLoad() {
@@ -182,6 +183,7 @@ public class WrapperController implements PropertyChangeListener {
 			// Erzeugt die dialogStage und stellt sie in den Vordergrund.
 			Stage dialogStage = new Stage();
 			dialogStage.initStyle(StageStyle.UTILITY);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(mainApp.getPrimaryStage());
 			dialogStage.setResizable(false);
 			Scene scene = new Scene(page);
@@ -195,7 +197,8 @@ public class WrapperController implements PropertyChangeListener {
 	}
 	
 	/**
-	 * Löst die Überprüfung der Lösbarkeit des eingegeben Sudokus über die MainApp aus.
+	 * Löst die Überprüfung der Lösbarkeit des eingegeben Sudokus über die MainApp aus
+	 * und wertet diese aus.
 	 */
 	@FXML
 	private void handleCheck(){

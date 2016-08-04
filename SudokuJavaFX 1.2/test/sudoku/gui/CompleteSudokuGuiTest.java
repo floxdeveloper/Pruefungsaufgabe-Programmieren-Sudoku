@@ -30,6 +30,7 @@ public class CompleteSudokuGuiTest{
 		robot.clickOn("#closeButton");
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testSudokuGenerate(){
 		robot.clickOn("#sudoku");

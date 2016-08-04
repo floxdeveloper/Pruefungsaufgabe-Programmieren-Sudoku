@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 
 /**
  * Diese Klasse verwaltet das Popup-Menu unter About.
+ * 
+ * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
  */
 public class AboutController {
 	
@@ -15,6 +17,7 @@ public class AboutController {
 	
 	/**
 	 * Schließt die aktuelle Stage.
+	 * @param event - Event
 	 */
 	@FXML
 	public void handleClose(ActionEvent event) {

@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 /**
  * Diese Klasse verwaltet das Congratulations-Popup.
+ * 
+ * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
  */
 public class CongratulationController {
 

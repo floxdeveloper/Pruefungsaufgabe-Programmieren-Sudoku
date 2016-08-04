@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 	/**
 	 * Diese Klasse definiert den abstrakten Datentyp Sudoku und seine Operationen.
+	 * 
+	 * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
 	 */
 public class Sudoku implements Serializable {
 	
@@ -12,22 +14,22 @@ public class Sudoku implements Serializable {
 	protected int[][] sudokuArray = new int[9][9];
 	protected int[][] sudokuSaved = new int[9][9];
 
-	// Wird nach solve aus unten stehenden Variablen gebildet
+	// Wird nach solve aus unten stehenden Variablen gebildet.
 	private Solvability solvability = Solvability.notEvaluated;
 
-	// Variablen für solve
+	// Variablen für solve.
 	private long solveStarted = -1;
 	private int timeToSolve;
 	private boolean ranOutOfTime = false;
 	/** 
 	* Gefüllt nach solveCount (0 = unlösbar; 1 = einzigartig lösbar; 2 = nicht
-	* eindeutig lösbar)
+	* eindeutig lösbar).
 	*/
 	protected int solveCounter;
 	protected boolean fertig;
 	
 	/**
-	 * Gibt den solveCounter aus.
+	 * Gibt den solveCounter zurück.
 	 * @return die Anzahl der möglichen Lösungen (2 = zwei oder mehr Lösungen).
 	 */
 	public int getSolveCounter() {
@@ -35,7 +37,7 @@ public class Sudoku implements Serializable {
 	}
 	
 	/**
-	 * Gibt das sudokuArray aus.
+	 * Gibt das sudokuArray zurück.
 	 * @return das sudokuArray als Feld
 	 */
 	public int[][] getSudokuArray() {
@@ -43,7 +45,7 @@ public class Sudoku implements Serializable {
 	}
 	
 	/**
-	 * Gibt als String aus, welche Art der Lösbarkeit vorhanden ist.
+	 * Gibt als String zurück, welche Art der Lösbarkeit vorhanden ist.
 	 * @return die Art der Lösbarkeit in Form eines Strings
 	 */
 	public Solvability getSolvability() {
@@ -52,7 +54,7 @@ public class Sudoku implements Serializable {
 	
 	/**
 	 * Hilfsfunktion für sudokuBT und sudokuBTCount. Gibt die nächste 
-	 * Koordinate aus, die ausprobiert werden muss.
+	 * Koordinate zurück, die ausprobiert werden muss.
 	 * @return die nächste zu probierende Koordinate oder {-1, -1}, falls komplett durchprobiert
 	 */
 	private int[] getNextCoordinate() {
@@ -67,9 +69,8 @@ public class Sudoku implements Serializable {
 	}
 	
 	/**
-	 * Entspricht sudokuArray den Regeln wird es gesetzt.
-	 * 
-	 * 
+	 * Entspricht sudokuArray den Regeln, wird es gesetzt.
+	 *  
 	 * @param array 9x9 Array, das Sudoku enthält
 	 * @return true wenn gesetzt; false sonst
 	 */
@@ -84,8 +85,8 @@ public class Sudoku implements Serializable {
 	/**
 	 * Setzt alle Werte in boolArray auf value.
 	 * 
-	 * @param boolArray
-	 * @param value - true oder false
+	 * @param boolArray - Array vom Typ boolean
+	 * @param value - zu setzender Wert
 	 */
 	private void setBoolArrayAll(boolean[] boolArray, boolean value) {
 		for (int i = 0; i < boolArray.length; i++) {
@@ -248,18 +249,20 @@ public class Sudoku implements Serializable {
 	}
 
 	/**
-	 * @param toCopy - 9x9 Array, das zu kopierendes Sudoku enthält
+	 * Gibt kopierte Version des eingegebenen Arrays zurück.
+	 * @param array - 9x9 Array, das zu kopierendes Sudoku enthält
 	 * @return Neu erstelltes Array mit Werten aus toCopy.
 	 */
-	private int[][] copyArray(int[][] toCopy) {
-		int[][] copied = new int[9][9];
-		for (int k = 0; k < 9; k++) {
-			for (int j = 0; j < 9; j++) {
-				copied[k][j] = toCopy[k][j];
+	 private int[][] copyArray(int[][] array) {
+			int[][] arrayret = new int[array.length][array[0].length];
+
+			for (int i = 0; i < array.length; i++) {
+				for (int j = 0; j < array[i].length; j++) {
+					arrayret[i][j] = array[i][j];
+				}
 			}
-		}
-		return copied;
-	}
+			return arrayret;
+		}		  
 
 	/**
 	 * Erzeugt eine referenzungebundene Kopie vom sudokuArray.

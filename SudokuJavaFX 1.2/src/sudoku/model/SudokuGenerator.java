@@ -9,6 +9,8 @@ package sudoku.model;
  * ansonsten wird eine andere Zahl ausprobiert.
  * Die Anzahl von vorgegebenen Zahlen stellt gleichzeitig den 
  * Schwierigkeitsgrad dar (20-30: schwierig, 31-50: mittel, 51-80: leicht).
+ * 
+ * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
  */
 public class SudokuGenerator {
 
@@ -71,7 +73,8 @@ public class SudokuGenerator {
 			int yKoord = (int) Math.floor((Math.random() * 9));
 			int digit = getNotTriedNumber();
 
-			// Wenn Feld frei ist -> muss eine Lösung haben, da es im Schritt davor lösbar war -> alle Zahlen durchprobieren (für Performance)
+			// Wenn Feld frei ist -> muss eine Lösung haben, da es im Schritt davor lösbar war
+			// -> alle Zahlen durchprobieren
 			if (arraySudoku[xKoord][yKoord] == 0) {
 				boolean filledPos = false;
 				while (!filledPos) {
@@ -79,7 +82,7 @@ public class SudokuGenerator {
 					arraySudoku[xKoord][yKoord] = digit;				
 					copy = copySudokuArray(arraySudoku);	
 	
-					// entspricht nicht den Sudoku Regeln -> nächste Zahl probieren
+					// entspricht nicht den Sudoku-Regeln -> nächste Zahl probieren
 					if (!objectSudoku.setSudokuIfCorrect(copy)) {
 						digit = getNotTriedNumber();
 						filledPos = false;
@@ -103,7 +106,7 @@ public class SudokuGenerator {
 	/**
 	 * Füllt ein Array der Größe 9x9 mit Nullen.
 	 * 
-	 * @param array
+	 * @param array - 9x9 Array
 	 */
 	private static void fillArrayWith0(int[][] array){	
 		for (int i = 0; i < 9; i++) {
@@ -120,10 +123,10 @@ public class SudokuGenerator {
 	 * @return kopiertes Array
 	 */
 	private static int[][] copySudokuArray(int[][] array) {
-		int[][] arrayret = new int[9][9];
+		int[][] arrayret = new int[array.length][array[0].length];
 
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[i].length; j++) {
 				arrayret[i][j] = array[i][j];
 			}
 		}

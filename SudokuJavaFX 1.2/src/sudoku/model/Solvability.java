@@ -1,7 +1,9 @@
 package sudoku.model;
 
 /**
- * Diese Enumeration bildet die einzelnen Lösbarkeitsstufen auf Strings ab.
+ * Diese Enumeration bildet die einzelnen Lösbarkeitsstufen ab.
+ * 
+ * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
  */
 public enum Solvability {
   notEvaluated /**Nicht überprüft */,

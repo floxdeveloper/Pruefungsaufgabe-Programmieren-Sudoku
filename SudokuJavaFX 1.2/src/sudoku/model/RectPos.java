@@ -3,7 +3,9 @@ package sudoku.model;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Diese Klasse erlaubt es, den Sudoku-Kästchen eine Position zuzuweisen.
+ * Diese Klasse erlaubt es, den Sudoku-Feldern eine Position zuzuweisen.
+ * 
+ * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
  */
 public class RectPos extends Rectangle {
 
@@ -28,7 +30,7 @@ public class RectPos extends Rectangle {
 	}
 	
 	/**
-	 * Gibt horizontale Position des Rechtecks aus.
+	 * Gibt horizontale Position des Rechtecks zurück.
 	 * @return Rechtecksposition x-Achse
 	 */
 	public int getPosX(){
@@ -36,7 +38,7 @@ public class RectPos extends Rectangle {
 	}
 	
 	/**
-	 * Gibt vertikale Position des Rechtecks aus.
+	 * Gibt vertikale Position des Rechtecks zurück.
 	 * @return Rechtecksposition y-Achse
 	 */	
 	public int getPosY(){

@@ -28,6 +28,8 @@ import sudoku.model.Sudoku;
 /**
  * Diese Klasse verwaltet die GUI des Sudokus. Sie ist zuständig für die Interaktionen
  * des Benutzers mit dem Sudoku und verwaltet zudem die Editierbarkeit der Sudokufelder.
+ * 
+ * @author Tobias Berner, Yvette Labastille, William Riyadi, Florian Stöckl
  */
 public class SudokuController {
 
@@ -72,7 +74,7 @@ public class SudokuController {
 	 * Wird von MainApp aufgerufen und setzt den Verweis auf diese.
 	 * Zusätzlich wird das Sudoku geladen und dann angezeigt.
 	 * 
-	 * @param mainApp
+	 * @param mainApp - Die MainApp.
 	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
@@ -234,7 +236,6 @@ public class SudokuController {
 		alert.setTitle("Reset Confirmation");
 		alert.setHeaderText("Reset Sudoku?");
 
-		// Holt sich die Stage.
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 
 		// Fügt das Logo hinzu.
@@ -263,7 +264,6 @@ public class SudokuController {
 		alert.setTitle("Solve Confirmation");
 		alert.setHeaderText("Solve Sudoku?");
 
-		// Holt sich die Stage.
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 
 		// Fügt das Logo hinzu.
@@ -273,16 +273,16 @@ public class SudokuController {
 		if (result.get() == ButtonType.OK) {
 			unselect();
 
-			// Färbt User Input blau ein.
+			// Färbt Userinput blau ein und sperrt ihn.
 			lockEnteredFields();
 
 			// Wenn nicht nach Sudoku-Regeln: zeigt hier altes Sudoku an (kommt
-			// nie vor da nach jeder Eingabe gecheckt wird)
+			// nie vor da nach jeder Eingabe gecheckt wird).
 			sudokuAuslesen();
 
 			// Bei unlösbaren Sudokus stoppt Backtracking ohne ein gefülltes
 			// Sudoku zurück zu lassen. Danach kann abgefragt werden, ob es
-			// geklappt hat
+			// geklappt hat.
 			Task<Void> task = new Task<Void>() {
 				@Override
 				protected Void call() throws Exception {
@@ -294,7 +294,8 @@ public class SudokuController {
 			task.setOnRunning(e -> {
 				mainApp.lockScreen();
 			});
-			// Unlockt den Screen, wenn der Thread abgelaufen ist.
+			// Unlockt den Screen und gibt Ergebnis aus, wenn der Thread
+			// erfolgreich abgeschlossen ist.
 			task.setOnSucceeded(e -> {
 				mainApp.unlockScreen();
 				if (!mainApp.getSudoku().isFilled()) {
@@ -312,7 +313,7 @@ public class SudokuController {
 				} else {
 					editable = false;
 				}				
-				//Lädt Sudoku in GUI (entweder gelöst oder bei unlösbarem Sudoku wie davor).
+				//Lädt Sudoku in GUI (entweder gelöst oder bei unlösbarem Sudoku Stand wie davor).
 				sudokuAnzeigen();
 			});
 
